@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lenguajes de Diseño y Programación · Cultura Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* ── Paleta azul pastel clarito ── */
+      --accent:    #3B82F6;        /* azul medio — acento principal */
+      --accent2:   #1D4ED8;        /* azul oscuro — hover/énfasis */
+      --accent-lt: #BFDBFE;        /* azul muy claro — detalles */
+
+      --bg:       #EFF6FF;         /* fondo: azul cielo muy pálido */
+      --surface:  #FFFFFF;         /* tarjetas: blanco */
+      --surface2: #DBEAFE;         /* superficie secundaria: azul pastel */
+      --border:   rgba(59,130,246,0.15);
+      --border2:  rgba(59,130,246,0.30);
+      --text:     #0F172A;         /* azul casi negro */
+      --text2:    #1E3A5F;         /* azul oscuro medio */
+      --text3:    #5B8DB8;         /* azul grisáceo suave */
+      --radius-md: 8px;
+      --radius-lg: 14px;
+      --font: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-display: 'Syne', sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      padding: 2rem 2rem 0;
+      border-bottom: 0.5px solid var(--border);
+      background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 60%, #BFDBFE 100%);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+    }
+    .header-inner { max-width: 1100px; margin: 0 auto; }
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: #DBEAFE;
+      color: #1D4ED8;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: .6rem;
+      font-weight: 600;
+      border: 0.5px solid rgba(29,78,216,0.25);
+    }
+    .site-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 4vw, 34px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: .4rem;
+      background: linear-gradient(90deg, #1D4ED8 0%, #3B82F6 55%, #93C5FD 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .site-sub {
+      font-size: 14px;
+      color: var(--text2);
+      max-width: 600px;
+    }
+
+    /* ── TABS ── */
+    .tab-bar {
+      display: flex;
+      gap: 2px;
+      max-width: 1100px;
+      margin: 1rem auto 0;
+      padding: 0;
+      border-bottom: 0.5px solid var(--border);
+      overflow-x: auto;
+    }
+    .tab-btn {
+      font-family: var(--font);
+      font-size: 13px;
+      padding: 9px 18px;
+      border: none;
+      background: none;
+      color: var(--text2);
+      cursor: pointer;
+      border-bottom: 2.5px solid transparent;
+      margin-bottom: -0.5px;
+      white-space: nowrap;
+      transition: color .15s, border-color .15s, background .15s;
+      border-radius: 6px 6px 0 0;
+    }
+    .tab-btn.active {
+      color: var(--accent2);
+      border-bottom-color: var(--accent);
+      font-weight: 600;
+      background: rgba(59,130,246,0.08);
+    }
+    .tab-btn:hover:not(.active) {
+      color: var(--accent);
+      background: rgba(191,219,254,0.35);
+    }
+
+    /* ── MAIN ── */
+    .main { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .section-intro {
+      font-size: 13.5px;
+      color: var(--text2);
+      margin-bottom: 1.5rem;
+      padding: 12px 16px;
+      background: linear-gradient(90deg, #DBEAFE, #EFF6FF);
+      border-radius: var(--radius-md);
+      border-left: 3px solid var(--accent);
+      line-height: 1.65;
+    }
+    .section-intro strong { color: var(--accent2); }
+
+    /* ── GRID ── */
+    .lang-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    /* ── CARD ── */
+    .lang-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: border-color .2s, transform .15s, box-shadow .2s;
+    }
+    .lang-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 24px rgba(59,130,246,0.14);
+    }
+
+    .card-banner {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -1px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px 8px;
+    }
+    .card-header img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .lang-name { font-size: 15px; font-weight: 600; color: var(--text); }
+    .lang-year { font-size: 11px; color: var(--text3); margin-top: 1px; }
+
+    .lang-desc {
+      font-size: 12.5px;
+      color: var(--text2);
+      padding: 0 16px 10px;
+      line-height: 1.6;
+    }
+    .lang-desc strong { color: var(--accent2); }
+    .lang-desc em { font-style: italic; }
+
+    .use-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      padding: 0 16px 10px;
+    }
+    .tag {
+      font-size: 11px;
+      padding: 2px 9px;
+      border-radius: 20px;
+      background: #DBEAFE;
+      color: #1D4ED8;
+      border: 0.5px solid rgba(59,130,246,0.25);
+      font-weight: 500;
+    }
+
+    .difficulty {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 16px 12px;
+    }
+    .diff-label { font-size: 11px; color: var(--text3); }
+    .diff-dots { display: flex; gap: 3px; }
+    .diff-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(59,130,246,0.15);
+    }
+    .diff-dot.on-easy  { background: #93C5FD; }
+    .diff-dot.on-med   { background: #3B82F6; }
+    .diff-dot.on-hard  { background: #1D4ED8; }
+
+    /* ── CODE BLOCK ── */
+    .code-block {
+      margin: 0 10px 14px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 0.5px solid rgba(59,130,246,0.20);
+    }
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 12px;
+      background: linear-gradient(90deg, #DBEAFE, #EFF6FF);
+      border-bottom: 0.5px solid rgba(59,130,246,0.15);
+    }
+    .code-label { font-size: 11px; color: var(--text3); font-family: var(--font-mono); }
+    .dots { display: flex; gap: 4px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .d1{background:#3B82F6} .d2{background:#93C5FD} .d3{background:#1D4ED8}
+
+    pre {
+      margin: 0;
+      padding: 13px 14px;
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      line-height: 1.65;
+      overflow-x: auto;
+      background: #F8FBFF;
+      color: #0F172A;
+      tab-size: 2;
+    }
+
+    /* Syntax tokens — tonos azules y fríos */
+    .kw   { color: #1D4ED8; }   /* azul oscuro — keywords */
+    .fn   { color: #0369A1; }   /* azul-cian — funciones */
+    .str  { color: #047857; }   /* verde azulado — strings */
+    .num  { color: #7C3AED; }   /* violeta — números */
+    .cmt  { color: #94A3B8; font-style: italic; }
+    .tgh  { color: #1E40AF; }   /* azul navy — HTML tags */
+    .attr { color: #0891B2; }   /* cian — atributos */
+    .val  { color: #059669; }   /* verde — valores */
+    .sel  { color: #2563EB; }   /* azul — selectores */
+    .prop { color: #0369A1; }   /* azul-cian — propiedades */
+    .clr  { color: #7C3AED; }   /* violeta — colores */
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-size: 12px;
+      color: var(--text3);
+      border-top: 0.5px solid var(--border);
+      margin-top: 3rem;
+      background: linear-gradient(180deg, transparent, #DBEAFE);
+    }
+    footer p:first-child { font-weight: 600; color: var(--accent2); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .main { padding: 1.25rem; }
+      .tab-bar { padding: 0; }
+      .site-header { padding: 1.25rem 1.25rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <span class="badge">Cultura Digital · Unidad 2</span>
+      <h1 class="site-title">Lenguajes de Diseño<br>y Programación</h1>
+      <p class="site-sub">Explora los principales lenguajes usados en el desarrollo web, aplicaciones de escritorio y diseño digital. Conoce su sintaxis, propósito y nivel de dificultad.</p>
+    </div>
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('web',this)">🌐 Desarrollo Web</button>
+      <button class="tab-btn" onclick="switchTab('desktop',this)">🖥️ Escritorio</button>
+      <button class="tab-btn" onclick="switchTab('design',this)">🎨 Diseño y Maquetación</button>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- ══════════════════ WEB ══════════════════ -->
+    <div id="tab-web" class="section active">
+      <p class="section-intro">Los lenguajes web son los pilares de todo lo que vemos y usamos en Internet. Se dividen en <strong>frontend</strong> (lo que el usuario ve) y <strong>backend</strong> (la lógica del servidor). Muchos proyectos modernos combinan varios de ellos.</p>
+      <div class="lang-grid">
+
+        <!-- HTML -->
+        <div class="lang-card">
+          <div class="card-banner" style="background:linear-gradient(135deg,#E34F26,#EF6B35)">HTML</div>
+          <div class="card-header">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"/>
+            <div><div class="lang-name">HTML 5</div><div class="lang-year">HyperText Markup Language · 1993</div></div>
+          </div>
+          <p class="lang-desc">Lenguaje de marcado que define la <strong>estructura</strong> de las páginas web. No es un lenguaje de programación, sino de <em>marcado semántico</em>: etiquetas describen el contenido.</p>
+          <div class="use-tags"><span class="tag">Páginas web</span><span class="tag">SEO</span><span class="tag">Accesibilidad</span><span class="tag">Frontend</span></div>
+          <div class="difficulty">
+            <span class="diff-label">Dificultad</span>
+            <div class="diff-dots"><div class="diff-dot on-easy"></div><div class="diff-dot"></div><div class="diff-dot"></div><div class="diff-dot"></div><div class="diff-dot"></div></div>
+            <span class="diff-label">Principiante</span>
+          </div>
+          <div class="code-block">
+            <div class="code-header"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="code-label">index.html</span></div>
+            <pre><span class="cmt">&lt;!-- Estructura básica HTML --&gt;</span>
+<span class="tgh">&lt;!DOCTYPE html&gt;</span>
+<span class="tgh">&lt;html</span> <span class="attr">lang</span>=<span class="val">"es"</span><span class="tgh">&gt;</span>
+  <span class="tgh">&lt;head&gt;</span>
+    <span class="tgh">&lt;title&gt;</span>Mi Primera Página<span class="tgh">&lt;/title&gt;</span>
+  <span class="tgh">&lt;/head&gt;</span>
+  <span class="tgh">&lt;body&gt;</span>
+    <span class="tgh">&lt;h1&gt;</span>¡Hola, Mundo!<span class="tgh">&lt;/h1&gt;</span>
+    <span class="tgh">&lt;p&gt;</span>Bienvenido al desarrollo web.<span class="tgh">&lt;/p&gt;</span>
+    <span class="tgh">&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span><span class="tgh">&gt;</span>Ir arriba<span class="tgh">&lt;/a&gt;</span>
+  <span class="tgh">&lt;/body&gt;</span>
+<span class="tgh">&lt;/html&gt;</span></pre>
+          </div>
+        </div>
+
+        <!-- CSS -->
+        <div class="lang-card">
+          <div class="card-banner" style="background:linear-gradient(135deg,#264DE4,#3D72E8)">CSS</div>
+          <div class="card-header">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"/>
+            <div><div class="lang-name">CSS 3</div><div class="lang-year">Cascading Style Sheets · 1996</div></div>
+          </div>
+          <p class="lang-desc">Lenguaje de estilos que controla la <strong>apariencia visual</strong>: colores, tipografía, espaciado, animaciones y layouts. Trabaja directamente junto a HTML.</p>
+          <div class="use-tags"><span class="tag">Estilos</span><span class="tag">Animaciones</span><span class="tag">Responsive</span><span class="tag">Grid/Flex</span></div>
+          <div class="difficulty">
+            <span class="diff-label">Dificultad</span>
+            <div class="diff-dots"><div class="diff-dot on-easy"></div><div class="diff-dot on-easy"></div><div class="diff-dot"></div><div class="diff-dot"></div><div class="diff-dot"></div></div>
+            <span class="diff-label">Básico</span>
+          </div>
+          <div class="code-block">
+            <div class="code-header"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="code-label">estilos.css</span></div>
+            <pre><span class="cmt">/* Estilos para el cuerpo */</span>
+<span class="sel">body</span> {
+  <span class="prop">font-family</span>: <span class="str">Arial, sans-serif</span>;
+  <span class="prop">background-color</span>: <span class="clr">#f0f0f0</span>;
+  <span class="prop">color</span>: <span class="clr">#333</span>;
+}
+
+<span class="sel">h1</span> {
+  <span class="prop">font-size</span>: <span class="num">2rem</span>;
+  <span class="prop">text-align</span>: <span class="str">center</span>;
+  <span class="prop">animation</span>: <span class="str">fadeIn 1s ease</span>;
+}
+
+<span class="sel">@keyframes fadeIn</span> {
+  <span class="sel">from</span> { <span class="prop">opacity</span>: <span class="num">0</span>; }
+  <span class="sel">to</span>   { <span class="prop">opacity</span>: <span class="num">1</span>; }
+}</pre>
+          </div>
+        </div>
+
+        <!-- JavaScript -->
+        <div class="lang-card">
+          <div class="card-banner" style="background:linear-gradient(135deg,#F7DF1E,#F5C518);color:#333">JS</div>
+          <div class="card-header">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"/>
+            <div><div class="lang-name">JavaScript</div><div class="lang-year">ECMAScript · 1995</div></div>
+          </div>
+          <p class="lang-desc">El lenguaje de programación de la web. Da <strong>interactividad y dinamismo</strong> a las páginas. Con Node.js también se usa en backend. Es el más usado del mundo.</p>
+          <div class="use-tags"><span class="tag">Frontend</span><span class="tag">Backend</span><span class="tag">APIs</span><span class="tag">React/Vue</span></div>
+          <div class="difficulty">
+            <span class="diff-label">Dificultad</span>
+            <div class="diff-dots"><div class="diff-dot on-med"></div><div class="diff-dot on-med"></div><div class="diff-dot on-med"></div><div class="diff-dot"></div><div class="diff-dot"></div></div>
+            <span class="diff-label">Intermedio</span>
+          </div>
+          <div class="code-block">
+            <div class="code-header"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="code-label">app.js</span></div>
+            <pre><span class="cmt">// Función para saludar al usuario</span>
+<span class="kw">function</span> <span class="fn">saludar</span>(nombre) {
+  <span class="kw">const</span> hora = <span class="kw">new</span> <span class="fn">Date</span>().getHours();
+  <span class="kw">const</span> turno = hora &lt; <span class="num">12</span>
+    ? <span class="str">"Buenos días"</span>
+    : <span class="str">"Buenas tardes"</span>;
+  <span class="kw">return</span> <span class="str">`${turno}, ${nombre}!`</span>;
+}
+
+console.log(<span class="fn">saludar</span>(<span class="str">"Estudiante"</span>));
+<span class="cmt">// → "Buenas tardes, Estudiante!"</span></pre>
+          </div>
+        </div>
+
+        <!-- PHP -->
+        <div class="lang-card">
+          <div class="card-banner" style="background:linear-gradient(135deg,#777BB4,#9B9BDF)">PHP</div>
+          <div class="card-header">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP"/>
+            <div><div class="lang-name">PHP</div><div class="lang-year">Hypertext Preprocessor · 1994</div></div>
+          </div>
+          <p class="lang-desc">Lenguaje de <strong>servidor (backend)</strong> muy popular. Impulsa WordPress, Drupal y millones de sitios. Genera HTML dinámico y se conecta con bases de datos fácilmente.</p>
+          <div class="use-tags"><span class="tag">Backend</span><span class="tag">WordPress</span><span class="tag">MySQL</span><span class="tag">CMS</span></div>
+          <div class="difficulty">
+            <span class="diff-label">Dificultad</span>
+            <div class="diff-dots"><div class="diff-dot on-med"></div><div class="diff-dot on-med"></div><div class="diff-dot"></div><div class="diff-dot"></div><div class="diff-dot"></div></div>
+            <span class="diff-label">Básico–Medio</span>
+          </div>
+          <div class="code-block">
+            <div class="code-header"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="code-label">index.php</span></div>
+            <pre><span class="tgh">&lt;?php</span>
+<span class="cmt">// Variables y condicional básico</span>
+<span class="kw">$nombre</span> = <span class="str">"Alumno"</span>;
+<span class="kw">$nota</span>   = <span class="num">8.5</span>;
+
+<span class="kw">if</span> (<span class="kw">$nota</span> >= <span class="num">7</span>) {
+  <span class="fn">echo</span> <span class="str">"✓ $nombre aprobó"</span>;
+} <span class="kw">else</span> {
+  <span class="fn">echo</span> <span class="str">"✗ $nombre reprobó"</span>;
+}
+<span class="tgh">?&gt;</span></pre>
+          </div>
+        </div>
+
+        <!-- Python -->
+        <div class="lang-card">
+          <div class="card-banner" style="background:linear-gradient(135deg,#3776AB,#FFD43B)">PY</div>
+          <div class="card-header">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"/>
+            <div><div class="lang-name">Python</div><div class="lang-year">Flask / Django · 1991</div></div>
+          </div>
+          <p class="lang-desc">Lenguaje de propósito general con uso creciente en web (Django, Flask). Su sintaxis limpia lo hace ideal como <strong>primer lenguaje</strong>. También domina en IA y ciencia de datos.</p>
+          <div class="use-tags"><span class="tag">Backend</span><span class="tag">IA / ML</span><span class="tag">Django</span><span class="tag">APIs REST</span></div>
+          <div class="difficulty">
+            <span class="diff-label">Dificultad</span>
+            <div class="diff-dots"><div class="diff-dot on-easy"></div><div class="diff-dot on-easy"></div><div class="diff-dot"></div><div class="diff-dot"></div><div class="diff-dot"></div></div>
+            <span class="diff-label">Fácil</span>
+          </div>
+          <div class="code-block">
+            <div class="code-header"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="code-label">app.py</span></div>
+            <pre><span class="cmt"># API básica con Flask</span>
+<span class="kw">from</span> flask <span class="kw">import</span> Flask, jsonify
+
+app = <span class="fn">Flask</span>(__name__)
+
+<span class="kw">@app</span>.route(<span class="str">"/saludo"</span>)
+<span class="kw">def</span> <span class="fn">saludo</span>():
+    <span class="kw">return</span> <span class="fn">jsonify</span>({
+      <span class="str">"mensaje"</span>: <span class="str">"Hola desde el servidor"</span>
+    })</pre>
+          </div>
+        </div>
+
+        <!-- TypeScript -->
+        <div class="lang-card">
+          <div class="card-banner" style="background:linear-gradient(135deg,#3178C6,#4E9FDD)">TS</div>
+          <div class="card-header">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript"/>
+            <div><div class="lang-name">TypeScript</div><div class="lang-year">Superset de JavaScript · 2012</div></div>
+          </div>
+          <p class="lang-desc">JavaScript con <strong>tipado estático</strong>. Atrapa errores antes de ejecutar el código. Es el estándar en proyectos profesionales y frameworks modernos como Angular y Next.js.</p>
+          <div class="use-tags"><span class="tag">Frontend</span><span class="tag">Angular</span><span class="tag">Next.js</span><span class="tag">Tipos</span></div>
+          <div class="difficulty">
+            <span class="diff-label">Dificultad</span>
+            <div class="diff-dots"><div class="diff-dot on-med"></div><div class="diff-dot on-med"></div><div class="diff-dot on-med"></div><div class="diff-dot"></div><div class="diff-dot"></div></div>
+            <span class="diff-label">Intermedio</span>
+          </div>
+          <div class="code-block">
+            <div class="code-header"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="code-label">usuario.ts</span></div>
+            <pre><span class="cmt">// Interface con tipos definidos</span>
+<span class="kw">interface</span> <span class="fn">Usuario</span> {
+  nombre: <span class="kw">string</span>;
+  edad:   <span class="kw">number</span>;
+  activo: <span class="kw">boolean</span>;
+}
+
+<span class="kw">const</span> alumno: <span class="fn">Usuario</span> = {
+  nombre: <span class="str">"María"</span>,
+  edad:   <span class="num">18</span>,
+  activo: <span class="kw">true</span>
+};</pre>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════ ESCRITORIO ══════════════════ -->
+    <div id="tab-desktop" class="section">
+      <p class="section-intro">Los lenguajes de escritorio permiten crear aplicaciones nativas que se instalan en el sistema operativo (Windows, macOS, Linux). Priorizan <strong>rendimiento, acceso al hardware</strong> y experiencia fluida sin depender del navegador.</p>
+      <div class="lang-grid">
+
+        <!-- Java -->
+        <div class="lang-card">
+          <div class="card-banner" style="background:linear-gradient(135deg,#ED8B00,#F5A623)">JAVA</div>
+          <div class="card-header">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"/>
+            <div><div class="lang-name">Java</div><div class="lang-year">Sun Microsystems · 1995</div></div>
+          </div>
+          <p class="lang-desc">Lenguaje orientado a objetos con filosofía <em>"Write Once, Run Anywhere"</em>. Dominó el desarrollo empresarial y Android durante décadas. Ampliamente enseñado en universidades.</p>
+          <div class="use-tags"><span class="tag">Android</span><span class="tag">Empresarial</span><span class="tag">POO</span><span class="tag">Spring</span></div>
+          <div class="difficulty">
+            <span class="diff-label">Dificultad</span>
+            <div class="diff-dots"><div class="diff-dot on-med"></div><div class="diff-dot on-med"></div><div class="diff-dot on-med"></div><div class="diff-dot"></div><div class="diff-dot"></div></div>
+            <span class="diff-label">Intermedio</span>
+          </div>
+          <div class="code-block">
+            <div class="code-header"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="code-label">Main.java</span></div>
+            <pre><span class="cmt">// Clase con método principal</span>
+<span class="kw">public class</span> <span class="fn">Main</span> {
+  <span class="kw">public static void</span> <span class="fn">main</span>(<span class="kw">String</span>[] args) {
+    <span class="kw">String</span> saludo = <span class="str">"Hola, Java"</span>;
+    System.out.println(saludo);
+
+    <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">1</span>; i &lt;= <span class="num">3</span>; i++) {
+      System.out.println(<span class="str">"Item: "</span> + i);
+    }
+  }
+}</pre>
+          </div>
+        </div>
+
+        <!-- C++ -->
+        <div class="lang-card">
+          <div class="card-banner" style="background:linear-gradient(135deg,#00599C,#0086CC)">C++</div>
+          <div class="card-header">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"/>
+            <div><div class="lang-name">C++</div><div class="lang-year">Bjarne Stroustrup · 1985</div></div>
+          </div>
+          <p class="lang-desc">Lenguaje de <strong>alto rendimiento</strong> usado en sistemas operativos, videojuegos (Unreal Engine), software científico y aplicaciones donde la velocidad es crítica.</p>
+          <div class="use-tags"><span class="tag">Videojuegos</span><span class="tag">Sistemas</span><span class="tag">Unreal</span><span class="tag">Alto rendimiento</span></div>
+          <div class="difficulty">
+            <span class="diff-label">Dificultad</span>
+            <div class="diff-dots"><div class="diff-dot on-hard"></div><div class="diff-dot on-hard"></div><div class="diff-dot on-hard"></div><div class="diff-dot on-hard"></div><div class="diff-dot"></div></div>
+            <span class="diff-label">Avanzado</span>
+          </div>
+          <div class="code-block">
+            <div class="code-header"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="code-label">main.cpp</span></div>
+            <pre><span class="cmt">// Punteros y manejo de memoria</span>
+<span class="kw">#include</span> <span class="str">&lt;iostream&gt;</span>
+<span class="kw">using namespace</span> std;
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+  <span class="kw">int</span> valor = <span class="num">42</span>;
+  <span class="kw">int*</span> puntero = &amp;valor;
+
+  cout &lt;&lt; <span class="str">"Valor: "</span> &lt;&lt; *puntero
+       &lt;&lt; endl;
+  <span class="kw">return</span> <span class="num">0</span>;
+}</pre>
+          </div>
+        </div>
+
+        <!-- C# -->
+        <div class="lang-card">
+          <div class="card-banner" style="background:linear-gradient(135deg,#512BD4,#7B5EA7)">C#</div>
+          <div class="card-header">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#"/>
+            <div><div class="lang-name">C# (C Sharp)</div><div class="lang-year">Microsoft · 2000</div></div>
+          </div>
+          <p class="lang-desc">Lenguaje de Microsoft para el ecosistema <strong>.NET</strong>. Potencia Unity (videojuegos), aplicaciones Windows y software empresarial. Sintaxis moderna y muy bien documentada.</p>
+          <div class="use-tags"><span class="tag">Unity</span><span class="tag">.NET</span><span class="tag">Windows</span><span class="tag">Videojuegos</span></div>
+          <div class="difficulty">
+            <span class="diff-label">Dificultad</span>
+            <div class="diff-dots"><div class="diff-dot on-med"></div><div class="diff-dot on-med"></div><div class="diff-dot on-med"></div><div class="diff-dot"></div><div class="diff-dot"></div></div>
+            <span class="diff-label">Intermedio</span>
+          </div>
+          <div class="code-block">
+            <div class="code-header"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="code-label">Personaje.cs</span></div>
+            <pre><span class="cmt">// Clase para un personaje en Unity</span>
+<span class="kw">using</span> UnityEngine;
+
+<span class="kw">public class</span> <span class="fn">Personaje</span> : MonoBehaviour {
+  <span class="kw">public float</span> velocidad = <span class="num">5f</span>;
+
+  <span class="kw">void</span> <span class="fn">Update</span>() {
+    <span class="kw">float</span> h = Input.GetAxis(<span class="str">"Horizontal"</span>);
+    transform.Translate(
+      h * velocidad * Time.deltaTime,
+      <span class="num">0</span>, <span class="num">0</span>);
+  }
+}</pre>
+          </div>
+        </div>
+
+        <!-- Swift -->
+        <div class="lang-card">
+          <div class="card-banner" style="background:linear-gradient(135deg,#FA7343,#F05138)">Swift</div>
+          <div class="card-header">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" alt="Swift"/>
+            <div><div class="lang-name">Swift</div><div class="lang-year">Apple Inc. · 2014</div></div>
+          </div>
+          <p class="lang-desc">Lenguaje moderno y seguro de Apple para <strong>iOS y macOS</strong>. Reemplazó a Objective-C con sintaxis expresiva, tipado seguro y excelente rendimiento en dispositivos Apple.</p>
+          <div class="use-tags"><span class="tag">iOS</span><span class="tag">macOS</span><span class="tag">SwiftUI</span><span class="tag">Xcode</span></div>
+          <div class="difficulty">
+            <span class="diff-label">Dificultad</span>
+            <div class="diff-dots"><div class="diff-dot on-med"></div><div class="diff-dot on-med"></div><div class="diff-dot"></div><div class="diff-dot"></div><div class="diff-dot"></div></div>
+            <span class="diff-label">Básico–Medio</span>
+          </div>
+          <div class="code-block">
+            <div class="code-header"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="code-label">Contador.swift</span></div>
+            <pre><span class="cmt">// Estructura con propiedades mutables</span>
+<span class="kw">import</span> Foundation
+
+<span class="kw">struct</span> <span class="fn">Contador</span> {
+  <span class="kw">var</span> valor: <span class="kw">Int</span> = <span class="num">0</span>
+
+  <span class="kw">mutating func</span> <span class="fn">incrementar</span>() {
+    valor += <span class="num">1</span>
+  }
+}
+
+<span class="kw">var</span> c = <span class="fn">Contador</span>()
+c.<span class="fn">incrementar</span>()
+print(c.valor) <span class="cmt">// → 1</span></pre>
+          </div>
+        </div>
+
+        <!-- Kotlin -->
+        <div class="lang-card">
+          <div class="card-banner" style="background:linear-gradient(135deg,#7F52FF,#B975FF)">Kotlin</div>
+          <div class="card-header">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin"/>
+            <div><div class="lang-name">Kotlin</div><div class="lang-year">JetBrains · 2011</div></div>
+          </div>
+          <p class="lang-desc">El lenguaje oficial de <strong>Android</strong> desde 2017. Más conciso y seguro que Java, con nulo seguro integrado. Compatible con toda la biblioteca de Java y su ecosistema.</p>
+          <div class="use-tags"><span class="tag">Android</span><span class="tag">Jetpack</span><span class="tag">Null-safe</span><span class="tag">Coroutines</span></div>
+          <div class="difficulty">
+            <span class="diff-label">Dificultad</span>
+            <div class="diff-dots"><div class="diff-dot on-med"></div><div class="diff-dot on-med"></div><div class="diff-dot"></div><div class="diff-dot"></div><div class="diff-dot"></div></div>
+            <span class="diff-label">Básico–Medio</span>
+          </div>
+          <div class="code-block">
+            <div class="code-header"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="code-label">Main.kt</span></div>
+            <pre><span class="cmt">// Data class y expresiones lambda</span>
+<span class="kw">data class</span> <span class="fn">Estudiante</span>(
+  <span class="kw">val</span> nombre: <span class="kw">String</span>,
+  <span class="kw">val</span> nota: <span class="kw">Double</span>
+)
+
+<span class="kw">val</span> lista = listOf(
+  <span class="fn">Estudiante</span>(<span class="str">"Ana"</span>, <span class="num">9.2</span>),
+  <span class="fn">Estudiante</span>(<span class="str">"Luis"</span>, <span class="num">7.5</span>)
+)
+
+lista.filter { it.nota >= <span class="num">8</span> }
+     .forEach { println(it.nombre) }</pre>
+          </div>
+        </div>
+
+        <!-- Python Desktop -->
+        <div class="lang-card">
+          <div class="card-banner" style="background:linear-gradient(135deg,#3776AB,#1E3A5F)">PyGUI</div>
+          <div class="card-header">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python Tkinter"/>
+            <div><div class="lang-name">Python + Tkinter</div><div class="lang-year">GUI multiplataforma · 1991</div></div>
+          </div>
+          <p class="lang-desc">Python con la librería <strong>Tkinter</strong> permite crear interfaces de escritorio multiplataforma con muy poco código. Ideal para herramientas internas, scripts con interfaz y prototipos rápidos.</p>
+          <div class="use-tags"><span class="tag">GUI</span><span class="tag">Tkinter</span><span class="tag">PyQt</span><span class="tag">Herramientas</span></div>
+          <div class="difficulty">
+            <span class="diff-label">Dificultad</span>
+            <div class="diff-dots"><div class="diff-dot on-easy"></div><div class="diff-dot on-easy"></div><div class="diff-dot"></div><div class="diff-dot"></div><div class="diff-dot"></div></div>
+            <span class="diff-label">Fácil</span>
+          </div>
+          <div class="code-block">
+            <div class="code-header"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="code-label">ventana.py</span></div>
+            <pre><span class="kw">import</span> tkinter <span class="kw">as</span> tk
+
+<span class="cmt"># Ventana principal</span>
+raiz = tk.<span class="fn">Tk</span>()
+raiz.<span class="fn">title</span>(<span class="str">"Mi App"</span>)
+
+etiqueta = tk.<span class="fn">Label</span>(
+  raiz, text=<span class="str">"¡Hola desde Python!"</span>
+)
+etiqueta.<span class="fn">pack</span>(pady=<span class="num">20</span>)
+
+raiz.<span class="fn">mainloop</span>()</pre>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════ DISEÑO ══════════════════ -->
+    <div id="tab-design" class="section">
+      <p class="section-intro">Los lenguajes y sistemas de diseño/maquetación definen cómo se ve el mundo digital: desde la apariencia visual hasta la estructura de documentos. Algunos son lenguajes formales; otros, <strong>sistemas y herramientas con lógica propia</strong>.</p>
+      <div class="lang-grid">
+
+        <!-- Figma -->
+        <div class="lang-card">
+          <div class="card-banner" style="background:linear-gradient(135deg,#F24E1E,#A259FF)">Figma</div>
+          <div class="card-header">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma"/>
+            <div><div class="lang-name">Figma</div><div class="lang-year">Diseño vectorial colaborativo · 2016</div></div>
+          </div>
+          <p class="lang-desc">Herramienta líder en diseño de interfaces UI/UX. Opera en la nube con colaboración en tiempo real. Genera <strong>tokens de diseño</strong> y código CSS/iOS/Android automáticamente.</p>
+          <div class="use-tags"><span class="tag">UI/UX</span><span class="tag">Prototipado</span><span class="tag">Components</span><span class="tag">Auto Layout</span></div>
+          <div class="difficulty">
+            <span class="diff-label">Dificultad</span>
+            <div class="diff-dots"><div class="diff-dot on-easy"></div><div class="diff-dot on-easy"></div><div class="diff-dot"></div><div class="diff-dot"></div><div class="diff-dot"></div></div>
+            <span class="diff-label">Fácil</span>
+          </div>
+          <div class="code-block">
+            <div class="code-header"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="code-label">CSS generado por Figma</span></div>
+            <pre><span class="cmt">/* Figma exporta CSS automático */</span>
+<span class="sel">.boton-primario</span> {
+  <span class="prop">display</span>: <span class="str">flex</span>;
+  <span class="prop">padding</span>: <span class="num">12px 24px</span>;
+  <span class="prop">background</span>: <span class="clr">#5B4BF5</span>;
+  <span class="prop">border-radius</span>: <span class="num">8px</span>;
+  <span class="prop">font-weight</span>: <span class="num">600</span>;
+  <span class="prop">color</span>: <span class="clr">#FFFFFF</span>;
+  <span class="prop">box-shadow</span>: <span class="str">0 4px 12px rgba(0,0,0,.2)</span>;
+}</pre>
+          </div>
+        </div>
+
+        <!-- SASS -->
+        <div class="lang-card">
+          <div class="card-banner" style="background:linear-gradient(135deg,#CF649A,#E87CB7)">SASS</div>
+          <div class="card-header">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" alt="SASS"/>
+            <div><div class="lang-name">SASS / SCSS</div><div class="lang-year">CSS con superpoderes · 2006</div></div>
+          </div>
+          <p class="lang-desc">Preprocesador CSS que agrega variables, funciones, anidamiento e imports. El código <strong>SCSS</strong> se compila a CSS estándar. Imprescindible en proyectos de maquetación profesional.</p>
+          <div class="use-tags"><span class="tag">Estilos</span><span class="tag">Variables</span><span class="tag">Mixins</span><span class="tag">Anidamiento</span></div>
+          <div class="difficulty">
+            <span class="diff-label">Dificultad</span>
+            <div class="diff-dots"><div class="diff-dot on-easy"></div><div class="diff-dot on-easy"></div><div class="diff-dot"></div><div class="diff-dot"></div><div class="diff-dot"></div></div>
+            <span class="diff-label">Fácil</span>
+          </div>
+          <div class="code-block">
+            <div class="code-header"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="code-label">estilos.scss</span></div>
+            <pre><span class="cmt">// Variables y anidamiento SCSS</span>
+<span class="kw">$color-primario</span>: <span class="clr">#5B4BF5</span>;
+<span class="kw">$radio</span>: <span class="num">8px</span>;
+
+<span class="sel">.tarjeta</span> {
+  <span class="prop">border-radius</span>: <span class="kw">$radio</span>;
+  <span class="prop">padding</span>: <span class="num">1rem</span>;
+
+  <span class="sel">&amp;:hover</span> {
+    <span class="prop">border-color</span>: <span class="kw">$color-primario</span>;
+  }
+
+  <span class="sel">.titulo</span> { <span class="prop">font-size</span>: <span class="num">1.2rem</span>; }
+}</pre>
+          </div>
+        </div>
+
+        <!-- SVG -->
+        <div class="lang-card">
+          <div class="card-banner" style="background:linear-gradient(135deg,#FFB13B,#DE6000)">SVG</div>
+          <div class="card-header">
+            <div style="width:38px;height:38px;background:#FFB13B;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:12px;font-family:'Syne',sans-serif;flex-shrink:0">SVG</div>
+            <div><div class="lang-name">SVG</div><div class="lang-year">Scalable Vector Graphics · 1999</div></div>
+          </div>
+          <p class="lang-desc">Formato XML para gráficos vectoriales que <strong>nunca pierden calidad</strong> al escalar. Embebible directamente en HTML y estilizable con CSS. Ideal para íconos, ilustraciones e infografías web.</p>
+          <div class="use-tags"><span class="tag">Vectores</span><span class="tag">Íconos</span><span class="tag">Animaciones</span><span class="tag">Logotipos</span></div>
+          <div class="difficulty">
+            <span class="diff-label">Dificultad</span>
+            <div class="diff-dots"><div class="diff-dot on-easy"></div><div class="diff-dot on-easy"></div><div class="diff-dot on-med"></div><div class="diff-dot"></div><div class="diff-dot"></div></div>
+            <span class="diff-label">Básico</span>
+          </div>
+          <div class="code-block">
+            <div class="code-header"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="code-label">icono.svg</span></div>
+            <pre><span class="cmt">&lt;!-- Ícono de estrella en SVG --&gt;</span>
+<span class="tgh">&lt;svg</span> <span class="attr">viewBox</span>=<span class="val">"0 0 24 24"</span>
+     <span class="attr">width</span>=<span class="val">"48"</span><span class="tgh">&gt;</span>
+  <span class="tgh">&lt;polygon</span>
+    <span class="attr">points</span>=<span class="val">"12,2 15,9 22,9 17,14
+      19,21 12,17 5,21 7,14 2,9 9,9"</span>
+    <span class="attr">fill</span>=<span class="val">"#FFB13B"</span>
+    <span class="attr">stroke</span>=<span class="val">"#DE6000"</span>
+    <span class="attr">stroke-width</span>=<span class="val">"1"</span><span class="tgh">/&gt;</span>
+<span class="tgh">&lt;/svg&gt;</span></pre>
+          </div>
+        </div>
+
+        <!-- LaTeX -->
+        <div class="lang-card">
+          <div class="card-banner" style="background:linear-gradient(135deg,#1A7F5A,#2DB57D)">LaTeX</div>
+          <div class="card-header">
+            <div style="width:38px;height:38px;background:#1A7F5A;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:11px;font-family:'Syne',sans-serif;flex-shrink:0">TEX</div>
+            <div><div class="lang-name">LaTeX</div><div class="lang-year">Composición tipográfica · 1984</div></div>
+          </div>
+          <p class="lang-desc">Sistema de maquetación para <strong>documentos científicos y académicos</strong>. Genera PDFs con tipografía profesional perfecta. Estándar en física, matemáticas, economía y tesis universitarias.</p>
+          <div class="use-tags"><span class="tag">Tesis</span><span class="tag">Papers</span><span class="tag">Fórmulas</span><span class="tag">Académico</span></div>
+          <div class="difficulty">
+            <span class="diff-label">Dificultad</span>
+            <div class="diff-dots"><div class="diff-dot on-med"></div><div class="diff-dot on-med"></div><div class="diff-dot on-med"></div><div class="diff-dot"></div><div class="diff-dot"></div></div>
+            <span class="diff-label">Intermedio</span>
+          </div>
+          <div class="code-block">
+            <div class="code-header"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="code-label">documento.tex</span></div>
+            <pre><span class="cmt">% Documento académico en LaTeX</span>
+<span class="kw">\documentclass</span>{article}
+<span class="kw">\usepackage</span>[utf8]{inputenc}
+
+<span class="kw">\title</span>{Cultura Digital}
+<span class="kw">\author</span>{Alumno}
+
+<span class="kw">\begin</span>{document}
+<span class="kw">\maketitle</span>
+
+La fórmula de Einstein: <span class="str">$E = mc^2$</span>
+
+<span class="kw">\end</span>{document}</pre>
+          </div>
+        </div>
+
+        <!-- Tailwind -->
+        <div class="lang-card">
+          <div class="card-banner" style="background:linear-gradient(135deg,#06B6D4,#0EA5E9)">Tailwind</div>
+          <div class="card-header">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS"/>
+            <div><div class="lang-name">Tailwind CSS</div><div class="lang-year">Utility-first CSS · 2017</div></div>
+          </div>
+          <p class="lang-desc">Framework CSS <strong>utility-first</strong> que aplica estilos directamente en el HTML mediante clases atómicas. Elimina la necesidad de escribir CSS personalizado en la mayoría de los casos.</p>
+          <div class="use-tags"><span class="tag">Utility-first</span><span class="tag">React</span><span class="tag">Componentes</span><span class="tag">Rapid UI</span></div>
+          <div class="difficulty">
+            <span class="diff-label">Dificultad</span>
+            <div class="diff-dots"><div class="diff-dot on-easy"></div><div class="diff-dot on-easy"></div><div class="diff-dot"></div><div class="diff-dot"></div><div class="diff-dot"></div></div>
+            <span class="diff-label">Fácil</span>
+          </div>
+          <div class="code-block">
+            <div class="code-header"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="code-label">componente.html</span></div>
+            <pre><span class="cmt">&lt;!-- Card con clases Tailwind --&gt;</span>
+<span class="tgh">&lt;div</span> <span class="attr">class</span>=<span class="val">"bg-white rounded-xl
+     shadow-md p-6 max-w-sm
+     hover:shadow-lg transition"</span><span class="tgh">&gt;</span>
+  <span class="tgh">&lt;h2</span> <span class="attr">class</span>=<span class="val">"text-xl font-bold
+       text-gray-800 mb-2"</span><span class="tgh">&gt;</span>
+    Título<span class="tgh">&lt;/h2&gt;</span>
+  <span class="tgh">&lt;p</span> <span class="attr">class</span>=<span class="val">"text-gray-500 text-sm"</span><span class="tgh">&gt;</span>
+    Descripción del componente.
+  <span class="tgh">&lt;/p&gt;</span>
+<span class="tgh">&lt;/div&gt;</span></pre>
+          </div>
+        </div>
+
+        <!-- Markdown -->
+        <div class="lang-card">
+          <div class="card-banner" style="background:linear-gradient(135deg,#4A4A4A,#6E6E6E)">MD</div>
+          <div class="card-header">
+            <div style="width:38px;height:38px;background:#4A4A4A;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:13px;font-family:'Syne',sans-serif;flex-shrink:0">MD</div>
+            <div><div class="lang-name">Markdown</div><div class="lang-year">Lenguaje de marcado ligero · 2004</div></div>
+          </div>
+          <p class="lang-desc">Lenguaje de marcado <strong>ultraligero</strong> para escritura legible que se convierte a HTML. Usado en GitHub, Notion, documentación técnica y blogs. Sintaxis sencilla aprendida en minutos.</p>
+          <div class="use-tags"><span class="tag">Documentación</span><span class="tag">GitHub</span><span class="tag">Blogs</span><span class="tag">Notion</span></div>
+          <div class="difficulty">
+            <span class="diff-label">Dificultad</span>
+            <div class="diff-dots"><div class="diff-dot on-easy"></div><div class="diff-dot"></div><div class="diff-dot"></div><div class="diff-dot"></div><div class="diff-dot"></div></div>
+            <span class="diff-label">Muy fácil</span>
+          </div>
+          <div class="code-block">
+            <div class="code-header"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="code-label">README.md</span></div>
+            <pre><span class="cmt"># Encabezado principal (H1)</span>
+<span class="kw">## Subtítulo (H2)</span>
+
+Texto con <span class="str">**negrita**</span>, <span class="kw">*cursiva*</span>
+y <span class="fn">`código inline`</span>.
+
+<span class="str">- Elemento de lista
+- Otro elemento
+  - Sub-elemento</span>
+
+<span class="fn">[Enlace](https://ejemplo.com)</span>
+<span class="fn">![Imagen](ruta/imagen.png)</span></pre>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>Cultura Digital · Unidad 2 — Lenguajes de Diseño y Programación</p>
+    <p style="margin-top:6px;color:#B06040">18 lenguajes &nbsp;·&nbsp; 3 categorías &nbsp;·&nbsp; CBTIS 144</p>
+  </footer>
+
+  <script>
+    function switchTab(id, btn) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+      btn.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>

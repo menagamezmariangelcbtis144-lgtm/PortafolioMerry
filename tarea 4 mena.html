@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<!-- saved from url=(0175)file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía Completa CSS3 — Cultura Digital 2</title>
+  <link href="./Guía Completa CSS3 — Cultura Digital 2.html 4_files/css2" rel="stylesheet">
+  <style>
+    :root {
+      --orange-deep:   #8a9a00;
+      --orange-mid:    #a8b800;
+      --orange-bright: #c8d400;
+      --orange-glow:   #eef5a0;
+      --ink:           #f5f9d0;
+      --ink-mid:       #eaf3b0;
+      --ink-card:      #e2ee98;
+      --white:         #2a2e00;
+      --text-body:     #3a4000;
+      --text-muted:    #6a7a10;
+      /* CSS3 accent: olive/lime */
+      --css-blue:      #7a9000;
+      --css-light:     #9ab000;
+      --teal:          #8aaa00;
+      --teal-dim:      #5a7000;
+      --cyan:          #b8d020;
+      --green-acc:     #6a9800;
+      --yellow-acc:    #a09000;
+      --pink-acc:      #808000;
+      --purple-acc:    #7a8800;
+      --red-acc:       #8a7800;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: linear-gradient(to bottom, #f7fbcc 0%, #d6e860 100%); background-attachment: fixed; color: var(--text-body); }
+
+    /* ── NAV ── */
+    .topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 32px;
+      background: rgba(240,250,180,0.95); backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(140,160,0,0.25);
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 8px 20px; border-radius: 50px;
+      border: 1.5px solid rgba(255,140,56,0.55); background: transparent;
+      color: var(--orange-bright); font-family: 'Space Mono', monospace;
+      font-size: 0.75rem; letter-spacing: 0.12em; text-decoration: none;
+      cursor: pointer; transition: background .2s, color .2s, transform .2s;
+    }
+    .back-btn:hover { background: var(--orange-mid); color: #fff; border-color: var(--orange-mid); transform: translateX(-3px); }
+    .back-btn svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .nav-badge { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--text-muted); letter-spacing: 0.15em; text-transform: uppercase; }
+    .nav-badge span { color: var(--orange-bright); }
+
+    /* ── LAYOUT ── */
+    .layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-top: 58px;
+    }
+
+    /* ── TOC ── */
+    .toc {
+      position: sticky; top: 58px; height: calc(100vh - 58px);
+      overflow-y: auto; padding: 32px 0 32px 24px;
+      border-right: 1px solid rgba(100,120,0,0.15);
+      scrollbar-width: thin; scrollbar-color: rgba(140,160,0,0.35) transparent;
+    }
+    .toc::-webkit-scrollbar { width: 4px; }
+    .toc::-webkit-scrollbar-thumb { background: rgba(140,160,0,0.35); border-radius: 2px; }
+    .toc-title { font-family: 'Space Mono', monospace; font-size: 0.62rem; color: var(--teal); letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 16px; }
+    .toc a { display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px 0; text-decoration: none; font-size: 0.80rem; color: var(--text-muted); border-radius: 6px; transition: color .2s; line-height: 1.35; }
+    .toc a:hover { color: var(--teal); }
+    .toc a.active { color: var(--white); }
+    .toc-num { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: var(--teal-dim); width: 18px; flex-shrink: 0; }
+    .toc-group { margin-top: 10px; margin-bottom: 4px; }
+    .toc-group-label { font-family: 'Space Mono', monospace; font-size: 0.58rem; color: rgba(45,212,191,0.40); letter-spacing: 0.2em; text-transform: uppercase; padding: 4px 0; margin-bottom: 2px; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 92vh;
+      display: flex; align-items: flex-end; padding-bottom: 72px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 65% at 18% 60%, rgba(38,77,228,0.20) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 45% at 75% 25%, rgba(45,212,191,0.12) 0%, transparent 60%),
+        linear-gradient(165deg, #070d14 0%, #0a1520 50%, #070d14 100%);
+    }
+
+    /* Floating CSS property rain */
+    .prop-rain { position: absolute; inset: 0; pointer-events: none; overflow: hidden; opacity: 0.06; font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--teal); }
+    .prop-col { position: absolute; top: -10%; display: flex; flex-direction: column; gap: 9px; animation: fall linear infinite; }
+    @keyframes fall { to { transform: translateY(115vh); } }
+
+    /* CSS3 logo on right */
+    .hero-logo-right {
+      position: absolute; right: 5%; top: 0; bottom: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 3; opacity: 0;
+      animation: fadeUp .8s .5s ease forwards;
+    }
+    .logo-glow-ring {
+      position: absolute; width: 520px; height: 520px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(38,77,228,0.22) 0%, rgba(45,212,191,0.08) 50%, transparent 75%);
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1);   opacity: 0.7; }
+      50%       { transform: scale(1.1); opacity: 1;   }
+    }
+    .css3-svg-logo {
+      width: 380px; height: 380px;
+      position: relative; z-index: 1;
+      filter:
+        drop-shadow(0 0 40px rgba(38,77,228,0.70))
+        drop-shadow(0 0 80px rgba(45,212,191,0.30))
+        drop-shadow(0 16px 32px rgba(0,0,0,0.60));
+      animation: floatLogo 4s ease-in-out infinite;
+    }
+    @keyframes floatLogo {
+      0%, 100% { transform: translateY(0);    }
+      50%       { transform: translateY(-14px); }
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 580px; padding: 0 40px; }
+    .hero-tag-line {
+      font-family: 'Space Mono', monospace; font-size: 0.70rem; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--teal); margin-bottom: 18px;
+      display: flex; align-items: center; gap: 10px;
+      opacity: 0; animation: fadeUp .6s .1s ease forwards;
+    }
+    .hero-tag-line::before { content:''; display:block; width:32px; height:1.5px; background:var(--teal); }
+    .hero-title {
+      font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 5.2rem);
+      font-weight: 900; line-height: 1.0; color: var(--white); margin-bottom: 16px;
+      opacity: 0; animation: fadeUp .6s .25s ease forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--teal); }
+    .hero-desc {
+      font-size: 1.02rem; color: var(--text-muted); line-height: 1.75; max-width: 520px;
+      margin-bottom: 32px; opacity: 0; animation: fadeUp .6s .40s ease forwards;
+    }
+    .hero-desc strong { color: var(--text-body); }
+    .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; opacity: 0; animation: fadeUp .6s .55s ease forwards; }
+    .stat { display: flex; flex-direction: column; gap: 3px; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--teal); line-height: 1; }
+    .stat-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: var(--text-muted); letter-spacing: 0.15em; text-transform: uppercase; }
+
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    /* ── ARTICLE ── */
+    .article { padding: 60px 40px 120px; }
+
+    .sep { display: flex; align-items: center; gap: 16px; margin: 72px 0 28px; }
+    .sep-line { flex: 1; height: 1px; background: rgba(45,212,191,0.12); }
+    .sep-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.22em; color: var(--teal); text-transform: uppercase; white-space: nowrap; }
+
+    h2.sh { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3.5vw, 2.2rem); color: var(--white); font-weight: 700; margin-bottom: 12px; line-height: 1.2; }
+    h3.sh3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--white); font-weight: 700; margin: 36px 0 12px; }
+    p.bp { font-size: 0.97rem; color: var(--text-body); line-height: 1.82; margin-bottom: 16px; }
+    p.bp strong { color: var(--white); }
+    p.bp em { color: var(--teal); font-style: normal; }
+
+    /* ── CODE BLOCKS ── */
+    .code-block { background: #060e18; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.07); margin: 20px 0; }
+    .code-bar { display: flex; align-items: center; gap: 6px; padding: 9px 16px; background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .dot { width: 9px; height: 9px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; } .dot-y { background: #ffbd2e; } .dot-g { background: #28c840; }
+    .code-file { font-family: 'Space Mono', monospace; font-size: 0.62rem; color: var(--text-muted); margin-left: auto; }
+    pre.cc { padding: 18px 20px; font-family: 'Space Mono', monospace; font-size: 0.74rem; line-height: 1.75; overflow-x: auto; color: #abb2bf; margin: 0; white-space: pre; }
+    .sel  { color: #e06c75; }
+    .prp  { color: #56b6c2; }
+    .vl   { color: #98c379; }
+    .cm   { color: #5c6370; font-style: italic; }
+    .kw   { color: #c678dd; }
+    .num  { color: #d19a66; }
+    .fn   { color: #61afef; }
+    .at   { color: #d19a66; }
+    .hl   { background: rgba(45,212,191,0.07); border-left: 2px solid var(--teal); display: block; margin: 0 -20px; padding: 0 18px; }
+
+    /* ── INFO BOXES ── */
+    .info-box { border-radius: 12px; padding: 18px 22px; margin: 20px 0; border-left: 3px solid; }
+    .info-box.tip    { background: rgba(74,222,128,0.06);  border-color: var(--green-acc); }
+    .info-box.warn   { background: rgba(251,191,36,0.06);  border-color: var(--yellow-acc); }
+    .info-box.note   { background: rgba(45,212,191,0.06);  border-color: var(--teal); }
+    .info-box.css    { background: rgba(38,77,228,0.08);   border-color: var(--css-light); }
+    .info-label { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 6px; }
+    .info-box.tip  .info-label { color: var(--green-acc); }
+    .info-box.warn .info-label { color: var(--yellow-acc); }
+    .info-box.note .info-label { color: var(--teal); }
+    .info-box.css  .info-label { color: var(--css-light); }
+    .info-box p { font-size: 0.90rem; color: var(--text-body); line-height: 1.7; }
+    .info-box p strong { color: var(--white); }
+
+    /* ── PROPERTY CARDS ── */
+    .prop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin: 24px 0; }
+    .prop-card { background: rgba(220,240,80,0.45); border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); padding: 16px 18px; transition: border-color .2s, transform .2s; }
+    .prop-card:hover { border-color: rgba(45,212,191,0.30); transform: translateY(-3px); }
+    .prop-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .prop-pill { font-family: 'Space Mono', monospace; font-size: 0.72rem; font-weight: 700; background: rgba(45,212,191,0.12); color: var(--teal); padding: 3px 10px; border-radius: 6px; }
+    .prop-type { font-family: 'Space Mono', monospace; font-size: 0.58rem; color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase; }
+    .prop-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.55; }
+    .prop-desc strong { color: var(--text-body); }
+    .val-chips { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; }
+    .val-chip { font-family: 'Space Mono', monospace; font-size: 0.60rem; background: rgba(103,232,249,0.08); color: var(--cyan); border: 1px solid rgba(103,232,249,0.18); border-radius: 4px; padding: 2px 7px; }
+
+    /* ── TABLE ── */
+    .tbl-wrap { overflow-x: auto; margin: 20px 0; }
+    table.tbl { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+    table.tbl th { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); padding: 10px 14px; border-bottom: 2px solid rgba(45,212,191,0.18); background: rgba(45,212,191,0.04); text-align: left; }
+    table.tbl td { padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text-body); vertical-align: top; line-height: 1.55; }
+    table.tbl td:first-child { font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--cyan); }
+    table.tbl tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* ── BOX MODEL DIAGRAM ── */
+    .box-model-diagram {
+      background: rgba(220,240,80,0.45); border-radius: 14px; padding: 32px;
+      margin: 24px 0; border: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .bm-outer {
+      width: 100%; max-width: 480px;
+      position: relative; font-family: 'Space Mono', monospace; font-size: 0.65rem;
+    }
+    .bm-layer {
+      border-radius: 8px; padding: 16px;
+      display: flex; flex-direction: column; align-items: center;
+      position: relative;
+    }
+    .bm-label {
+      position: absolute; top: 6px; left: 10px;
+      font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
+      font-weight: 700; opacity: 0.8;
+    }
+    .bm-margin  { background: rgba(251,191,36,0.08); border: 2px dashed rgba(251,191,36,0.35); }
+    .bm-margin  .bm-label { color: var(--yellow-acc); }
+    .bm-border  { background: rgba(248,113,113,0.08); border: 2px solid rgba(248,113,113,0.40); margin: 14px; }
+    .bm-border  .bm-label { color: var(--red-acc); }
+    .bm-padding { background: rgba(74,222,128,0.07); border: 2px dashed rgba(74,222,128,0.30); margin: 14px; }
+    .bm-padding .bm-label { color: var(--green-acc); }
+    .bm-content { background: rgba(45,212,191,0.15); border: 2px solid rgba(45,212,191,0.45); margin: 14px; border-radius: 6px; padding: 24px 32px; text-align: center; }
+    .bm-content .bm-label { color: var(--teal); }
+    .bm-content-text { color: var(--white); font-size: 0.75rem; margin-top: 18px; }
+
+    /* ── SPECIFICITY DIAGRAM ── */
+    .spec-row {
+      display: flex; align-items: center; gap: 14px; margin: 10px 0;
+    }
+    .spec-bar-track { flex: 1; height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; }
+    .spec-bar-fill { height: 100%; border-radius: 4px; }
+    .spec-label { font-family: 'Space Mono', monospace; font-size: 0.68rem; width: 180px; flex-shrink: 0; }
+    .spec-score { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--teal); width: 70px; text-align: right; flex-shrink: 0; }
+
+    /* ── LIVE DEMO BOXES ── */
+    .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+    .demo-box {
+      background: rgba(220,240,80,0.45); border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.06); overflow: hidden;
+    }
+    .demo-label { font-family: 'Space Mono', monospace; font-size: 0.62rem; color: var(--text-muted); padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); letter-spacing: 0.12em; text-transform: uppercase; }
+    .demo-preview { padding: 20px; min-height: 80px; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+
+    /* ── COLOR SWATCHES ── */
+    .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); gap: 10px; margin: 20px 0; }
+    .swatch { border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.07); }
+    .swatch-color { height: 52px; }
+    .swatch-info { padding: 8px 10px; background: rgba(220,240,80,0.45); }
+    .swatch-name { font-family: 'Space Mono', monospace; font-size: 0.62rem; color: var(--white); margin-bottom: 2px; }
+    .swatch-val  { font-family: 'Space Mono', monospace; font-size: 0.55rem; color: var(--text-muted); }
+
+    /* ── POSITIONING DIAGRAM ── */
+    .pos-demo {
+      background: rgba(220,240,80,0.45); border-radius: 12px; padding: 20px;
+      border: 1px solid rgba(255,255,255,0.06); margin: 12px 0;
+      min-height: 120px; position: relative; overflow: hidden;
+    }
+    .pos-demo-label { font-family: 'Space Mono', monospace; font-size: 0.62rem; color: var(--text-muted); margin-bottom: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
+    .pos-box { padding: 6px 14px; border-radius: 6px; font-family: 'Space Mono', monospace; font-size: 0.68rem; display: inline-block; }
+
+    /* ── CHEAT SHEET ── */
+    .cheat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px,1fr)); gap: 11px; margin: 20px 0; }
+    .cheat-item { background: rgba(220,240,80,0.45); border-radius: 10px; padding: 13px 15px; border: 1px solid rgba(255,255,255,0.05); transition: border-color .2s; }
+    .cheat-item:hover { border-color: rgba(45,212,191,0.25); }
+    .cheat-prop { font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--teal); margin-bottom: 5px; }
+    .cheat-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* ── FOOTER ── */
+    footer { background: linear-gradient(135deg, var(--orange-deep) 0%, var(--orange-mid) 100%); text-align: center; padding: 40px 24px; }
+    .footer-school { font-family: 'Playfair Display', serif; font-size: clamp(0.85rem,2vw,1.05rem); color: #fff; font-weight: 700; margin-bottom: 8px; line-height: 1.4; }
+    .footer-details { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; color: var(--orange-glow); line-height: 1.8; }
+    .footer-divider { width: 40px; height: 2px; background: rgba(255,255,255,0.3); margin: 16px auto; border-radius: 2px; }
+
+    @media(max-width:900px){
+      .layout { grid-template-columns: 1fr; }
+      .toc { display: none; }
+      .article { padding: 40px 20px 80px; }
+      .demo-grid { grid-template-columns: 1fr; }
+      .hero-content { padding: 0 24px; }
+      .hero-logo-right { display: none; }
+    }
+    @media(max-width:600px){ .topnav { padding: 12px 16px; } }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav class="topnav">
+  <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/index.html" class="back-btn">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    Volver al portafolio
+  </a>
+  <span class="nav-badge">Tarea <span>04</span> — Cultura Digital 2</span>
+</nav>
+
+<div class="layout">
+
+  <!-- ══ TOC ══ -->
+  <aside class="toc">
+    <p class="toc-title">Contenido</p>
+    <div class="toc-group">
+      <p class="toc-group-label">Introducción</p>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-intro" class=""><span class="toc-num">01</span>¿Qué es CSS3?</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-sintaxis" class=""><span class="toc-num">02</span>Sintaxis y reglas</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-como-agregar" class=""><span class="toc-num">03</span>Cómo agregar CSS</a>
+    </div>
+    <div class="toc-group">
+      <p class="toc-group-label">Fundamentos</p>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-selectores" class=""><span class="toc-num">04</span>Selectores básicos</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-sel-avanzados"><span class="toc-num">05</span>Selectores avanzados</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-cascada"><span class="toc-num">06</span>Cascada y herencia</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-especificidad"><span class="toc-num">07</span>Especificidad</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-box-model" class=""><span class="toc-num">08</span>Modelo de caja</a>
+    </div>
+    <div class="toc-group">
+      <p class="toc-group-label">Visual</p>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-unidades"><span class="toc-num">09</span>Unidades de medida</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-colores" class=""><span class="toc-num">10</span>Colores</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-tipografia"><span class="toc-num">11</span>Tipografía</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-fondos" class=""><span class="toc-num">12</span>Fondos</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-bordes"><span class="toc-num">13</span>Bordes y sombras</a>
+    </div>
+    <div class="toc-group">
+      <p class="toc-group-label">Layout</p>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-display"><span class="toc-num">14</span>Display</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-posicionamiento"><span class="toc-num">15</span>Posicionamiento</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-flexbox"><span class="toc-num">16</span>Flexbox</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-grid" class=""><span class="toc-num">17</span>CSS Grid</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-responsive"><span class="toc-num">18</span>Responsive / Media</a>
+    </div>
+    <div class="toc-group">
+      <p class="toc-group-label">CSS3 Avanzado</p>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-variables"><span class="toc-num">19</span>Variables CSS</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-transiciones"><span class="toc-num">20</span>Transiciones</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-animaciones"><span class="toc-num">21</span>Animaciones</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-transformaciones"><span class="toc-num">22</span>Transformaciones</a>
+    </div>
+    <div class="toc-group">
+      <p class="toc-group-label">Referencia</p>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-cheatsheet"><span class="toc-num">23</span>Cheat Sheet</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea4.html#s-buenas" class="active"><span class="toc-num">24</span>Buenas prácticas</a>
+    </div>
+  </aside>
+
+  <!-- ══ MAIN ══ -->
+  <div class="main-content">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+
+      <!-- CSS property rain -->
+      <div class="prop-rain" aria-hidden="true">
+        <div class="prop-col" style="left:4%;animation-duration:9s;"><span>color:</span><span>margin:</span><span>display:</span><span>padding:</span><span>flex:</span></div>
+        <div class="prop-col" style="left:20%;animation-duration:12s;animation-delay:-4s;"><span>border:</span><span>font-size:</span><span>position:</span><span>width:</span><span>height:</span></div>
+        <div class="prop-col" style="left:42%;animation-duration:10s;animation-delay:-2s;"><span>@media</span><span>:hover</span><span>grid:</span><span>opacity:</span><span>z-index:</span></div>
+        <div class="prop-col" style="left:64%;animation-duration:14s;animation-delay:-6s;"><span>transform:</span><span>animation:</span><span>var(--)</span><span>transition:</span></div>
+        <div class="prop-col" style="left:83%;animation-duration:11s;animation-delay:-1s;"><span>background:</span><span>box-shadow:</span><span>border-radius:</span></div>
+      </div>
+
+      <!-- CSS3 Logo right -->
+      <div class="hero-logo-right">
+        <div class="logo-glow-ring"></div>
+        <svg class="css3-svg-logo" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <lineargradient id="cssShieldL" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#4d7bef"></stop>
+              <stop offset="100%" stop-color="#1a3fc4"></stop>
+            </lineargradient>
+            <lineargradient id="cssShieldR" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#3d6ef5"></stop>
+              <stop offset="100%" stop-color="#1230a0"></stop>
+            </lineargradient>
+            <filter id="cssGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <fegaussianblur stdDeviation="10" result="blur"></fegaussianblur>
+              <femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+            </filter>
+          </defs>
+          <!-- Shield left -->
+          <path d="M256 32 L64 80 L96 416 L256 480 L256 32Z" fill="url(#cssShieldL)"></path>
+          <!-- Shield right -->
+          <path d="M256 32 L448 80 L416 416 L256 480 L256 32Z" fill="url(#cssShieldR)"></path>
+          <!-- Top bar -->
+          <rect x="64" y="80" width="384" height="52" fill="rgba(0,0,0,0.20)" rx="4"></rect>
+          <text x="256" y="118" font-family="Arial Black, Impact, sans-serif" font-size="44" font-weight="900" fill="white" text-anchor="middle" letter-spacing="6" opacity="0.95">CSS</text>
+          <!-- "3" numeral -->
+          <text x="256" y="360" font-family="Arial Black, Impact, sans-serif" font-size="260" font-weight="900" fill="white" text-anchor="middle" opacity="0.96">3</text>
+        </svg>
+      </div>
+
+      <div class="hero-content">
+        <p class="hero-tag-line">Cultura Digital 2 · Tarea 04</p>
+        <h1 class="hero-title">Guía<br>Completa de<br><em>CSS3</em></h1>
+        <p class="hero-desc">
+          Todo lo que necesitas para dar <strong>vida visual a cualquier página web</strong>. Selectores, modelo de caja, Flexbox, Grid, animaciones y mucho más desde cero.
+        </p>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-num">24</span><span class="stat-label">Secciones</span></div>
+          <div class="stat"><span class="stat-num">500+</span><span class="stat-label">Propiedades</span></div>
+          <div class="stat"><span class="stat-num">1996</span><span class="stat-label">Año CSS</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ ARTICLE ══════ -->
+    <article class="article">
+
+      <!-- 01 QUÉ ES CSS3 -->
+      <div id="s-intro" class="sep"><div class="sep-line"></div><span class="sep-label">01 · Introducción</span><div class="sep-line"></div></div>
+      <h2 class="sh">¿Qué es CSS3?</h2>
+      <p class="bp"><strong>CSS</strong> significa <em>Cascading Style Sheets</em> (Hojas de Estilo en Cascada). Es el lenguaje que le da apariencia visual al HTML: colores, tipografías, tamaños, espaciado, animaciones y diseño de páginas completas.</p>
+      <p class="bp"><strong>CSS3</strong> es la versión más reciente, lanzada en módulos desde el año 2011. Introdujo animaciones, transiciones, gradientes, variables, Flexbox, Grid y decenas de funcionalidades que antes solo eran posibles con JavaScript o imágenes externas.</p>
+      <div class="info-box note">
+        <p class="info-label">💡 La trinidad de la Web</p>
+        <p><strong>HTML</strong> es el esqueleto. <strong>CSS</strong> es la piel, ropa y estilo. <strong>JavaScript</strong> es el cerebro. Sin CSS, toda la web sería texto negro sobre fondo blanco, como un documento de texto plano.</p>
+      </div>
+
+      <!-- 02 SINTAXIS -->
+      <div id="s-sintaxis" class="sep"><div class="sep-line"></div><span class="sep-label">02 · Sintaxis y reglas</span><div class="sep-line"></div></div>
+      <h2 class="sh">Sintaxis: cómo se escribe CSS</h2>
+      <p class="bp">CSS se escribe en <em>reglas</em>. Cada regla tiene un <strong>selector</strong> (a quién aplica) y un <strong>bloque de declaraciones</strong> (qué cambiar). Cada declaración es un par propiedad–valor separado por dos puntos y cerrado con punto y coma.</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">styles.css</span></div>
+        <pre class="cc"><span class="hl"><span class="cm">/* selector  { propiedad: valor; } */</span></span>
+
+<span class="sel">h1</span> {
+  <span class="prp">color</span>: <span class="vl">#e8620a</span>;
+  <span class="prp">font-size</span>: <span class="num">2rem</span>;
+  <span class="prp">font-weight</span>: <span class="num">700</span>;
+  <span class="prp">text-align</span>: <span class="vl">center</span>;
+}
+
+<span class="sel">.tarjeta</span> {
+  <span class="prp">background-color</span>: <span class="vl">white</span>;
+  <span class="prp">border-radius</span>: <span class="num">12px</span>;
+  <span class="prp">padding</span>: <span class="num">24px</span>;
+  <span class="prp">box-shadow</span>: <span class="num">0 4px 20px</span> <span class="fn">rgba</span>(<span class="num">0,0,0,0.1</span>);
+}
+
+<span class="cm">/* Múltiples selectores a la vez */</span>
+<span class="sel">h1, h2, h3</span> {
+  <span class="prp">font-family</span>: <span class="vl">'Playfair Display'</span>, serif;
+}
+
+<span class="cm">/* Comentarios van entre /* y */</span></pre>
+      </div>
+
+      <!-- 03 CÓMO AGREGAR -->
+      <div id="s-como-agregar" class="sep"><div class="sep-line"></div><span class="sep-label">03 · Cómo agregar CSS</span><div class="sep-line"></div></div>
+      <h2 class="sh">Tres formas de agregar CSS a tu HTML</h2>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">index.html</span></div>
+        <pre class="cc"><span class="cm">&lt;!-- 1. EXTERNO (recomendado) — archivo separado --&gt;</span>
+<span class="at">&lt;link</span> <span class="prp">rel</span>=<span class="vl">"stylesheet"</span> <span class="prp">href</span>=<span class="vl">"styles.css"</span><span class="at">&gt;</span>
+
+<span class="cm">&lt;!-- 2. INTERNO — dentro del &lt;head&gt; --&gt;</span>
+<span class="at">&lt;style&gt;</span>
+  <span class="sel">body</span> { <span class="prp">background</span>: <span class="vl">#f5f5f5</span>; }
+<span class="at">&lt;/style&gt;</span>
+
+<span class="cm">&lt;!-- 3. EN LÍNEA — directamente en el elemento (no recomendado) --&gt;</span>
+<span class="at">&lt;p</span> <span class="prp">style</span>=<span class="vl">"color: red; font-size: 18px;"</span><span class="at">&gt;</span>Texto<span class="at">&lt;/p&gt;</span></pre>
+      </div>
+      <div class="info-box tip">
+        <p class="info-label">✅ Buena práctica</p>
+        <p>Siempre usa un archivo <strong>CSS externo</strong>. Mantiene el HTML limpio, permite reutilizar estilos en múltiples páginas y facilita el mantenimiento del proyecto.</p>
+      </div>
+
+      <!-- 04 SELECTORES BÁSICOS -->
+      <div id="s-selectores" class="sep"><div class="sep-line"></div><span class="sep-label">04 · Selectores básicos</span><div class="sep-line"></div></div>
+      <h2 class="sh">Selectores básicos</h2>
+      <p class="bp">Los selectores determinan <em>a qué elementos HTML</em> se aplican los estilos. Son la parte más importante de CSS.</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">selectores.css</span></div>
+        <pre class="cc"><span class="cm">/* Selector de etiqueta — todos los &lt;p&gt; */</span>
+<span class="sel">p</span> { <span class="prp">color</span>: <span class="vl">gray</span>; }
+
+<span class="cm">/* Selector de clase — elementos con class="btn" */</span>
+<span class="sel">.btn</span> { <span class="prp">background</span>: <span class="vl">blue</span>; }
+
+<span class="cm">/* Selector de ID — el elemento con id="logo" */</span>
+<span class="sel">#logo</span> { <span class="prp">width</span>: <span class="num">200px</span>; }
+
+<span class="cm">/* Selector universal — todos los elementos */</span>
+<span class="sel">*</span> { <span class="prp">box-sizing</span>: <span class="vl">border-box</span>; }
+
+<span class="cm">/* Selector descendiente — &lt;a&gt; dentro de &lt;nav&gt; */</span>
+<span class="sel">nav a</span> { <span class="prp">text-decoration</span>: <span class="vl">none</span>; }
+
+<span class="cm">/* Selector hijo directo — solo hijos directos */</span>
+<span class="sel">ul &gt; li</span> { <span class="prp">list-style</span>: <span class="vl">none</span>; }
+
+<span class="cm">/* Selector hermano adyacente */</span>
+<span class="sel">h2 + p</span> { <span class="prp">margin-top</span>: <span class="num">0</span>; }
+
+<span class="cm">/* Selector de atributo */</span>
+<span class="sel">input[type="email"]</span> { <span class="prp">border-color</span>: <span class="vl">blue</span>; }
+<span class="sel">a[href^="https"]</span>    { <span class="prp">color</span>: <span class="vl">green</span>; } <span class="cm">/* empieza con */</span>
+<span class="sel">img[src$=".png"]</span>    { <span class="prp">opacity</span>: <span class="num">0.9</span>; }  <span class="cm">/* termina con */</span></pre>
+      </div>
+
+      <!-- 05 SELECTORES AVANZADOS -->
+      <div id="s-sel-avanzados" class="sep"><div class="sep-line"></div><span class="sep-label">05 · Selectores avanzados</span><div class="sep-line"></div></div>
+      <h2 class="sh">Pseudoclases y pseudoelementos</h2>
+      <p class="bp">Las <em>pseudoclases</em> seleccionan elementos en un <strong>estado especial</strong>. Los <em>pseudoelementos</em> crean partes virtuales de un elemento que no existen en el HTML.</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">pseudo.css</span></div>
+        <pre class="cc"><span class="cm">/* ── Pseudoclases de estado ── */</span>
+<span class="sel">a:hover</span>   { <span class="prp">color</span>: <span class="vl">orange</span>; }        <span class="cm">/* al pasar el cursor */</span>
+<span class="sel">a:active</span>  { <span class="prp">opacity</span>: <span class="num">0.7</span>; }        <span class="cm">/* al hacer clic */</span>
+<span class="sel">a:visited</span> { <span class="prp">color</span>: <span class="vl">purple</span>; }       <span class="cm">/* enlace visitado */</span>
+<span class="sel">input:focus</span> { <span class="prp">outline</span>: <span class="num">2px</span> <span class="vl">solid teal</span>; }
+
+<span class="cm">/* ── Pseudoclases estructurales ── */</span>
+<span class="sel">li:first-child</span>    { <span class="prp">font-weight</span>: <span class="num">700</span>; }
+<span class="sel">li:last-child</span>     { <span class="prp">margin-bottom</span>: <span class="num">0</span>; }
+<span class="sel">li:nth-child(2n)</span>  { <span class="prp">background</span>: <span class="vl">#f5f5f5</span>; } <span class="cm">/* pares */</span>
+<span class="sel">li:nth-child(odd)</span> { <span class="prp">background</span>: <span class="vl">#fff</span>; }    <span class="cm">/* impares */</span>
+<span class="sel">p:not(.especial)</span>  { <span class="prp">color</span>: <span class="vl">gray</span>; }       <span class="cm">/* negación */</span>
+
+<span class="cm">/* ── Pseudoelementos (doble ::) ── */</span>
+<span class="sel">p::first-line</span>   { <span class="prp">font-weight</span>: <span class="num">700</span>; }    <span class="cm">/* primera línea */</span>
+<span class="sel">p::first-letter</span> { <span class="prp">font-size</span>: <span class="num">2em</span>; }     <span class="cm">/* primera letra */</span>
+<span class="sel">::selection</span>     { <span class="prp">background</span>: <span class="vl">teal</span>; }   <span class="cm">/* texto seleccionado */</span>
+
+<span class="sel">.btn::before</span> {     <span class="cm">/* inserta contenido antes */</span>
+  <span class="prp">content</span>: <span class="vl">"→ "</span>;
+}
+<span class="sel">.titulo::after</span> {   <span class="cm">/* inserta contenido después */</span>
+  <span class="prp">content</span>: <span class="vl">""</span>;
+  <span class="prp">display</span>: <span class="vl">block</span>;
+  <span class="prp">width</span>: <span class="num">40px</span>; <span class="prp">height</span>: <span class="num">3px</span>;
+  <span class="prp">background</span>: <span class="vl">orange</span>;
+}</pre>
+      </div>
+
+      <!-- 06 CASCADA Y HERENCIA -->
+      <div id="s-cascada" class="sep"><div class="sep-line"></div><span class="sep-label">06 · Cascada y herencia</span><div class="sep-line"></div></div>
+      <h2 class="sh">La Cascada: cómo CSS decide qué estilo gana</h2>
+      <p class="bp">La <em>C</em> de CSS viene de <strong>Cascading</strong> (en cascada). Cuando múltiples reglas aplican al mismo elemento, CSS sigue un orden de prioridad para decidir cuál gana.</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">cascada.css</span></div>
+        <pre class="cc"><span class="cm">/* Orden de la cascada (de menor a mayor prioridad): */</span>
+<span class="cm">/* 1. Estilos del navegador (User Agent)             */</span>
+<span class="cm">/* 2. CSS externo / interno del autor                */</span>
+<span class="cm">/* 3. CSS en línea (style="")                        */</span>
+<span class="cm">/* 4. !important — fuerza el estilo sin importar     */</span>
+
+<span class="sel">p</span> { <span class="prp">color</span>: <span class="vl">blue</span>; }         <span class="cm">/* aplicará... */</span>
+<span class="sel">p</span> { <span class="prp">color</span>: <span class="vl">red</span>; }          <span class="cm">/* ...esto gana (último en declararse) */</span>
+
+<span class="cm">/* !important sobreescribe todo (úsalo con cuidado) */</span>
+<span class="sel">p</span> { <span class="prp">color</span>: <span class="vl">blue</span> <span class="kw">!important</span>; } <span class="cm">/* gana siempre */</span>
+
+<span class="cm">/* ── Herencia ── */</span>
+<span class="cm">/* Propiedades como color, font-family, line-height   */</span>
+<span class="cm">/* se HEREDAN de padres a hijos automáticamente.      */</span>
+<span class="cm">/* Propiedades como margin, padding, border NO se heredan. */</span>
+
+<span class="sel">body</span> {
+  <span class="prp">font-family</span>: <span class="vl">'DM Sans'</span>, sans-serif; <span class="cm">/* heredada por todos */</span>
+  <span class="prp">color</span>: <span class="vl">#333</span>;                        <span class="cm">/* heredada por todos */</span>
+}
+
+<span class="sel">.no-heredar</span> {
+  <span class="prp">color</span>: <span class="kw">inherit</span>;    <span class="cm">/* fuerza herencia */</span>
+  <span class="prp">color</span>: <span class="kw">initial</span>;   <span class="cm">/* valor por defecto del navegador */</span>
+  <span class="prp">color</span>: <span class="kw">unset</span>;     <span class="cm">/* hereda si es heredable, o initial */</span>
+}</pre>
+      </div>
+
+      <!-- 07 ESPECIFICIDAD -->
+      <div id="s-especificidad" class="sep"><div class="sep-line"></div><span class="sep-label">07 · Especificidad</span><div class="sep-line"></div></div>
+      <h2 class="sh">Especificidad: el sistema de puntos de CSS</h2>
+      <p class="bp">Cuando dos reglas aplican al mismo elemento, CSS calcula la <em>especificidad</em> de cada selector. Gana el que tenga más puntos. Se calcula en tres columnas: <strong>(IDs, Clases, Etiquetas)</strong>.</p>
+
+      <div style="background:var(--ink-card);border-radius:12px;padding:24px 28px;margin:20px 0;border:1px solid rgba(255,255,255,0.06);">
+        <div class="spec-row">
+          <span class="spec-label" style="color:var(--red-acc);">style="" (en línea)</span>
+          <div class="spec-bar-track"><div class="spec-bar-fill" style="width:100%;background:var(--red-acc);"></div></div>
+          <span class="spec-score">1,0,0,0</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label" style="color:var(--purple-acc);">#id</span>
+          <div class="spec-bar-track"><div class="spec-bar-fill" style="width:75%;background:var(--purple-acc);"></div></div>
+          <span class="spec-score">0,1,0,0</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label" style="color:var(--teal);">.clase / :pseudoclase / [attr]</span>
+          <div class="spec-bar-track"><div class="spec-bar-fill" style="width:45%;background:var(--teal);"></div></div>
+          <span class="spec-score">0,0,1,0</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label" style="color:var(--text-muted);">etiqueta / ::pseudoelemento</span>
+          <div class="spec-bar-track"><div class="spec-bar-fill" style="width:18%;background:var(--text-muted);"></div></div>
+          <span class="spec-score">0,0,0,1</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label" style="color:rgba(255,255,255,0.25);">* (universal)</span>
+          <div class="spec-bar-track"><div class="spec-bar-fill" style="width:2%;background:rgba(255,255,255,0.15);"></div></div>
+          <span class="spec-score">0,0,0,0</span>
+        </div>
+      </div>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">especificidad.css</span></div>
+        <pre class="cc"><span class="sel">p</span>                    { <span class="prp">color</span>: <span class="vl">gray</span>;   } <span class="cm">/* (0,0,0,1) */</span>
+<span class="sel">.texto</span>               { <span class="prp">color</span>: <span class="vl">blue</span>;   } <span class="cm">/* (0,0,1,0) ← gana */</span>
+<span class="sel">#principal</span>           { <span class="prp">color</span>: <span class="vl">green</span>;  } <span class="cm">/* (0,1,0,0) ← gana más */</span>
+<span class="sel">div#principal .texto p</span>{ <span class="prp">color</span>: <span class="vl">red</span>; }   <span class="cm">/* (0,1,1,2) ← mayor */</span></pre>
+      </div>
+
+      <!-- 08 BOX MODEL -->
+      <div id="s-box-model" class="sep"><div class="sep-line"></div><span class="sep-label">08 · Modelo de caja</span><div class="sep-line"></div></div>
+      <h2 class="sh">El Modelo de Caja (Box Model)</h2>
+      <p class="bp">Todo elemento HTML es una caja rectangular compuesta por 4 capas concéntricas. Entender el Box Model es <strong>fundamental</strong> para controlar el espaciado y tamaño de cualquier elemento.</p>
+
+      <div class="box-model-diagram">
+        <div class="bm-outer">
+          <div class="bm-layer bm-margin">
+            <span class="bm-label">MARGIN</span>
+            <div class="bm-layer bm-border">
+              <span class="bm-label">BORDER</span>
+              <div class="bm-layer bm-padding">
+                <span class="bm-label">PADDING</span>
+                <div class="bm-layer bm-content">
+                  <span class="bm-label">CONTENT</span>
+                  <span class="bm-content-text">width × height</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">box-model.css</span></div>
+        <pre class="cc"><span class="sel">.caja</span> {
+  <span class="cm">/* CONTENT — tamaño del contenido */</span>
+  <span class="prp">width</span>:  <span class="num">300px</span>;
+  <span class="prp">height</span>: <span class="num">200px</span>;
+
+  <span class="cm">/* PADDING — espacio interior (entre contenido y borde) */</span>
+  <span class="prp">padding</span>: <span class="num">20px</span>;           <span class="cm">/* todos los lados */</span>
+  <span class="prp">padding</span>: <span class="num">10px 20px</span>;     <span class="cm">/* arriba/abajo  izq/der */</span>
+  <span class="prp">padding</span>: <span class="num">5px 10px 15px 20px</span>; <span class="cm">/* top der bot izq */</span>
+
+  <span class="cm">/* BORDER — borde del elemento */</span>
+  <span class="prp">border</span>: <span class="num">2px</span> <span class="vl">solid</span> <span class="vl">#333</span>;
+  <span class="prp">border-radius</span>: <span class="num">12px</span>;   <span class="cm">/* esquinas redondeadas */</span>
+
+  <span class="cm">/* MARGIN — espacio exterior (separa de otros elementos) */</span>
+  <span class="prp">margin</span>: <span class="num">24px</span>;
+  <span class="prp">margin</span>: <span class="num">0 auto</span>;        <span class="cm">/* centrar horizontalmente */</span>
+}
+
+<span class="cm">/* box-sizing: border-box es la mejor práctica */</span>
+<span class="cm">/* hace que padding y border NO aumenten el tamaño total */</span>
+<span class="sel">*</span> {
+  <span class="prp">box-sizing</span>: <span class="vl">border-box</span>; <span class="cm">/* ← ponlo siempre */</span>
+}</pre>
+      </div>
+
+      <!-- 09 UNIDADES -->
+      <div id="s-unidades" class="sep"><div class="sep-line"></div><span class="sep-label">09 · Unidades de medida</span><div class="sep-line"></div></div>
+      <h2 class="sh">Unidades de medida</h2>
+
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>Unidad</th><th>Tipo</th><th>Descripción</th><th>Ejemplo</th></tr></thead>
+          <tbody>
+            <tr><td>px</td><td>Absoluta</td><td>Píxeles. Tamaño fijo, independiente del contexto.</td><td>font-size: 16px</td></tr>
+            <tr><td>%</td><td>Relativa</td><td>Porcentaje del elemento padre. Muy útil para layouts.</td><td>width: 50%</td></tr>
+            <tr><td>em</td><td>Relativa</td><td>Relativa al font-size del elemento padre. 1em = tamaño padre.</td><td>padding: 1.5em</td></tr>
+            <tr><td>rem</td><td>Relativa</td><td>Relativa al font-size del elemento raíz (&lt;html&gt;). Más predecible.</td><td>font-size: 1.2rem</td></tr>
+            <tr><td>vw</td><td>Viewport</td><td>1% del ancho del viewport (ventana). Muy útil para tipografía fluida.</td><td>font-size: 5vw</td></tr>
+            <tr><td>vh</td><td>Viewport</td><td>1% del alto del viewport. Ideal para secciones de pantalla completa.</td><td>height: 100vh</td></tr>
+            <tr><td>vmin</td><td>Viewport</td><td>1% del lado más pequeño del viewport.</td><td>font-size: 3vmin</td></tr>
+            <tr><td>vmax</td><td>Viewport</td><td>1% del lado más grande del viewport.</td><td>width: 50vmax</td></tr>
+            <tr><td>ch</td><td>Relativa</td><td>Ancho del carácter "0". Útil para limitar anchos de texto.</td><td>max-width: 65ch</td></tr>
+            <tr><td>fr</td><td>Grid</td><td>Fracción del espacio disponible. Exclusiva de CSS Grid.</td><td>grid: 1fr 2fr</td></tr>
+            <tr><td>clamp()</td><td>Función</td><td>Valor fluido entre un mínimo y máximo. Tipografía responsiva.</td><td>font-size: clamp(1rem,3vw,2rem)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 10 COLORES -->
+      <div id="s-colores" class="sep"><div class="sep-line"></div><span class="sep-label">10 · Colores</span><div class="sep-line"></div></div>
+      <h2 class="sh">Colores en CSS3</h2>
+      <p class="bp">CSS admite múltiples formatos para definir colores. CSS3 añadió <em>HSL</em>, <em>RGBA</em>, <em>HSLA</em> y la función <em>oklch()</em> moderna, que permiten controlar transparencia y luminosidad de forma intuitiva.</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">colores.css</span></div>
+        <pre class="cc"><span class="cm">/* Nombre de color */</span>
+<span class="prp">color</span>: <span class="vl">tomato</span>;
+<span class="prp">color</span>: <span class="vl">teal</span>;
+
+<span class="cm">/* Hexadecimal */</span>
+<span class="prp">color</span>: <span class="vl">#e8620a</span>;       <span class="cm">/* 6 dígitos */</span>
+<span class="prp">color</span>: <span class="vl">#e83</span>;          <span class="cm">/* abreviado */</span>
+<span class="prp">color</span>: <span class="vl">#e8620a80</span>;    <span class="cm">/* con transparencia (últimos 2 = alpha) */</span>
+
+<span class="cm">/* RGB */</span>
+<span class="prp">color</span>: <span class="fn">rgb</span>(<span class="num">232</span>, <span class="num">98</span>, <span class="num">10</span>);
+
+<span class="cm">/* RGBA — con canal de transparencia 0-1 */</span>
+<span class="prp">color</span>: <span class="fn">rgba</span>(<span class="num">232</span>, <span class="num">98</span>, <span class="num">10</span>, <span class="num">0.5</span>);  <span class="cm">/* 50% opacidad */</span>
+
+<span class="cm">/* HSL — Hue (0-360°) Saturation% Lightness% */</span>
+<span class="prp">color</span>: <span class="fn">hsl</span>(<span class="num">24</span>, <span class="num">90%</span>, <span class="num">48%</span>);
+
+<span class="cm">/* HSLA — con transparencia */</span>
+<span class="prp">color</span>: <span class="fn">hsla</span>(<span class="num">24</span>, <span class="num">90%</span>, <span class="num">48%</span>, <span class="num">0.8</span>);
+
+<span class="cm">/* oklch — moderno, más uniforme visualmente */</span>
+<span class="prp">color</span>: <span class="fn">oklch</span>(<span class="num">0.65</span> <span class="num">0.20</span> <span class="num">35</span>);
+
+<span class="cm">/* Gradientes */</span>
+<span class="prp">background</span>: <span class="fn">linear-gradient</span>(<span class="num">135deg</span>, <span class="vl">#e8620a</span>, <span class="vl">#c94a00</span>);
+<span class="prp">background</span>: <span class="fn">radial-gradient</span>(<span class="vl">circle</span>, <span class="vl">#fff</span>, <span class="vl">#000</span>);
+<span class="prp">background</span>: <span class="fn">conic-gradient</span>(<span class="vl">red</span>, <span class="vl">blue</span>, <span class="vl">green</span>);</pre>
+      </div>
+
+      <div class="color-grid">
+        <div class="swatch"><div class="swatch-color" style="background:#e8620a;"></div><div class="swatch-info"><div class="swatch-name">Orange</div><div class="swatch-val">#e8620a</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:rgba(232,98,10,0.5);"></div><div class="swatch-info"><div class="swatch-name">Orange 50%</div><div class="swatch-val">rgba(232,98,10,.5)</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:hsl(24,90%,48%);"></div><div class="swatch-info"><div class="swatch-name">HSL</div><div class="swatch-val">hsl(24,90%,48%)</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:linear-gradient(135deg,#e8620a,#264de4);"></div><div class="swatch-info"><div class="swatch-name">Gradient</div><div class="swatch-val">linear-gradient</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:radial-gradient(circle,#2dd4bf,#0f766e);"></div><div class="swatch-info"><div class="swatch-name">Radial</div><div class="swatch-val">radial-gradient</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:conic-gradient(#e8620a,#264de4,#2dd4bf,#e8620a);"></div><div class="swatch-info"><div class="swatch-name">Conic</div><div class="swatch-val">conic-gradient</div></div></div>
+      </div>
+
+      <!-- 11 TIPOGRAFÍA -->
+      <div id="s-tipografia" class="sep"><div class="sep-line"></div><span class="sep-label">11 · Tipografía</span><div class="sep-line"></div></div>
+      <h2 class="sh">Tipografía en CSS3</h2>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">tipografia.css</span></div>
+        <pre class="cc"><span class="cm">/* Importar fuente de Google Fonts */</span>
+<span class="kw">@import</span> <span class="fn">url</span>(<span class="vl">'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;display=swap'</span>);
+
+<span class="sel">p</span> {
+  <span class="prp">font-family</span>: <span class="vl">'DM Sans'</span>, sans-serif;  <span class="cm">/* fuente + fallback */</span>
+  <span class="prp">font-size</span>: <span class="num">1rem</span>;          <span class="cm">/* tamaño */</span>
+  <span class="prp">font-weight</span>: <span class="num">400</span>;         <span class="cm">/* 100-900 */</span>
+  <span class="prp">font-style</span>: <span class="vl">normal</span>;      <span class="cm">/* normal | italic | oblique */</span>
+  <span class="prp">line-height</span>: <span class="num">1.6</span>;        <span class="cm">/* interlineado (sin unidad = relativo) */</span>
+  <span class="prp">letter-spacing</span>: <span class="num">0.05em</span>; <span class="cm">/* espacio entre letras */</span>
+  <span class="prp">word-spacing</span>: <span class="num">0.1em</span>;   <span class="cm">/* espacio entre palabras */</span>
+  <span class="prp">text-align</span>: <span class="vl">left</span>;        <span class="cm">/* left | center | right | justify */</span>
+  <span class="prp">text-decoration</span>: <span class="vl">none</span>;  <span class="cm">/* none | underline | line-through */</span>
+  <span class="prp">text-transform</span>: <span class="vl">none</span>;   <span class="cm">/* none | uppercase | lowercase | capitalize */</span>
+  <span class="prp">text-shadow</span>: <span class="num">2px 2px 4px</span> <span class="fn">rgba</span>(<span class="num">0,0,0,0.3</span>);
+}
+
+<span class="cm">/* Fuente local personalizada */</span>
+<span class="kw">@font-face</span> {
+  <span class="prp">font-family</span>: <span class="vl">'MiFuente'</span>;
+  <span class="prp">src</span>: <span class="fn">url</span>(<span class="vl">'mifuente.woff2'</span>) <span class="vl">format</span>(<span class="vl">'woff2'</span>);
+  <span class="prp">font-weight</span>: <span class="num">400</span>;
+  <span class="prp">font-display</span>: <span class="vl">swap</span>;
+}
+
+<span class="cm">/* Tipografía fluida con clamp */</span>
+<span class="sel">h1</span> {
+  <span class="prp">font-size</span>: <span class="fn">clamp</span>(<span class="num">2rem</span>, <span class="num">5vw</span>, <span class="num">4rem</span>);
+}</pre>
+      </div>
+
+      <!-- 12 FONDOS -->
+      <div id="s-fondos" class="sep"><div class="sep-line"></div><span class="sep-label">12 · Fondos</span><div class="sep-line"></div></div>
+      <h2 class="sh">Fondos y background</h2>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">fondos.css</span></div>
+        <pre class="cc"><span class="sel">.hero</span> {
+  <span class="prp">background-color</span>: <span class="vl">#0b0f1a</span>;
+  <span class="prp">background-image</span>: <span class="fn">url</span>(<span class="vl">'foto.jpg'</span>);
+  <span class="prp">background-size</span>: <span class="vl">cover</span>;    <span class="cm">/* cover | contain | 100% | 300px */</span>
+  <span class="prp">background-position</span>: <span class="vl">center</span>; <span class="cm">/* center | top | 50% 50% */</span>
+  <span class="prp">background-repeat</span>: <span class="vl">no-repeat</span>;
+  <span class="prp">background-attachment</span>: <span class="vl">fixed</span>; <span class="cm">/* efecto parallax */</span>
+}
+
+<span class="cm">/* Múltiples fondos — se apilan */</span>
+<span class="sel">.multi-bg</span> {
+  <span class="prp">background</span>:
+    <span class="fn">linear-gradient</span>(<span class="fn">rgba</span>(<span class="num">0,0,0,0.5</span>), <span class="fn">rgba</span>(<span class="num">0,0,0,0.5</span>)),
+    <span class="fn">url</span>(<span class="vl">'foto.jpg'</span>) <span class="vl">center/cover no-repeat</span>;
+}
+
+<span class="cm">/* Shorthand: image position/size repeat attachment color */</span>
+<span class="sel">.shorthand</span> {
+  <span class="prp">background</span>: <span class="fn">url</span>(<span class="vl">'img.png'</span>) <span class="vl">center/cover no-repeat</span> <span class="vl">#1a1a2e</span>;
+}</pre>
+      </div>
+
+      <!-- 13 BORDES Y SOMBRAS -->
+      <div id="s-bordes" class="sep"><div class="sep-line"></div><span class="sep-label">13 · Bordes y sombras</span><div class="sep-line"></div></div>
+      <h2 class="sh">Bordes, sombras y efectos visuales</h2>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">bordes.css</span></div>
+        <pre class="cc"><span class="sel">.tarjeta</span> {
+  <span class="cm">/* Bordes */</span>
+  <span class="prp">border</span>: <span class="num">2px</span> <span class="vl">solid</span> <span class="vl">#e8620a</span>;      <span class="cm">/* grosor tipo color */</span>
+  <span class="prp">border-top</span>: <span class="num">4px</span> <span class="vl">dashed</span> <span class="vl">teal</span>;
+  <span class="prp">border-radius</span>: <span class="num">12px</span>;             <span class="cm">/* todas esquinas */</span>
+  <span class="prp">border-radius</span>: <span class="num">16px 4px 16px 4px</span>;<span class="cm">/* esquinas distintas */</span>
+  <span class="prp">border-radius</span>: <span class="num">50%</span>;              <span class="cm">/* círculo perfecto */</span>
+
+  <span class="cm">/* Sombra de caja */</span>
+  <span class="prp">box-shadow</span>: <span class="num">0 4px 20px</span> <span class="fn">rgba</span>(<span class="num">0,0,0,0.2</span>);
+  <span class="prp">box-shadow</span>: <span class="num">0 8px 32px</span> <span class="fn">rgba</span>(<span class="num">232,98,10,0.4</span>); <span class="cm">/* glow naranja */</span>
+  <span class="prp">box-shadow</span>: <span class="vl">inset</span> <span class="num">0 2px 8px</span> <span class="fn">rgba</span>(<span class="num">0,0,0,0.3</span>); <span class="cm">/* sombra interior */</span>
+
+  <span class="cm">/* Múltiples sombras */</span>
+  <span class="prp">box-shadow</span>:
+    <span class="num">0 2px 8px</span>  <span class="fn">rgba</span>(<span class="num">0,0,0,0.2</span>),
+    <span class="num">0 8px 32px</span> <span class="fn">rgba</span>(<span class="num">0,0,0,0.15</span>);
+
+  <span class="cm">/* Opacidad del elemento */</span>
+  <span class="prp">opacity</span>: <span class="num">0.85</span>;   <span class="cm">/* 0 = invisible, 1 = opaco */</span>
+
+  <span class="cm">/* Filtros CSS3 */</span>
+  <span class="prp">filter</span>: <span class="fn">blur</span>(<span class="num">4px</span>);
+  <span class="prp">filter</span>: <span class="fn">brightness</span>(<span class="num">1.2</span>) <span class="fn">contrast</span>(<span class="num">1.1</span>);
+  <span class="prp">filter</span>: <span class="fn">grayscale</span>(<span class="num">100%</span>);
+  <span class="prp">filter</span>: <span class="fn">drop-shadow</span>(<span class="num">0 4px 8px</span> <span class="fn">rgba</span>(<span class="num">0,0,0,0.4</span>));
+
+  <span class="cm">/* Mezcla de capas */</span>
+  <span class="prp">mix-blend-mode</span>: <span class="vl">multiply</span>;   <span class="cm">/* multiply | screen | overlay | ... */</span>
+}</pre>
+      </div>
+
+      <!-- 14 DISPLAY -->
+      <div id="s-display" class="sep"><div class="sep-line"></div><span class="sep-label">14 · Display</span><div class="sep-line"></div></div>
+      <h2 class="sh">La propiedad display</h2>
+      <p class="bp">La propiedad <em>display</em> es la más importante para controlar el layout. Define cómo se comporta un elemento en el flujo del documento.</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">display.css</span></div>
+        <pre class="cc"><span class="prp">display</span>: <span class="vl">block</span>;         <span class="cm">/* ocupa toda la línea (div, p, h1) */</span>
+<span class="prp">display</span>: <span class="vl">inline</span>;        <span class="cm">/* solo ocupa su contenido (span, a) */</span>
+<span class="prp">display</span>: <span class="vl">inline-block</span>;  <span class="cm">/* inline pero acepta width/height */</span>
+<span class="prp">display</span>: <span class="vl">none</span>;          <span class="cm">/* oculta el elemento (no ocupa espacio) */</span>
+<span class="prp">display</span>: <span class="vl">flex</span>;          <span class="cm">/* activa Flexbox en el contenedor */</span>
+<span class="prp">display</span>: <span class="vl">grid</span>;          <span class="cm">/* activa CSS Grid en el contenedor */</span>
+<span class="prp">display</span>: <span class="vl">contents</span>;      <span class="cm">/* el elemento desaparece, sus hijos no */</span>
+
+<span class="cm">/* visibility oculta pero SÍ ocupa espacio */</span>
+<span class="prp">visibility</span>: <span class="vl">hidden</span>;
+<span class="prp">visibility</span>: <span class="vl">visible</span>;</pre>
+      </div>
+
+      <!-- 15 POSICIONAMIENTO -->
+      <div id="s-posicionamiento" class="sep"><div class="sep-line"></div><span class="sep-label">15 · Posicionamiento</span><div class="sep-line"></div></div>
+      <h2 class="sh">Tipos de posicionamiento</h2>
+      <p class="bp">La propiedad <em>position</em> controla cómo se coloca un elemento en la página. Se combina con <strong>top, right, bottom, left</strong> y <strong>z-index</strong>.</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">posicionamiento.css</span></div>
+        <pre class="cc"><span class="cm">/* STATIC (por defecto) — flujo normal, ignora top/left */</span>
+<span class="prp">position</span>: <span class="vl">static</span>;
+
+<span class="cm">/* RELATIVE — se mueve relativo a su posición original */</span>
+<span class="prp">position</span>: <span class="vl">relative</span>;
+<span class="prp">top</span>: <span class="num">10px</span>; <span class="prp">left</span>: <span class="num">20px</span>; <span class="cm">/* el espacio original se conserva */</span>
+
+<span class="cm">/* ABSOLUTE — se posiciona relativo al ancestro "positioned" */</span>
+<span class="prp">position</span>: <span class="vl">absolute</span>;
+<span class="prp">top</span>: <span class="num">0</span>; <span class="prp">right</span>: <span class="num">0</span>;         <span class="cm">/* esquina sup. derecha del padre */</span>
+
+<span class="cm">/* FIXED — fijo respecto a la ventana, no se mueve al scrollear */</span>
+<span class="prp">position</span>: <span class="vl">fixed</span>;
+<span class="prp">top</span>: <span class="num">0</span>; <span class="prp">left</span>: <span class="num">0</span>; <span class="prp">right</span>: <span class="num">0</span>; <span class="cm">/* barra de navegación */</span>
+
+<span class="cm">/* STICKY — relative hasta que llega a un umbral, luego fixed */</span>
+<span class="prp">position</span>: <span class="vl">sticky</span>;
+<span class="prp">top</span>: <span class="num">20px</span>;               <span class="cm">/* se "pega" a 20px del borde superior */</span>
+
+<span class="cm">/* Z-INDEX — controla qué elemento queda encima */</span>
+<span class="prp">z-index</span>: <span class="num">10</span>;  <span class="cm">/* mayor número = más al frente */</span>
+<span class="prp">z-index</span>: <span class="num">-1</span>; <span class="cm">/* detrás del contenido normal */</span></pre>
+      </div>
+
+      <div class="prop-grid">
+        <div class="prop-card"><div class="prop-top"><span class="prop-pill">static</span><span class="prop-type">Default</span></div><p class="prop-desc">Flujo normal del documento. Las propiedades top/left/right/bottom <strong>no tienen efecto</strong>.</p></div>
+        <div class="prop-card"><div class="prop-top"><span class="prop-pill">relative</span><span class="prop-type">Relativo</span></div><p class="prop-desc">Se mueve relativo a <strong>su posición original</strong>. El espacio original se reserva. Crea contexto para absolute.</p></div>
+        <div class="prop-card"><div class="prop-top"><span class="prop-pill">absolute</span><span class="prop-type">Absoluto</span></div><p class="prop-desc">Se posiciona relativo al <strong>ancestro position≠static más cercano</strong>. Sale del flujo normal.</p></div>
+        <div class="prop-card"><div class="prop-top"><span class="prop-pill">fixed</span><span class="prop-type">Fijo</span></div><p class="prop-desc">Fijo respecto a la <strong>ventana del navegador</strong>. No se mueve al hacer scroll. Usado en navbars.</p></div>
+        <div class="prop-card"><div class="prop-top"><span class="prop-pill">sticky</span><span class="prop-type">Pegajoso</span></div><p class="prop-desc">Comportamiento híbrido: <strong>relative hasta</strong> que el scroll llega al umbral, luego actúa como fixed.</p></div>
+        <div class="prop-card"><div class="prop-top"><span class="prop-pill">z-index</span><span class="prop-type">Profundidad</span></div><p class="prop-desc">Controla el <strong>eje Z</strong> (profundidad). Solo funciona en elementos con position ≠ static.</p></div>
+      </div>
+
+      <!-- 16 FLEXBOX -->
+      <div id="s-flexbox" class="sep"><div class="sep-line"></div><span class="sep-label">16 · Flexbox</span><div class="sep-line"></div></div>
+      <h2 class="sh">Flexbox: el sistema de layout en una dimensión</h2>
+      <p class="bp">Flexbox permite alinear y distribuir elementos en una fila o columna con control total. Es ideal para <strong>componentes</strong>: barras de navegación, tarjetas, botones centrados y layouts simples.</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">flexbox.css</span></div>
+        <pre class="cc"><span class="cm">/* ── Propiedades del CONTENEDOR (padre) ── */</span>
+<span class="sel">.contenedor</span> {
+  <span class="prp">display</span>: <span class="vl">flex</span>;
+
+  <span class="cm">/* Dirección del eje principal */</span>
+  <span class="prp">flex-direction</span>: <span class="vl">row</span>;            <span class="cm">/* → row | ← row-reverse */</span>
+  <span class="prp">flex-direction</span>: <span class="vl">column</span>;         <span class="cm">/* ↓ column | ↑ column-reverse */</span>
+
+  <span class="cm">/* Alineación en eje principal (horizontal si row) */</span>
+  <span class="prp">justify-content</span>: <span class="vl">flex-start</span>;    <span class="cm">/* al inicio */</span>
+  <span class="prp">justify-content</span>: <span class="vl">flex-end</span>;      <span class="cm">/* al final */</span>
+  <span class="prp">justify-content</span>: <span class="vl">center</span>;        <span class="cm">/* al centro */</span>
+  <span class="prp">justify-content</span>: <span class="vl">space-between</span>; <span class="cm">/* espacio entre items */</span>
+  <span class="prp">justify-content</span>: <span class="vl">space-around</span>;  <span class="cm">/* espacio alrededor */</span>
+  <span class="prp">justify-content</span>: <span class="vl">space-evenly</span>;  <span class="cm">/* espacio igual */</span>
+
+  <span class="cm">/* Alineación en eje cruzado (vertical si row) */</span>
+  <span class="prp">align-items</span>: <span class="vl">stretch</span>;    <span class="cm">/* estira a la altura del padre */</span>
+  <span class="prp">align-items</span>: <span class="vl">flex-start</span>; <span class="cm">/* arriba */</span>
+  <span class="prp">align-items</span>: <span class="vl">flex-end</span>;   <span class="cm">/* abajo */</span>
+  <span class="prp">align-items</span>: <span class="vl">center</span>;     <span class="cm">/* centrado vertical */</span>
+  <span class="prp">align-items</span>: <span class="vl">baseline</span>;   <span class="cm">/* por línea base del texto */</span>
+
+  <span class="cm">/* Salto de línea */</span>
+  <span class="prp">flex-wrap</span>: <span class="vl">nowrap</span>;  <span class="cm">/* no envuelve (default) */</span>
+  <span class="prp">flex-wrap</span>: <span class="vl">wrap</span>;    <span class="cm">/* envuelve a la siguiente línea */</span>
+
+  <span class="cm">/* Espacio entre items */</span>
+  <span class="prp">gap</span>: <span class="num">16px</span>;
+  <span class="prp">gap</span>: <span class="num">12px 24px</span>; <span class="cm">/* filas columnas */</span>
+}
+
+<span class="cm">/* ── Propiedades del ITEM (hijo) ── */</span>
+<span class="sel">.item</span> {
+  <span class="prp">flex-grow</span>: <span class="num">1</span>;   <span class="cm">/* crece para llenar espacio disponible */</span>
+  <span class="prp">flex-shrink</span>: <span class="num">0</span>; <span class="cm">/* no se encoge aunque no haya espacio */</span>
+  <span class="prp">flex-basis</span>: <span class="num">200px</span>; <span class="cm">/* tamaño base antes de crecer/encoger */</span>
+  <span class="prp">flex</span>: <span class="num">1 1 200px</span>;   <span class="cm">/* shorthand: grow shrink basis */</span>
+  <span class="prp">align-self</span>: <span class="vl">center</span>; <span class="cm">/* sobreescribe align-items solo para este */</span>
+  <span class="prp">order</span>: <span class="num">2</span>;          <span class="cm">/* cambia el orden visual sin cambiar el HTML */</span>
+}</pre>
+      </div>
+
+      <!-- 17 GRID -->
+      <div id="s-grid" class="sep"><div class="sep-line"></div><span class="sep-label">17 · CSS Grid</span><div class="sep-line"></div></div>
+      <h2 class="sh">CSS Grid: layout en dos dimensiones</h2>
+      <p class="bp">CSS Grid es el sistema de layout más poderoso de la web. Permite crear layouts en <strong>filas y columnas simultáneamente</strong>. Ideal para el layout completo de una página.</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">grid.css</span></div>
+        <pre class="cc"><span class="cm">/* ── Contenedor Grid ── */</span>
+<span class="sel">.grid</span> {
+  <span class="prp">display</span>: <span class="vl">grid</span>;
+
+  <span class="cm">/* Definir columnas */</span>
+  <span class="prp">grid-template-columns</span>: <span class="num">200px 1fr 1fr</span>;   <span class="cm">/* fija + 2 iguales */</span>
+  <span class="prp">grid-template-columns</span>: <span class="fn">repeat</span>(<span class="num">3</span>, <span class="num">1fr</span>);   <span class="cm">/* 3 columnas iguales */</span>
+  <span class="prp">grid-template-columns</span>: <span class="fn">repeat</span>(<span class="vl">auto-fill</span>, <span class="fn">minmax</span>(<span class="num">250px</span>, <span class="num">1fr</span>)); <span class="cm">/* responsivo */</span>
+
+  <span class="cm">/* Definir filas */</span>
+  <span class="prp">grid-template-rows</span>: <span class="num">80px 1fr auto</span>;
+
+  <span class="cm">/* Espaciado */</span>
+  <span class="prp">gap</span>: <span class="num">24px</span>;
+  <span class="prp">column-gap</span>: <span class="num">24px</span>; <span class="prp">row-gap</span>: <span class="num">16px</span>;
+
+  <span class="cm">/* Áreas nombradas */</span>
+  <span class="prp">grid-template-areas</span>:
+    <span class="vl">"header  header"</span>
+    <span class="vl">"sidebar main  "</span>
+    <span class="vl">"footer  footer"</span>;
+}
+
+<span class="cm">/* Asignar áreas a los hijos */</span>
+<span class="sel">.header</span>  { <span class="prp">grid-area</span>: <span class="vl">header</span>;  }
+<span class="sel">.sidebar</span> { <span class="prp">grid-area</span>: <span class="vl">sidebar</span>; }
+<span class="sel">.main</span>    { <span class="prp">grid-area</span>: <span class="vl">main</span>;    }
+<span class="sel">.footer</span>  { <span class="prp">grid-area</span>: <span class="vl">footer</span>;  }
+
+<span class="cm">/* ── Item Grid — control de posición ── */</span>
+<span class="sel">.item-grande</span> {
+  <span class="prp">grid-column</span>: <span class="num">1 / 3</span>;   <span class="cm">/* ocupa de línea 1 a línea 3 (2 cols) */</span>
+  <span class="prp">grid-row</span>: <span class="num">1 / 3</span>;      <span class="cm">/* ocupa 2 filas */</span>
+  <span class="prp">grid-column</span>: <span class="num">1 / -1</span>; <span class="cm">/* hasta la última columna */</span>
+}</pre>
+      </div>
+
+      <!-- 18 RESPONSIVE -->
+      <div id="s-responsive" class="sep"><div class="sep-line"></div><span class="sep-label">18 · Responsive / Media Queries</span><div class="sep-line"></div></div>
+      <h2 class="sh">Diseño Responsivo y Media Queries</h2>
+      <p class="bp">El diseño responsivo adapta la interfaz a diferentes tamaños de pantalla. Las <em>Media Queries</em> permiten aplicar estilos condicionales según las características del dispositivo.</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">responsive.css</span></div>
+        <pre class="cc"><span class="cm">/* Mobile First: estilos base para móvil, luego ampliar */</span>
+
+<span class="cm">/* Estilos por defecto (móvil) */</span>
+<span class="sel">.grid</span> {
+  <span class="prp">grid-template-columns</span>: <span class="num">1fr</span>;     <span class="cm">/* 1 columna en móvil */</span>
+}
+
+<span class="cm">/* Tablet: pantallas ≥ 768px */</span>
+<span class="kw">@media</span> (<span class="prp">min-width</span>: <span class="num">768px</span>) {
+  <span class="sel">.grid</span> { <span class="prp">grid-template-columns</span>: <span class="fn">repeat</span>(<span class="num">2</span>, <span class="num">1fr</span>); }
+}
+
+<span class="cm">/* Desktop: pantallas ≥ 1024px */</span>
+<span class="kw">@media</span> (<span class="prp">min-width</span>: <span class="num">1024px</span>) {
+  <span class="sel">.grid</span> { <span class="prp">grid-template-columns</span>: <span class="fn">repeat</span>(<span class="num">3</span>, <span class="num">1fr</span>); }
+}
+
+<span class="cm">/* Desktop XL: pantallas ≥ 1280px */</span>
+<span class="kw">@media</span> (<span class="prp">min-width</span>: <span class="num">1280px</span>) {
+  <span class="sel">.grid</span> { <span class="prp">grid-template-columns</span>: <span class="fn">repeat</span>(<span class="num">4</span>, <span class="num">1fr</span>); }
+}
+
+<span class="cm">/* Orientación */</span>
+<span class="kw">@media</span> (<span class="prp">orientation</span>: <span class="vl">landscape</span>) { <span class="sel">.hero</span> { <span class="prp">height</span>: <span class="num">80vh</span>; } }
+
+<span class="cm">/* Dark mode del sistema */</span>
+<span class="kw">@media</span> (<span class="prp">prefers-color-scheme</span>: <span class="vl">dark</span>) {
+  <span class="sel">body</span> { <span class="prp">background</span>: <span class="vl">#0b0f1a</span>; <span class="prp">color</span>: <span class="vl">#d4dce8</span>; }
+}
+
+<span class="cm">/* Reducir movimiento (accesibilidad) */</span>
+<span class="kw">@media</span> (<span class="prp">prefers-reduced-motion</span>: <span class="vl">reduce</span>) {
+  <span class="sel">*</span> { <span class="prp">animation</span>: <span class="vl">none</span> <span class="kw">!important</span>; }
+}</pre>
+      </div>
+
+      <!-- 19 VARIABLES -->
+      <div id="s-variables" class="sep"><div class="sep-line"></div><span class="sep-label">19 · Variables CSS</span><div class="sep-line"></div></div>
+      <h2 class="sh">Variables CSS (Custom Properties)</h2>
+      <p class="bp">Las variables CSS, introducidas en CSS3, permiten almacenar valores reutilizables. Son <em>dinámicas</em>: se pueden cambiar con JavaScript o dentro de Media Queries, a diferencia de las variables de SCSS.</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">variables.css</span></div>
+        <pre class="cc"><span class="cm">/* Declarar en :root para acceso global */</span>
+<span class="sel">:root</span> {
+  <span class="prp">--color-primary</span>: <span class="vl">#e8620a</span>;
+  <span class="prp">--color-dark</span>:    <span class="vl">#0b0f1a</span>;
+  <span class="prp">--font-body</span>:     <span class="vl">'DM Sans'</span>, sans-serif;
+  <span class="prp">--radius</span>:        <span class="num">12px</span>;
+  <span class="prp">--shadow</span>:        <span class="num">0 4px 20px</span> <span class="fn">rgba</span>(<span class="num">0,0,0,0.2</span>);
+  <span class="prp">--spacing-sm</span>:    <span class="num">8px</span>;
+  <span class="prp">--spacing-md</span>:    <span class="num">16px</span>;
+  <span class="prp">--spacing-lg</span>:    <span class="num">32px</span>;
+}
+
+<span class="cm">/* Usar con var() */</span>
+<span class="sel">.btn</span> {
+  <span class="prp">background</span>:    <span class="fn">var</span>(<span class="prp">--color-primary</span>);
+  <span class="prp">border-radius</span>: <span class="fn">var</span>(<span class="prp">--radius</span>);
+  <span class="prp">padding</span>:       <span class="fn">var</span>(<span class="prp">--spacing-sm</span>) <span class="fn">var</span>(<span class="prp">--spacing-md</span>);
+  <span class="prp">box-shadow</span>:    <span class="fn">var</span>(<span class="prp">--shadow</span>);
+}
+
+<span class="cm">/* Valor de fallback si la variable no existe */</span>
+<span class="prp">color</span>: <span class="fn">var</span>(<span class="prp">--color-accent</span>, <span class="vl">orange</span>);
+
+<span class="cm">/* Cambiar con Media Query */</span>
+<span class="kw">@media</span> (<span class="prp">prefers-color-scheme</span>: <span class="vl">dark</span>) {
+  <span class="sel">:root</span> { <span class="prp">--color-dark</span>: <span class="vl">#ffffff</span>; }
+}
+
+<span class="cm">/* Cambiar con JavaScript */</span>
+<span class="cm">// document.documentElement.style</span>
+<span class="cm">//   .setProperty('--color-primary', '#ff0000');</span></pre>
+      </div>
+
+      <!-- 20 TRANSICIONES -->
+      <div id="s-transiciones" class="sep"><div class="sep-line"></div><span class="sep-label">20 · Transiciones</span><div class="sep-line"></div></div>
+      <h2 class="sh">Transiciones CSS3</h2>
+      <p class="bp">Las transiciones animan el <em>cambio de estado</em> de una propiedad (de un valor a otro). Son perfectas para efectos de <strong>hover</strong>, focus y cambios de clase con JavaScript.</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">transiciones.css</span></div>
+        <pre class="cc"><span class="sel">.btn</span> {
+  <span class="prp">background</span>: <span class="vl">#e8620a</span>;
+  <span class="prp">transform</span>: <span class="fn">scale</span>(<span class="num">1</span>);
+
+  <span class="cm">/* propiedad  duración  función  retraso */</span>
+  <span class="prp">transition</span>: <span class="vl">background</span> <span class="num">.3s</span> <span class="vl">ease</span> <span class="num">0s</span>;
+
+  <span class="cm">/* Múltiples propiedades */</span>
+  <span class="prp">transition</span>:
+    <span class="vl">background</span>  <span class="num">.3s</span> <span class="vl">ease</span>,
+    <span class="vl">transform</span>   <span class="num">.2s</span> <span class="vl">ease</span>,
+    <span class="vl">box-shadow</span>  <span class="num">.3s</span> <span class="vl">ease</span>;
+
+  <span class="cm">/* O transicionar todo */</span>
+  <span class="prp">transition</span>: <span class="vl">all</span> <span class="num">.3s</span> <span class="vl">ease</span>;
+}
+
+<span class="sel">.btn:hover</span> {
+  <span class="prp">background</span>: <span class="vl">#c94a00</span>;
+  <span class="prp">transform</span>: <span class="fn">scale</span>(<span class="num">1.05</span>);
+}
+
+<span class="cm">/* Funciones de timing */</span>
+<span class="cm">/* ease       — lento → rápido → lento (default)  */</span>
+<span class="cm">/* linear     — velocidad constante                */</span>
+<span class="cm">/* ease-in    — empieza lento                      */</span>
+<span class="cm">/* ease-out   — termina lento                      */</span>
+<span class="cm">/* ease-in-out — lento al inicio y al final        */</span>
+<span class="cm">/* cubic-bezier(x1,y1,x2,y2) — curva personalizada */</span>
+<span class="prp">transition-timing-function</span>: <span class="fn">cubic-bezier</span>(<span class="num">0.4</span>, <span class="num">0</span>, <span class="num">0.2</span>, <span class="num">1</span>);</pre>
+      </div>
+
+      <!-- 21 ANIMACIONES -->
+      <div id="s-animaciones" class="sep"><div class="sep-line"></div><span class="sep-label">21 · Animaciones</span><div class="sep-line"></div></div>
+      <h2 class="sh">Animaciones con @keyframes</h2>
+      <p class="bp">Las animaciones CSS permiten crear movimiento complejo sin JavaScript. Se definen con <em>@keyframes</em> y se aplican con la propiedad <em>animation</em>.</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">animaciones.css</span></div>
+        <pre class="cc"><span class="cm">/* 1. Definir la animación con @keyframes */</span>
+<span class="kw">@keyframes</span> <span class="fn">aparecer</span> {
+  <span class="num">from</span>  { <span class="prp">opacity</span>: <span class="num">0</span>; <span class="prp">transform</span>: <span class="fn">translateY</span>(<span class="num">20px</span>); }
+  <span class="num">to</span>    { <span class="prp">opacity</span>: <span class="num">1</span>; <span class="prp">transform</span>: <span class="fn">translateY</span>(<span class="num">0</span>); }
+}
+
+<span class="kw">@keyframes</span> <span class="fn">pulsar</span> {
+  <span class="num">0%</span>   { <span class="prp">transform</span>: <span class="fn">scale</span>(<span class="num">1</span>); }
+  <span class="num">50%</span>  { <span class="prp">transform</span>: <span class="fn">scale</span>(<span class="num">1.1</span>); }
+  <span class="num">100%</span> { <span class="prp">transform</span>: <span class="fn">scale</span>(<span class="num">1</span>); }
+}
+
+<span class="kw">@keyframes</span> <span class="fn">girar</span> {
+  <span class="num">from</span> { <span class="prp">transform</span>: <span class="fn">rotate</span>(<span class="num">0deg</span>); }
+  <span class="num">to</span>   { <span class="prp">transform</span>: <span class="fn">rotate</span>(<span class="num">360deg</span>); }
+}
+
+<span class="cm">/* 2. Aplicar con animation */</span>
+<span class="sel">.elemento</span> {
+  <span class="cm">/* nombre  duración  timing  retraso  repeticiones  dirección  relleno */</span>
+  <span class="prp">animation</span>: <span class="fn">aparecer</span> <span class="num">.6s</span> <span class="vl">ease</span> <span class="num">0s</span> <span class="num">1</span> <span class="vl">normal</span> <span class="vl">forwards</span>;
+
+  <span class="cm">/* O por separado */</span>
+  <span class="prp">animation-name</span>:            <span class="fn">aparecer</span>;
+  <span class="prp">animation-duration</span>:        <span class="num">.6s</span>;
+  <span class="prp">animation-timing-function</span>: <span class="vl">ease</span>;
+  <span class="prp">animation-delay</span>:           <span class="num">.2s</span>;
+  <span class="prp">animation-iteration-count</span>: <span class="vl">infinite</span>; <span class="cm">/* o un número */</span>
+  <span class="prp">animation-direction</span>:       <span class="vl">alternate</span>; <span class="cm">/* va y vuelve */</span>
+  <span class="prp">animation-fill-mode</span>:       <span class="vl">forwards</span>;  <span class="cm">/* mantiene el estado final */</span>
+  <span class="prp">animation-play-state</span>:      <span class="vl">paused</span>;    <span class="cm">/* pausar con JS */</span>
+}
+
+<span class="cm">/* Animaciones escalonadas con delay */</span>
+<span class="sel">.item:nth-child(1)</span> { <span class="prp">animation-delay</span>: <span class="num">.1s</span>; }
+<span class="sel">.item:nth-child(2)</span> { <span class="prp">animation-delay</span>: <span class="num">.2s</span>; }
+<span class="sel">.item:nth-child(3)</span> { <span class="prp">animation-delay</span>: <span class="num">.3s</span>; }</pre>
+      </div>
+
+      <!-- 22 TRANSFORMACIONES -->
+      <div id="s-transformaciones" class="sep"><div class="sep-line"></div><span class="sep-label">22 · Transformaciones</span><div class="sep-line"></div></div>
+      <h2 class="sh">Transformaciones 2D y 3D</h2>
+      <p class="bp">La propiedad <em>transform</em> mueve, rota, escala o sesga elementos sin afectar el flujo del documento. Es la base de la mayoría de las animaciones modernas.</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">transform.css</span></div>
+        <pre class="cc"><span class="sel">.elemento</span> {
+  <span class="cm">/* ── Transformaciones 2D ── */</span>
+  <span class="prp">transform</span>: <span class="fn">translateX</span>(<span class="num">20px</span>);         <span class="cm">/* mover derecha */</span>
+  <span class="prp">transform</span>: <span class="fn">translateY</span>(<span class="num">-10px</span>);        <span class="cm">/* mover arriba */</span>
+  <span class="prp">transform</span>: <span class="fn">translate</span>(<span class="num">20px</span>, <span class="num">-10px</span>);   <span class="cm">/* mover X e Y */</span>
+
+  <span class="prp">transform</span>: <span class="fn">scale</span>(<span class="num">1.2</span>);              <span class="cm">/* escalar 120% */</span>
+  <span class="prp">transform</span>: <span class="fn">scaleX</span>(<span class="num">0.5</span>);             <span class="cm">/* solo horizontal */</span>
+
+  <span class="prp">transform</span>: <span class="fn">rotate</span>(<span class="num">45deg</span>);           <span class="cm">/* rotar 45° */</span>
+  <span class="prp">transform</span>: <span class="fn">rotate</span>(<span class="num">-90deg</span>);          <span class="cm">/* rotar negativo */</span>
+
+  <span class="prp">transform</span>: <span class="fn">skewX</span>(<span class="num">15deg</span>);            <span class="cm">/* sesgar horizontal */</span>
+  <span class="prp">transform</span>: <span class="fn">skewY</span>(<span class="num">10deg</span>);            <span class="cm">/* sesgar vertical */</span>
+
+  <span class="cm">/* Combinar múltiples transformaciones */</span>
+  <span class="prp">transform</span>: <span class="fn">translateY</span>(<span class="num">-8px</span>) <span class="fn">scale</span>(<span class="num">1.05</span>) <span class="fn">rotate</span>(<span class="num">2deg</span>);
+
+  <span class="cm">/* ── Transformaciones 3D ── */</span>
+  <span class="prp">transform</span>: <span class="fn">rotateX</span>(<span class="num">30deg</span>);
+  <span class="prp">transform</span>: <span class="fn">rotateY</span>(<span class="num">45deg</span>);
+  <span class="prp">transform</span>: <span class="fn">perspective</span>(<span class="num">500px</span>) <span class="fn">rotateY</span>(<span class="num">30deg</span>);
+  <span class="prp">transform</span>: <span class="fn">translateZ</span>(<span class="num">50px</span>);
+
+  <span class="cm">/* Punto de origen de la transformación */</span>
+  <span class="prp">transform-origin</span>: <span class="vl">center center</span>;   <span class="cm">/* default */</span>
+  <span class="prp">transform-origin</span>: <span class="vl">top left</span>;
+  <span class="prp">transform-origin</span>: <span class="num">0% 100%</span>;
+}</pre>
+      </div>
+
+      <!-- 23 CHEAT SHEET -->
+      <div id="s-cheatsheet" class="sep"><div class="sep-line"></div><span class="sep-label">23 · Cheat Sheet</span><div class="sep-line"></div></div>
+      <h2 class="sh">Cheat Sheet: propiedades esenciales</h2>
+      <div class="cheat-grid">
+        <div class="cheat-item"><div class="cheat-prop">color</div><div class="cheat-desc">Color del texto</div></div>
+        <div class="cheat-item"><div class="cheat-prop">background</div><div class="cheat-desc">Fondo (color, imagen, gradiente)</div></div>
+        <div class="cheat-item"><div class="cheat-prop">font-size</div><div class="cheat-desc">Tamaño de letra</div></div>
+        <div class="cheat-item"><div class="cheat-prop">font-family</div><div class="cheat-desc">Tipografía</div></div>
+        <div class="cheat-item"><div class="cheat-prop">font-weight</div><div class="cheat-desc">Grosor de la fuente</div></div>
+        <div class="cheat-item"><div class="cheat-prop">line-height</div><div class="cheat-desc">Interlineado</div></div>
+        <div class="cheat-item"><div class="cheat-prop">text-align</div><div class="cheat-desc">Alineación del texto</div></div>
+        <div class="cheat-item"><div class="cheat-prop">width / height</div><div class="cheat-desc">Ancho y alto</div></div>
+        <div class="cheat-item"><div class="cheat-prop">max-width</div><div class="cheat-desc">Ancho máximo</div></div>
+        <div class="cheat-item"><div class="cheat-prop">margin</div><div class="cheat-desc">Espacio exterior</div></div>
+        <div class="cheat-item"><div class="cheat-prop">padding</div><div class="cheat-desc">Espacio interior</div></div>
+        <div class="cheat-item"><div class="cheat-prop">border</div><div class="cheat-desc">Borde del elemento</div></div>
+        <div class="cheat-item"><div class="cheat-prop">border-radius</div><div class="cheat-desc">Esquinas redondeadas</div></div>
+        <div class="cheat-item"><div class="cheat-prop">box-shadow</div><div class="cheat-desc">Sombra de caja</div></div>
+        <div class="cheat-item"><div class="cheat-prop">opacity</div><div class="cheat-desc">Transparencia global</div></div>
+        <div class="cheat-item"><div class="cheat-prop">display</div><div class="cheat-desc">Tipo de visualización</div></div>
+        <div class="cheat-item"><div class="cheat-prop">position</div><div class="cheat-desc">Tipo de posicionamiento</div></div>
+        <div class="cheat-item"><div class="cheat-prop">z-index</div><div class="cheat-desc">Profundidad/apilamiento</div></div>
+        <div class="cheat-item"><div class="cheat-prop">overflow</div><div class="cheat-desc">Contenido desbordado</div></div>
+        <div class="cheat-item"><div class="cheat-prop">cursor</div><div class="cheat-desc">Tipo de cursor</div></div>
+        <div class="cheat-item"><div class="cheat-prop">flex</div><div class="cheat-desc">Shorthand Flexbox item</div></div>
+        <div class="cheat-item"><div class="cheat-prop">justify-content</div><div class="cheat-desc">Alinear eje principal</div></div>
+        <div class="cheat-item"><div class="cheat-prop">align-items</div><div class="cheat-desc">Alinear eje cruzado</div></div>
+        <div class="cheat-item"><div class="cheat-prop">gap</div><div class="cheat-desc">Espacio entre items</div></div>
+        <div class="cheat-item"><div class="cheat-prop">grid-template-columns</div><div class="cheat-desc">Columnas del grid</div></div>
+        <div class="cheat-item"><div class="cheat-prop">grid-area</div><div class="cheat-desc">Asignar área nombrada</div></div>
+        <div class="cheat-item"><div class="cheat-prop">@media</div><div class="cheat-desc">Media queries</div></div>
+        <div class="cheat-item"><div class="cheat-prop">var()</div><div class="cheat-desc">Variables CSS</div></div>
+        <div class="cheat-item"><div class="cheat-prop">transition</div><div class="cheat-desc">Animación de estado</div></div>
+        <div class="cheat-item"><div class="cheat-prop">animation</div><div class="cheat-desc">Animación @keyframes</div></div>
+        <div class="cheat-item"><div class="cheat-prop">transform</div><div class="cheat-desc">Mover, rotar, escalar</div></div>
+        <div class="cheat-item"><div class="cheat-prop">filter</div><div class="cheat-desc">Filtros visuales</div></div>
+        <div class="cheat-item"><div class="cheat-prop">@keyframes</div><div class="cheat-desc">Define animación</div></div>
+        <div class="cheat-item"><div class="cheat-prop">@import</div><div class="cheat-desc">Importar otro CSS</div></div>
+        <div class="cheat-item"><div class="cheat-prop">@font-face</div><div class="cheat-desc">Fuente personalizada</div></div>
+        <div class="cheat-item"><div class="cheat-prop">box-sizing</div><div class="cheat-desc">Modelo de caja</div></div>
+      </div>
+
+      <!-- 24 BUENAS PRÁCTICAS -->
+      <div id="s-buenas" class="sep"><div class="sep-line"></div><span class="sep-label">24 · Buenas prácticas</span><div class="sep-line"></div></div>
+      <h2 class="sh">Buenas prácticas en CSS3</h2>
+
+      <div class="prop-grid">
+        <div class="prop-card"><div class="prop-top"><span class="prop-pill" style="background:rgba(74,222,128,0.12);color:var(--green-acc);">✅ Reset</span><span class="prop-type">Base</span></div><p class="prop-desc">Siempre incluye <strong>* { box-sizing: border-box; margin: 0; padding: 0; }</strong> al inicio para normalizar entre navegadores.</p></div>
+        <div class="prop-card"><div class="prop-top"><span class="prop-pill" style="background:rgba(74,222,128,0.12);color:var(--green-acc);">✅ Variables</span><span class="prop-type">Mantenibilidad</span></div><p class="prop-desc">Declara <strong>colores, tipografías y espaciados</strong> como variables en :root. Cambiar el tema completo será cuestión de editar una sola sección.</p></div>
+        <div class="prop-card"><div class="prop-top"><span class="prop-pill" style="background:rgba(74,222,128,0.12);color:var(--green-acc);">✅ Mobile First</span><span class="prop-type">Responsive</span></div><p class="prop-desc">Escribe los estilos base para <strong>móvil primero</strong>, luego usa min-width en media queries para pantallas más grandes. Es más eficiente.</p></div>
+        <div class="prop-card"><div class="prop-top"><span class="prop-pill" style="background:rgba(74,222,128,0.12);color:var(--green-acc);">✅ Clases semánticas</span><span class="prop-type">Nomenclatura</span></div><p class="prop-desc">Nombra las clases según <strong>su propósito</strong>, no su apariencia. Usa <em>.btn-primary</em> no <em>.btn-rojo</em>. Si cambias el color rojo, el nombre sigue teniendo sentido.</p></div>
+        <div class="prop-card"><div class="prop-top"><span class="prop-pill" style="background:rgba(251,191,36,0.12);color:var(--yellow-acc);">⚠️ Evita !important</span><span class="prop-type">Cascada</span></div><p class="prop-desc">Usar <strong>!important</strong> rompe la cascada y crea bugs difíciles de resolver. Si necesitas usarlo, probablemente hay un problema de especificidad que corregir.</p></div>
+        <div class="prop-card"><div class="prop-top"><span class="prop-pill" style="background:rgba(251,191,36,0.12);color:var(--yellow-acc);">⚠️ Evita IDs en CSS</span><span class="prop-type">Especificidad</span></div><p class="prop-desc">Los selectores de <strong>#id tienen especificidad muy alta</strong>, lo que dificulta sobreescribirlos. Usa clases para estilar y reserva los IDs para el HTML y JavaScript.</p></div>
+        <div class="prop-card"><div class="prop-top"><span class="prop-pill" style="background:rgba(74,222,128,0.12);color:var(--green-acc);">✅ Usa rem no px</span><span class="prop-type">Accesibilidad</span></div><p class="prop-desc">Usa <strong>rem</strong> para tipografía y <strong>em o %</strong> para espaciados. Respeta la configuración de tamaño de fuente del usuario en su navegador.</p></div>
+        <div class="prop-card"><div class="prop-top"><span class="prop-pill" style="background:rgba(74,222,128,0.12);color:var(--green-acc);">✅ Organiza tu CSS</span><span class="prop-type">Estructura</span></div><p class="prop-desc">Organiza en secciones: <strong>reset → variables → base → layout → componentes → utilidades</strong>. Usa comentarios para separar cada bloque.</p></div>
+      </div>
+
+      <div class="info-box tip">
+        <p class="info-label">🚀 Siguiente paso</p>
+        <p>Ya dominas los fundamentos de CSS3. El siguiente paso natural es explorar <strong>SCSS/Sass</strong> para organización avanzada, o aprender <strong>Tailwind CSS</strong> para construir interfaces rápidamente con clases de utilidad. ¡Y después, JavaScript para darle vida completa a tus páginas!</p>
+      </div>
+
+    </article>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-school">Centro de Bachillerato Tecnológico Industrial y de Servicios No. 144</p>
+  <div class="footer-divider"></div>
+  <p class="footer-details">
+    Especialidad: Inteligencia Artificial  Alumno: Mariangel Mena Gámez<br>
+    Profesor: Jordy Jesús Chirino Balcázar
+  </p>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('[id^="s-"]');
+  const links = document.querySelectorAll('.toc a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.toc a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
+
+
+
+</body></html>

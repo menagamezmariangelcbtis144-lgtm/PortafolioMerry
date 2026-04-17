@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<!-- saved from url=(0175)file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía Completa HTML5 — Cultura Digital 2</title>
+  <link href="./Guía Completa HTML5 — Cultura Digital 2_files/css2" rel="stylesheet">
+  <style>
+    :root {
+      --orange-deep:   #7a0a0a;
+      --orange-mid:    #961212;
+      --orange-bright: #c42020;
+      --orange-glow:   #f0a0a0;
+      --ink:           #fdf0f0;
+      --ink-mid:       #f5d8d8;
+      --ink-light:     #f0c8c8;
+      --ink-card:      #ecc0c0;
+      --white:         #2a0000;
+      --text-body:     #3a0808;
+      --text-muted:    #8a3030;
+      /* HTML5 accent: blood red tones */
+      --html-red:      #b01818;
+      --html-orange:   #c82828;
+      --green-acc:     #8a1010;
+      --blue-acc:      #7a1818;
+      --yellow-acc:    #902020;
+      --pink-acc:      #b02020;
+      --purple-acc:    #880f0f;
+      --teal-acc:      #a01010;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: linear-gradient(to bottom, #fde8e8 0%, #c04040 100%); background-attachment: fixed; color: var(--text-body); }
+
+    /* ── NAV ── */
+    .topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 32px;
+      background: rgba(253,232,232,0.95); backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(160,20,20,0.20);
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 8px 20px; border-radius: 50px;
+      border: 1.5px solid rgba(255,140,56,0.55); background: transparent;
+      color: var(--orange-bright); font-family: 'Space Mono', monospace;
+      font-size: 0.75rem; letter-spacing: 0.12em; text-decoration: none;
+      cursor: pointer; transition: background .2s, color .2s, transform .2s;
+    }
+    .back-btn:hover { background: var(--orange-mid); color: #fff; border-color: var(--orange-mid); transform: translateX(-3px); }
+    .back-btn svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .nav-badge { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--text-muted); letter-spacing: 0.15em; text-transform: uppercase; }
+    .nav-badge span { color: var(--orange-bright); }
+
+    /* ── INDEX LATERAL (sticky TOC) ── */
+    .layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-top: 58px;
+    }
+    .toc {
+      position: sticky; top: 58px; height: calc(100vh - 58px);
+      overflow-y: auto; padding: 32px 0 32px 24px;
+      border-right: 1px solid rgba(255,255,255,0.05);
+      scrollbar-width: thin; scrollbar-color: rgba(255,140,56,0.3) transparent;
+    }
+    .toc::-webkit-scrollbar { width: 4px; }
+    .toc::-webkit-scrollbar-thumb { background: rgba(255,140,56,0.3); border-radius: 2px; }
+    .toc-title {
+      font-family: 'Space Mono', monospace; font-size: 0.62rem;
+      color: var(--orange-bright); letter-spacing: 0.22em; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .toc a {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 12px 6px 0; text-decoration: none;
+      font-size: 0.80rem; color: var(--text-muted);
+      border-radius: 6px; transition: color .2s; line-height: 1.35;
+    }
+    .toc a:hover { color: var(--orange-bright); }
+    .toc a.active { color: var(--white); }
+    .toc-num { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: var(--orange-deep); width: 18px; flex-shrink: 0; }
+    .toc-group { margin-top: 10px; margin-bottom: 4px; }
+    .toc-group-label {
+      font-family: 'Space Mono', monospace; font-size: 0.58rem;
+      color: rgba(255,140,56,0.45); letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 4px 0; margin-bottom: 2px;
+    }
+
+    /* ── MAIN ── */
+    .main-content { min-width: 0; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 88vh;
+      display: flex; align-items: flex-end; padding-bottom: 72px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 20% 60%, rgba(227,79,38,0.22) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 80% 25%, rgba(240,101,41,0.15) 0%, transparent 60%),
+        linear-gradient(170deg, #0b0f1a 0%, #1a0e06 55%, #0b0f1a 100%);
+    }
+    /* HTML tag rain */
+    .tag-rain { position: absolute; inset: 0; pointer-events: none; overflow: hidden; opacity: 0.055; font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--html-orange); }
+    .tag-col { position: absolute; top: -10%; display: flex; flex-direction: column; gap: 8px; animation: fall linear infinite; }
+    @keyframes fall { to { transform: translateY(115vh); } }
+
+    .hero-big-tag {
+      position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+      font-family: 'Space Mono', monospace; font-size: clamp(5rem, 12vw, 9rem);
+      font-weight: 700; color: rgba(227,79,38,0.07); line-height: 1;
+      pointer-events: none; user-select: none; white-space: nowrap;
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 580px; padding: 0 40px 0 40px; }
+    .hero-tag-line {
+      font-family: 'Space Mono', monospace; font-size: 0.70rem;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--html-orange); margin-bottom: 18px;
+      display: flex; align-items: center; gap: 10px;
+      opacity: 0; animation: fadeUp .6s .1s ease forwards;
+    }
+    .hero-tag-line::before { content:''; display:block; width:32px; height:1.5px; background:var(--html-orange); }
+    .hero-title {
+      font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 900; line-height: 1.0; color: var(--white); margin-bottom: 16px;
+      opacity: 0; animation: fadeUp .6s .25s ease forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--html-orange); }
+    .hero-desc {
+      font-size: 1.04rem; color: var(--text-muted); line-height: 1.75; max-width: 540px;
+      margin-bottom: 32px; opacity: 0; animation: fadeUp .6s .40s ease forwards;
+    }
+    .hero-desc strong { color: var(--text-body); }
+    .hero-stats {
+      display: flex; gap: 32px; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp .6s .55s ease forwards;
+    }
+    .stat { display: flex; flex-direction: column; gap: 3px; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--html-orange); line-height: 1; }
+    .stat-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: var(--text-muted); letter-spacing: 0.15em; text-transform: uppercase; }
+
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    /* ── HERO IMAGE ── */
+    .hero-visual {
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 46%;
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    /* dark fade on left edge so text blends */
+    .hero-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, var(--ink) 0%, rgba(253,232,232,0.75) 45%, rgba(253,232,232,0.20) 100%);
+      z-index: 2;
+    }
+    /* subtle vignette bottom */
+    .hero-visual::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(0deg, var(--ink) 0%, transparent 30%);
+      z-index: 2;
+    }
+    .hero-img-wrap {
+      position: relative; z-index: 1;
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-img-wrap svg {
+      width: 100%; height: 100%;
+      animation: imgReveal 1.0s .3s ease both;
+    }
+    @keyframes imgReveal {
+      from { opacity: 0; transform: scale(1.04); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    /* Glowing HTML5 logo overlay badge */
+    .html5-badge {
+      position: absolute;
+      bottom: 52px; right: 40px;
+      z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      opacity: 0; animation: fadeUp .7s .8s ease forwards;
+    }
+    .html5-badge img {
+      width: 90px; height: 90px;
+      filter: drop-shadow(0 0 24px rgba(227,79,38,0.65)) drop-shadow(0 0 8px rgba(240,101,41,0.8));
+      animation: none !important;
+      opacity: 1 !important;
+    }
+    .html5-badge span {
+      font-family: 'Space Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.22em; color: rgba(255,200,150,0.7); text-transform: uppercase;
+    }
+
+    /* ── HERO LOGO RIGHT ── */
+    .hero-logo-right {
+      position: absolute;
+      right: 5%;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      opacity: 0;
+      animation: fadeUp .8s .5s ease forwards;
+    }
+    .logo-glow-ring {
+      position: absolute;
+      width: 520px; height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,98,10,0.28) 0%, rgba(201,74,0,0.12) 50%, transparent 75%);
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1);   opacity: 0.7; }
+      50%       { transform: scale(1.1); opacity: 1;   }
+    }
+    .html5-svg-logo {
+      width: 380px; height: 380px;
+      position: relative; z-index: 1;
+      filter:
+        drop-shadow(0 0 40px rgba(232,98,10,0.75))
+        drop-shadow(0 0 80px rgba(201,74,0,0.40))
+        drop-shadow(0 16px 32px rgba(0,0,0,0.60));
+      animation: floatLogo 4s ease-in-out infinite;
+    }
+    @keyframes floatLogo {
+      0%, 100% { transform: translateY(0);    }
+      50%       { transform: translateY(-14px); }
+    }
+
+    /* ── ARTICLE ── */
+    .article { padding: 60px 40px 120px; }
+
+    /* Section divider */
+    .sep { display: flex; align-items: center; gap: 16px; margin: 72px 0 28px; }
+    .sep-line { flex: 1; height: 1px; background: rgba(227,79,38,0.15); }
+    .sep-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.22em; color: var(--html-orange); text-transform: uppercase; white-space: nowrap; }
+
+    h2.sh {
+      font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      color: var(--white); font-weight: 700; margin-bottom: 12px; line-height: 1.2;
+    }
+    h3.sh3 {
+      font-family: 'Playfair Display', serif; font-size: 1.25rem;
+      color: var(--white); font-weight: 700; margin: 36px 0 12px; line-height: 1.3;
+    }
+    p.bp { font-size: 0.97rem; color: var(--text-body); line-height: 1.82; margin-bottom: 16px; }
+    p.bp strong { color: var(--white); }
+    p.bp em { color: var(--html-orange); font-style: normal; }
+
+    /* ── CODE BLOCKS ── */
+    .code-block {
+      background: #0d1117; border-radius: 12px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.07); margin: 20px 0;
+    }
+    .code-bar {
+      display: flex; align-items: center; gap: 6px;
+      padding: 9px 16px; background: rgba(140,0,0,0.10);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .dot { width: 9px; height: 9px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; } .dot-y { background: #ffbd2e; } .dot-g { background: #28c840; }
+    .code-file { font-family: 'Space Mono', monospace; font-size: 0.62rem; color: var(--text-muted); margin-left: auto; }
+    pre.cc {
+      padding: 18px 20px; font-family: 'Space Mono', monospace; font-size: 0.74rem;
+      line-height: 1.75; overflow-x: auto; color: #abb2bf; margin: 0; white-space: pre;
+    }
+    .tg  { color: #e06c75; }
+    .at  { color: #d19a66; }
+    .vl  { color: #98c379; }
+    .cm  { color: #5c6370; font-style: italic; }
+    .kw  { color: #c678dd; }
+    .tx  { color: #abb2bf; }
+    .hl  { background: rgba(255,140,56,0.10); border-left: 2px solid var(--html-orange); display: block; margin: 0 -20px; padding: 0 18px; }
+
+    /* ── INFO BOXES ── */
+    .info-box {
+      border-radius: 12px; padding: 18px 22px; margin: 20px 0;
+      border-left: 3px solid;
+    }
+    .info-box.tip    { background: rgba(74,222,128,0.07); border-color: var(--green-acc); }
+    .info-box.warn   { background: rgba(251,191,36,0.07); border-color: var(--yellow-acc); }
+    .info-box.note   { background: rgba(96,165,250,0.07); border-color: var(--blue-acc); }
+    .info-box.html   { background: rgba(227,79,38,0.07);  border-color: var(--html-orange); }
+    .info-label {
+      font-family: 'Space Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 6px;
+    }
+    .info-box.tip  .info-label { color: var(--green-acc); }
+    .info-box.warn .info-label { color: var(--yellow-acc); }
+    .info-box.note .info-label { color: var(--blue-acc); }
+    .info-box.html .info-label { color: var(--html-orange); }
+    .info-box p { font-size: 0.90rem; color: var(--text-body); line-height: 1.7; }
+    .info-box p strong { color: var(--white); }
+
+    /* ── TAG REFERENCE CARDS ── */
+    .tag-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin: 24px 0; }
+    .tag-card {
+      background: rgba(220,160,160,0.45); border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.06); padding: 16px 18px;
+      transition: border-color .2s, transform .2s;
+    }
+    .tag-card:hover { border-color: rgba(227,79,38,0.35); transform: translateY(-3px); }
+    .tag-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .tag-pill {
+      font-family: 'Space Mono', monospace; font-size: 0.72rem; font-weight: 700;
+      background: rgba(227,79,38,0.18); color: var(--html-orange);
+      padding: 3px 10px; border-radius: 6px;
+    }
+    .tag-type {
+      font-family: 'Space Mono', monospace; font-size: 0.58rem;
+      color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .tag-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.55; }
+    .tag-desc strong { color: var(--text-body); }
+    .tag-attrs { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; }
+    .attr-chip {
+      font-family: 'Space Mono', monospace; font-size: 0.60rem;
+      background: rgba(96,165,250,0.10); color: var(--blue-acc);
+      border: 1px solid rgba(96,165,250,0.20); border-radius: 4px; padding: 2px 7px;
+    }
+
+    /* ── ATTRIBUTE TABLE ── */
+    .attr-table-wrap { overflow-x: auto; margin: 20px 0; }
+    table.attr-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+    table.attr-table th {
+      font-family: 'Space Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--html-orange); padding: 10px 14px;
+      border-bottom: 2px solid rgba(227,79,38,0.20);
+      background: rgba(227,79,38,0.04); text-align: left;
+    }
+    table.attr-table td {
+      padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: var(--text-body); vertical-align: top; line-height: 1.55;
+    }
+    table.attr-table td:first-child { font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--blue-acc); }
+    table.attr-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* ── SEMANTIC DIAGRAM ── */
+    .semantic-diagram {
+      background: rgba(220,160,160,0.45); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px; padding: 28px; margin: 24px 0;
+      font-family: 'Space Mono', monospace; font-size: 0.75rem;
+    }
+    .sem-page {
+      border: 2px solid rgba(255,255,255,0.10); border-radius: 8px;
+      overflow: hidden; max-width: 520px; margin: 0 auto;
+    }
+    .sem-row { display: flex; }
+    .sem-block {
+      padding: 10px 14px; border: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.70rem; letter-spacing: 0.1em; text-transform: uppercase;
+      min-height: 40px;
+    }
+    .sem-header  { background: rgba(227,79,38,0.20); color: #f87171; flex: 1; }
+    .sem-nav     { background: rgba(251,191,36,0.15); color: var(--yellow-acc); flex: 1; min-height: 60px; }
+    .sem-main    { background: rgba(96,165,250,0.12); color: var(--blue-acc); flex: 3; min-height: 140px; flex-direction: column; gap: 4px; }
+    .sem-aside   { background: rgba(167,139,250,0.12); color: var(--purple-acc); flex: 1; min-height: 140px; }
+    .sem-article { background: rgba(96,165,250,0.07); color: #93c5fd; font-size: 0.62rem; padding: 6px 10px; border-radius: 4px; width: 100%; text-align: center; }
+    .sem-section { background: rgba(45,212,191,0.07); color: var(--teal-acc); font-size: 0.62rem; padding: 6px 10px; border-radius: 4px; width: 100%; text-align: center; }
+    .sem-footer  { background: rgba(74,222,128,0.12); color: var(--green-acc); flex: 1; }
+    .sem-label   { font-size: 0.58rem; opacity: 0.6; }
+
+    /* ── BLOCK VS INLINE ── */
+    .bvi-demo {
+      background: rgba(220,160,160,0.45); border-radius: 12px; padding: 24px;
+      margin: 20px 0; border: 1px solid rgba(255,255,255,0.06);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    }
+    .bvi-col h4 { font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; }
+    .bvi-col.block-col h4 { color: var(--blue-acc); }
+    .bvi-col.inline-col h4 { color: var(--pink-acc); }
+    .block-box {
+      background: rgba(96,165,250,0.12); border: 1px solid rgba(96,165,250,0.25);
+      border-radius: 6px; padding: 8px 12px; margin-bottom: 6px;
+      font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--blue-acc);
+    }
+    .inline-wrap { line-height: 2.2; }
+    .inline-box {
+      display: inline-block;
+      background: rgba(244,114,182,0.12); border: 1px solid rgba(244,114,182,0.25);
+      border-radius: 4px; padding: 2px 8px; margin: 2px;
+      font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--pink-acc);
+    }
+
+    /* ── FORMS DEMO ── */
+    .form-demo {
+      background: rgba(220,160,160,0.45); border-radius: 12px; padding: 24px 28px;
+      margin: 20px 0; border: 1px solid rgba(255,255,255,0.06);
+    }
+    .form-demo label {
+      display: block; font-family: 'Space Mono', monospace; font-size: 0.65rem;
+      color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .form-demo input, .form-demo select, .form-demo textarea {
+      width: 100%; padding: 9px 14px; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12); border-radius: 8px;
+      color: var(--text-body); font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+      margin-bottom: 14px; outline: none; transition: border-color .2s;
+    }
+    .form-demo input:focus, .form-demo select:focus, .form-demo textarea:focus {
+      border-color: var(--html-orange);
+    }
+    .form-demo button {
+      padding: 9px 24px; background: linear-gradient(90deg, var(--orange-deep), var(--orange-mid));
+      color: #fff; border: none; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; font-family: 'DM Sans', sans-serif;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    /* ── PROGRESS INDICATOR ── */
+    .progress-bar-wrap { margin: 24px 0; }
+    .prog-item { margin-bottom: 12px; }
+    .prog-label { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--text-muted); margin-bottom: 5px; display: flex; justify-content: space-between; }
+    .prog-track { height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
+    .prog-fill { height: 100%; border-radius: 3px; animation: grow 1.2s ease forwards; transform-origin: left; }
+    @keyframes grow { from { width: 0; } }
+
+    /* ── CHEAT SHEET GRID ── */
+    .cheat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin: 20px 0; }
+    .cheat-item {
+      background: rgba(220,160,160,0.45); border-radius: 10px; padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.05); transition: border-color .2s;
+    }
+    .cheat-item:hover { border-color: rgba(227,79,38,0.30); }
+    .cheat-tag { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--html-orange); margin-bottom: 5px; }
+    .cheat-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: linear-gradient(135deg, var(--orange-deep) 0%, var(--orange-mid) 100%);
+      text-align: center; padding: 40px 24px;
+    }
+    .footer-school { font-family: 'Playfair Display', serif; font-size: clamp(0.85rem,2vw,1.05rem); color: #fff; font-weight: 700; margin-bottom: 8px; line-height: 1.4; }
+    .footer-details { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; color: var(--orange-glow); line-height: 1.8; }
+    .footer-divider { width: 40px; height: 2px; background: rgba(255,255,255,0.3); margin: 16px auto; border-radius: 2px; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .toc { display: none; }
+      .article { padding: 40px 20px 80px; }
+      .bvi-demo { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-content { padding: 0 24px; }
+      .hero-visual { display: none; }
+      .html5-badge { display: none; }
+    }
+    @media(max-width: 600px) {
+      .topnav { padding: 12px 16px; }
+      .hero-big-tag { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav class="topnav">
+  <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/index.html" class="back-btn">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    Volver al portafolio
+  </a>
+  <span class="nav-badge">Tarea <span>03</span> — Cultura Digital 2</span>
+</nav>
+
+<div class="layout">
+
+  <!-- ══ TOC LATERAL ══ -->
+  <aside class="toc">
+    <p class="toc-title">Contenido</p>
+
+    <div class="toc-group">
+      <p class="toc-group-label">Introducción</p>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html#s-intro"><span class="toc-num">01</span>¿Qué es HTML5?</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html#s-estructura"><span class="toc-num">02</span>Estructura básica</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html#s-sintaxis"><span class="toc-num">03</span>Sintaxis y reglas</a>
+    </div>
+
+    <div class="toc-group">
+      <p class="toc-group-label">Etiquetas</p>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html#s-bloques"><span class="toc-num">04</span>Elementos de bloque</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html#s-inline"><span class="toc-num">05</span>Elementos en línea</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html#s-semantica"><span class="toc-num">06</span>HTML Semántico</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html#s-encabezados"><span class="toc-num">07</span>Encabezados</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html#s-texto"><span class="toc-num">08</span>Texto y formato</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html#s-listas"><span class="toc-num">09</span>Listas</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html#s-enlaces"><span class="toc-num">10</span>Enlaces</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html#s-media"><span class="toc-num">11</span>Imágenes y media</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html#s-tablas"><span class="toc-num">12</span>Tablas</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html#s-formularios"><span class="toc-num">13</span>Formularios</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html#s-html5new"><span class="toc-num">14</span>Novedades HTML5</a>
+    </div>
+
+    <div class="toc-group">
+      <p class="toc-group-label">Atributos</p>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html#s-atributos"><span class="toc-num">15</span>Atributos globales</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html#s-data"><span class="toc-num">16</span>Atributos data-*</a>
+    </div>
+
+    <div class="toc-group">
+      <p class="toc-group-label">Referencia</p>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html#s-cheatsheet"><span class="toc-num">17</span>Cheat Sheet</a>
+      <a href="file:///C:/Users/carme/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/91D9F8F2C6D58BCB5EC5034C6E3CD95F4FA0AD66/transfers/2026-11/tarea3.html#s-buenas"><span class="toc-num">18</span>Buenas prácticas</a>
+    </div>
+  </aside>
+
+  <!-- ══ CONTENIDO PRINCIPAL ══ -->
+  <div class="main-content">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="tag-rain" aria-hidden="true">
+        <div class="tag-col" style="left:5%;animation-duration:9s;"><span>&lt;html&gt;</span><span>&lt;head&gt;</span><span>&lt;body&gt;</span><span>&lt;div&gt;</span><span>&lt;p&gt;</span><span>&lt;h1&gt;</span><span>&lt;/html&gt;</span></div>
+        <div class="tag-col" style="left:22%;animation-duration:12s;animation-delay:-4s;"><span>&lt;section&gt;</span><span>&lt;nav&gt;</span><span>&lt;footer&gt;</span><span>&lt;main&gt;</span><span>&lt;aside&gt;</span></div>
+        <div class="tag-col" style="left:45%;animation-duration:10s;animation-delay:-2s;"><span>&lt;img/&gt;</span><span>&lt;a href&gt;</span><span>&lt;form&gt;</span><span>&lt;input/&gt;</span><span>&lt;table&gt;</span></div>
+        <div class="tag-col" style="left:68%;animation-duration:14s;animation-delay:-6s;"><span>&lt;video&gt;</span><span>&lt;canvas&gt;</span><span>&lt;meta&gt;</span><span>&lt;link&gt;</span><span>&lt;ul&gt;</span></div>
+        <div class="tag-col" style="left:85%;animation-duration:11s;animation-delay:-1s;"><span>&lt;article&gt;</span><span>&lt;header&gt;</span><span>&lt;span&gt;</span><span>&lt;strong&gt;</span></div>
+      </div>
+      <!-- big tag removed -->
+
+      <!-- Logo HTML5 derecha -->
+      <div class="hero-logo-right">
+        <div class="logo-glow-ring"></div>
+        <svg class="html5-svg-logo" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <lineargradient id="shieldTop" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#ff8c38"></stop>
+              <stop offset="100%" stop-color="#c94a00"></stop>
+            </lineargradient>
+            <lineargradient id="shieldRight" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#e8620a"></stop>
+              <stop offset="100%" stop-color="#a03800"></stop>
+            </lineargradient>
+            <filter id="logoGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <fegaussianblur stdDeviation="12" result="blur"></fegaussianblur>
+              <femerge><femergenode in="blur"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+            </filter>
+          </defs>
+          <!-- Shield left half -->
+          <path d="M256 32 L64 80 L96 416 L256 480 L256 32Z" fill="url(#shieldTop)"></path>
+          <!-- Shield right half (slightly darker) -->
+          <path d="M256 32 L448 80 L416 416 L256 480 L256 32Z" fill="url(#shieldRight)"></path>
+          <!-- White "5" -->
+          <text x="256" y="360" font-family="Arial Black, Impact, sans-serif" font-size="260" font-weight="900" fill="white" text-anchor="middle" opacity="0.97">5</text>
+          <!-- "HTML" bar top -->
+          <rect x="64" y="80" width="384" height="52" fill="rgba(0,0,0,0.18)" rx="4"></rect>
+          <text x="256" y="118" font-family="Arial Black, Impact, sans-serif" font-size="44" font-weight="900" fill="white" text-anchor="middle" letter-spacing="6" opacity="0.95">HTML</text>
+        </svg>
+      </div>
+
+      <div class="hero-content">
+        <p class="hero-tag-line">Cultura Digital 2 · Tarea 03</p>
+        <h1 class="hero-title">Guía<br>Completa de<br><em>HTML5</em></h1>
+        <p class="hero-desc">
+          Todo lo que necesitas saber para pasar de <strong>cero a escribir páginas web</strong> desde hoy. Etiquetas, atributos, semántica, formularios, buenas prácticas y mucho más.
+        </p>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-num">100+</span><span class="stat-label">Etiquetas</span></div>
+          <div class="stat"><span class="stat-num">18</span><span class="stat-label">Secciones</span></div>
+          <div class="stat"><span class="stat-num">2014</span><span class="stat-label">Año HTML5</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════ -->
+    <article class="article">
+
+      <!-- ─────────── 01 QUÉ ES HTML5 ─────────── -->
+      <div id="s-intro" class="sep"><div class="sep-line"></div><span class="sep-label">01 · Introducción</span><div class="sep-line"></div></div>
+      <h2 class="sh">¿Qué es HTML5?</h2>
+      <p class="bp"><strong>HTML</strong> significa <em>HyperText Markup Language</em> (Lenguaje de Marcado de Hipertexto). Es el lenguaje estándar para crear páginas web. No es un lenguaje de programación —no tiene lógica ni variables— sino un <strong>lenguaje de marcado</strong>: usas etiquetas para describir qué es cada parte del contenido.</p>
+      <p class="bp"><strong>HTML5</strong> es la quinta y actual versión, lanzada oficialmente en octubre de 2014 por el W3C (World Wide Web Consortium). Introdujo decenas de nuevas etiquetas semánticas, soporte nativo para audio y video, el elemento <em>&lt;canvas&gt;</em> para gráficos, APIs de geolocalización, almacenamiento local y mucho más.</p>
+      <div class="info-box note">
+        <p class="info-label">💡 Concepto clave</p>
+        <p>HTML define <strong>qué es</strong> el contenido (un título, un párrafo, una imagen). CSS define <strong>cómo se ve</strong> (color, tamaño, posición). JavaScript define <strong>qué hace</strong> (reaccionar a clics, animarse). Los tres juntos forman una página web completa.</p>
+      </div>
+
+      <!-- ─────────── 02 ESTRUCTURA BÁSICA ─────────── -->
+      <div id="s-estructura" class="sep"><div class="sep-line"></div><span class="sep-label">02 · Estructura básica</span><div class="sep-line"></div></div>
+      <h2 class="sh">La estructura básica de todo documento HTML5</h2>
+      <p class="bp">Todo archivo HTML5 válido debe tener esta estructura mínima. Es el esqueleto sobre el que se construye cualquier página web:</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">index.html</span></div>
+        <pre class="cc"><span class="hl"><span class="cm">&lt;!-- 1. Declaración del tipo de documento --&gt;</span>
+<span class="tg">&lt;!DOCTYPE html&gt;</span></span>
+<span class="cm">&lt;!-- 2. Elemento raíz. lang indica el idioma --&gt;</span>
+<span class="tg">&lt;html</span> <span class="at">lang</span>=<span class="vl">"es"</span><span class="tg">&gt;</span>
+
+  <span class="cm">&lt;!-- 3. Sección de metadatos (no visible) --&gt;</span>
+  <span class="tg">&lt;head&gt;</span>
+    <span class="tg">&lt;meta</span> <span class="at">charset</span>=<span class="vl">"UTF-8"</span><span class="tg">/&gt;</span>
+    <span class="tg">&lt;meta</span> <span class="at">name</span>=<span class="vl">"viewport"</span> <span class="at">content</span>=<span class="vl">"width=device-width, initial-scale=1.0"</span><span class="tg">/&gt;</span>
+    <span class="tg">&lt;meta</span> <span class="at">name</span>=<span class="vl">"description"</span> <span class="at">content</span>=<span class="vl">"Mi primera página web"</span><span class="tg">/&gt;</span>
+    <span class="tg">&lt;title&gt;</span>Mi Primera Página<span class="tg">&lt;/title&gt;</span>
+    <span class="tg">&lt;link</span> <span class="at">rel</span>=<span class="vl">"stylesheet"</span> <span class="at">href</span>=<span class="vl">"styles.css"</span><span class="tg">/&gt;</span>
+  <span class="tg">&lt;/head&gt;</span>
+
+  <span class="cm">&lt;!-- 4. Sección de contenido visible --&gt;</span>
+  <span class="tg">&lt;body&gt;</span>
+    <span class="tg">&lt;h1&gt;</span>¡Hola, Mundo!<span class="tg">&lt;/h1&gt;</span>
+    <span class="tg">&lt;p&gt;</span>Esta es mi primera página web.<span class="tg">&lt;/p&gt;</span>
+    <span class="tg">&lt;script</span> <span class="at">src</span>=<span class="vl">"app.js"</span><span class="tg">&gt;&lt;/script&gt;</span>
+  <span class="tg">&lt;/body&gt;</span>
+
+<span class="tg">&lt;/html&gt;</span></pre>
+      </div>
+
+      <div class="tag-grid">
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill">&lt;!DOCTYPE html&gt;</span><span class="tag-type">Declaración</span></div>
+          <p class="tag-desc">Indica al navegador que el documento usa <strong>HTML5</strong>. Debe ser siempre la primera línea. No es una etiqueta HTML, es una instrucción para el navegador.</p>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill">&lt;html&gt;</span><span class="tag-type">Raíz</span></div>
+          <p class="tag-desc">Es el elemento raíz que envuelve todo el documento. El atributo <strong>lang</strong> mejora la accesibilidad e indexación SEO.</p>
+          <div class="tag-attrs"><span class="attr-chip">lang</span><span class="attr-chip">dir</span><span class="attr-chip">id</span></div>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill">&lt;head&gt;</span><span class="tag-type">Metadatos</span></div>
+          <p class="tag-desc">Contiene información <strong>sobre</strong> la página que no se muestra al usuario: título, charset, CSS, JavaScript, metadatos para SEO y redes sociales.</p>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill">&lt;meta&gt;</span><span class="tag-type">Metadato · Vacía</span></div>
+          <p class="tag-desc">Define metadatos del documento. <strong>charset</strong> establece la codificación de caracteres. <strong>viewport</strong> es esencial para diseño responsivo.</p>
+          <div class="tag-attrs"><span class="attr-chip">charset</span><span class="attr-chip">name</span><span class="attr-chip">content</span><span class="attr-chip">http-equiv</span></div>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill">&lt;title&gt;</span><span class="tag-type">Metadato</span></div>
+          <p class="tag-desc">Define el título de la página que aparece en la pestaña del navegador y en los resultados de Google. Es obligatorio y muy importante para SEO.</p>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill">&lt;link&gt;</span><span class="tag-type">Metadato · Vacía</span></div>
+          <p class="tag-desc">Vincula recursos externos al documento, principalmente hojas de estilos CSS. También se usa para favicons y fuentes de Google Fonts.</p>
+          <div class="tag-attrs"><span class="attr-chip">rel</span><span class="attr-chip">href</span><span class="attr-chip">type</span><span class="attr-chip">media</span></div>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill">&lt;body&gt;</span><span class="tag-type">Contenido</span></div>
+          <p class="tag-desc">Contiene todo el contenido visible de la página web: textos, imágenes, videos, formularios, tablas y cualquier otro elemento que el usuario pueda ver.</p>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill">&lt;script&gt;</span><span class="tag-type">Script</span></div>
+          <p class="tag-desc">Vincula o contiene código JavaScript. Se recomienda colocarlo al <strong>final del body</strong> para que la página cargue más rápido.</p>
+          <div class="tag-attrs"><span class="attr-chip">src</span><span class="attr-chip">defer</span><span class="attr-chip">async</span><span class="attr-chip">type</span></div>
+        </div>
+      </div>
+
+      <!-- ─────────── 03 SINTAXIS ─────────── -->
+      <div id="s-sintaxis" class="sep"><div class="sep-line"></div><span class="sep-label">03 · Sintaxis y reglas</span><div class="sep-line"></div></div>
+      <h2 class="sh">Sintaxis y reglas fundamentales</h2>
+      <p class="bp">HTML tiene una sintaxis muy simple. Conocer sus reglas te evitará errores comunes desde el principio.</p>
+
+      <h3 class="sh3">¿Cómo funcionan las etiquetas?</h3>
+      <p class="bp">La mayoría de las etiquetas tienen una etiqueta de <em>apertura</em> y una de <em>cierre</em>. El contenido va entre ambas:</p>
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">sintaxis.html</span></div>
+        <pre class="cc"><span class="cm">&lt;!-- Etiqueta con apertura y cierre --&gt;</span>
+<span class="tg">&lt;etiqueta</span> <span class="at">atributo</span>=<span class="vl">"valor"</span><span class="tg">&gt;</span>Contenido<span class="tg">&lt;/etiqueta&gt;</span>
+
+<span class="cm">&lt;!-- Etiqueta vacía (no tiene contenido ni cierre) --&gt;</span>
+<span class="tg">&lt;img</span> <span class="at">src</span>=<span class="vl">"foto.jpg"</span> <span class="at">alt</span>=<span class="vl">"Descripción"</span><span class="tg">/&gt;</span>
+<span class="tg">&lt;br/&gt;</span>
+<span class="tg">&lt;hr/&gt;</span>
+<span class="tg">&lt;input</span> <span class="at">type</span>=<span class="vl">"text"</span><span class="tg">/&gt;</span>
+
+<span class="cm">&lt;!-- Anidamiento correcto (de adentro hacia afuera) --&gt;</span>
+<span class="tg">&lt;p&gt;</span>Texto con una <span class="tg">&lt;strong&gt;</span>palabra en negrita<span class="tg">&lt;/strong&gt;</span> aquí.<span class="tg">&lt;/p&gt;</span>
+
+<span class="cm">&lt;!-- ❌ INCORRECTO: cruzar etiquetas --&gt;</span>
+<span class="cm">&lt;p&gt;&lt;strong&gt;Texto&lt;/p&gt;&lt;/strong&gt;</span>
+
+<span class="cm">&lt;!-- Los comentarios son así y no se muestran --&gt;</span>
+<span class="cm">&lt;!-- Esto es un comentario --&gt;</span></pre>
+      </div>
+
+      <div class="info-box warn">
+        <p class="info-label">⚠️ Regla importante</p>
+        <p>HTML5 no distingue entre mayúsculas y minúsculas, pero la <strong>convención es siempre usar minúsculas</strong> en las etiquetas y atributos. <code style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-family:&#39;Space Mono&#39;,monospace;font-size:0.8em;">&lt;P&gt;</code> y <code style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-family:&#39;Space Mono&#39;,monospace;font-size:0.8em;">&lt;p&gt;</code> funcionan igual, pero se considera mala práctica usar mayúsculas.</p>
+      </div>
+
+      <!-- ─────────── 04 BLOQUES ─────────── -->
+      <div id="s-bloques" class="sep"><div class="sep-line"></div><span class="sep-label">04 · Elementos de bloque</span><div class="sep-line"></div></div>
+      <h2 class="sh">Elementos de bloque vs. elementos en línea</h2>
+      <p class="bp">Esta es una de las distinciones más importantes en HTML. Los elementos de bloque ocupan todo el ancho disponible y siempre empiezan en una nueva línea. Los elementos en línea solo ocupan el espacio que necesitan su contenido.</p>
+
+      <div class="bvi-demo">
+        <div class="bvi-col block-col">
+          <h4>🟦 Bloque (Block)</h4>
+          <div class="block-box">&lt;div&gt; — contenedor</div>
+          <div class="block-box">&lt;p&gt; — párrafo</div>
+          <div class="block-box">&lt;h1&gt; — encabezado</div>
+          <div class="block-box">&lt;section&gt; — sección</div>
+          <div class="block-box">&lt;ul&gt; — lista</div>
+          <div class="block-box">&lt;table&gt; — tabla</div>
+        </div>
+        <div class="bvi-col inline-col">
+          <h4>🩷 En línea (Inline)</h4>
+          <div class="inline-wrap">
+            <span class="inline-box">&lt;span&gt;</span>
+            <span class="inline-box">&lt;a&gt;</span>
+            <span class="inline-box">&lt;strong&gt;</span>
+            <span class="inline-box">&lt;em&gt;</span>
+            <span class="inline-box">&lt;img&gt;</span>
+            <span class="inline-box">&lt;input&gt;</span>
+            <span class="inline-box">&lt;label&gt;</span>
+            <span class="inline-box">&lt;button&gt;</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────── 05 INLINE ─────────── -->
+      <div id="s-inline" class="sep"><div class="sep-line"></div><span class="sep-label">05 · El contenedor universal</span><div class="sep-line"></div></div>
+      <h2 class="sh">&lt;div&gt; y &lt;span&gt;: los contenedores genéricos</h2>
+      <p class="bp"><strong>&lt;div&gt;</strong> es el contenedor de bloque genérico. No tiene significado semántico por sí solo, pero es utilísimo para agrupar elementos y aplicarles estilos CSS. <strong>&lt;span&gt;</strong> es su equivalente en línea.</p>
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">contenedores.html</span></div>
+        <pre class="cc"><span class="cm">&lt;!-- div agrupa elementos de bloque --&gt;</span>
+<span class="tg">&lt;div</span> <span class="at">class</span>=<span class="vl">"tarjeta"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;h2&gt;</span>Título de la tarjeta<span class="tg">&lt;/h2&gt;</span>
+  <span class="tg">&lt;p&gt;</span>Descripción del contenido.<span class="tg">&lt;/p&gt;</span>
+  <span class="tg">&lt;a</span> <span class="at">href</span>=<span class="vl">"#"</span><span class="tg">&gt;</span>Ver más<span class="tg">&lt;/a&gt;</span>
+<span class="tg">&lt;/div&gt;</span>
+
+<span class="cm">&lt;!-- span aplica estilos a texto en línea --&gt;</span>
+<span class="tg">&lt;p&gt;</span>
+  El precio es
+  <span class="tg">&lt;span</span> <span class="at">style</span>=<span class="vl">"color: green;"</span><span class="tg">&gt;</span>$299<span class="tg">&lt;/span&gt;</span>
+  por mes.
+<span class="tg">&lt;/p&gt;</span></pre>
+      </div>
+
+      <!-- ─────────── 06 SEMÁNTICA ─────────── -->
+      <div id="s-semantica" class="sep"><div class="sep-line"></div><span class="sep-label">06 · HTML Semántico</span><div class="sep-line"></div></div>
+      <h2 class="sh">HTML Semántico: dale significado a tu código</h2>
+      <p class="bp">El HTML semántico consiste en usar etiquetas que <em>describen el significado</em> de su contenido, no solo su apariencia. HTML5 introdujo muchas etiquetas semánticas nuevas que reemplazaron el uso excesivo de <code style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-family:&#39;Space Mono&#39;,monospace;font-size:0.8em;">&lt;div&gt;</code>.</p>
+      <p class="bp">Usar HTML semántico beneficia la <strong>accesibilidad</strong> (lectores de pantalla), el <strong>SEO</strong> (Google entiende mejor tu contenido) y la <strong>mantenibilidad</strong> del código.</p>
+
+      <div class="semantic-diagram">
+        <p style="font-size:0.65rem;color:var(--text-muted);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:14px;">Estructura semántica de una página HTML5</p>
+        <div class="sem-page">
+          <div class="sem-row"><div class="sem-block sem-header">▬ &lt;header&gt; <span class="sem-label">· cabecera</span></div></div>
+          <div class="sem-row"><div class="sem-block sem-nav" style="flex:1;">☰ &lt;nav&gt; <span class="sem-label">· navegación</span></div></div>
+          <div class="sem-row">
+            <div class="sem-block sem-main">
+              <div class="sem-article">📄 &lt;article&gt;</div>
+              <div class="sem-section">📦 &lt;section&gt;</div>
+              <div class="sem-section">📦 &lt;section&gt;</div>
+            </div>
+            <div class="sem-block sem-aside">◧ &lt;aside&gt; <span class="sem-label">· barra lateral</span></div>
+          </div>
+          <div class="sem-row"><div class="sem-block sem-footer" style="flex:1;">— &lt;footer&gt; <span class="sem-label">· pie de página</span></div></div>
+        </div>
+      </div>
+
+      <div class="tag-grid">
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill">&lt;header&gt;</span><span class="tag-type">Semántico</span></div>
+          <p class="tag-desc">Cabecera de la página o de una sección. Generalmente contiene el logo, título principal y la navegación principal.</p>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill">&lt;nav&gt;</span><span class="tag-type">Semántico</span></div>
+          <p class="tag-desc">Bloque de navegación principal. Contiene los <strong>enlaces de menú</strong>. Los lectores de pantalla saltan directamente a él.</p>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill">&lt;main&gt;</span><span class="tag-type">Semántico</span></div>
+          <p class="tag-desc">Contenido principal y único de la página. Solo debe haber <strong>un &lt;main&gt;</strong> por página. Excluye encabezados, pies y barras laterales.</p>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill">&lt;article&gt;</span><span class="tag-type">Semántico</span></div>
+          <p class="tag-desc">Contenido independiente y auto-contenido que podría funcionar por sí solo: una noticia, un post de blog, un comentario o una tarjeta de producto.</p>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill">&lt;section&gt;</span><span class="tag-type">Semántico</span></div>
+          <p class="tag-desc">Sección genérica temática de un documento. Agrupa contenido relacionado. Generalmente tiene un encabezado propio <strong>&lt;h2&gt;</strong> o <strong>&lt;h3&gt;</strong>.</p>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill">&lt;aside&gt;</span><span class="tag-type">Semántico</span></div>
+          <p class="tag-desc">Contenido relacionado pero secundario al principal. Barra lateral, anuncios, biografía del autor, notas complementarias.</p>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill">&lt;footer&gt;</span><span class="tag-type">Semántico</span></div>
+          <p class="tag-desc">Pie de página o pie de sección. Contiene información de copyright, links legales, contacto, créditos y datos del autor.</p>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill">&lt;figure&gt;</span><span class="tag-type">Semántico</span></div>
+          <p class="tag-desc">Figura auto-contenida: imagen, diagrama, código o ilustración con su <strong>&lt;figcaption&gt;</strong> (pie de figura) opcional.</p>
+          <div class="tag-attrs"><span class="attr-chip">+ figcaption</span></div>
+        </div>
+      </div>
+
+      <!-- ─────────── 07 ENCABEZADOS ─────────── -->
+      <div id="s-encabezados" class="sep"><div class="sep-line"></div><span class="sep-label">07 · Encabezados</span><div class="sep-line"></div></div>
+      <h2 class="sh">Encabezados: la jerarquía del contenido</h2>
+      <p class="bp">Los encabezados van de <em>&lt;h1&gt;</em> a <em>&lt;h6&gt;</em>. Crean la jerarquía del documento, similar a los títulos y subtítulos de un libro. Solo debe haber <strong>un &lt;h1&gt; por página</strong>.</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">encabezados.html</span></div>
+        <pre class="cc"><span class="tg">&lt;h1&gt;</span>Título principal de la página (solo uno)<span class="tg">&lt;/h1&gt;</span>
+
+  <span class="tg">&lt;h2&gt;</span>Sección principal<span class="tg">&lt;/h2&gt;</span>
+    <span class="tg">&lt;h3&gt;</span>Subsección<span class="tg">&lt;/h3&gt;</span>
+      <span class="tg">&lt;h4&gt;</span>Sub-subsección<span class="tg">&lt;/h4&gt;</span>
+        <span class="tg">&lt;h5&gt;</span>Nivel 5 (raro en práctica)<span class="tg">&lt;/h5&gt;</span>
+          <span class="tg">&lt;h6&gt;</span>Nivel 6 (muy raro)<span class="tg">&lt;/h6&gt;</span>
+
+  <span class="tg">&lt;h2&gt;</span>Otra sección principal<span class="tg">&lt;/h2&gt;</span>
+    <span class="tg">&lt;h3&gt;</span>Su subsección<span class="tg">&lt;/h3&gt;</span></pre>
+      </div>
+      <div class="info-box tip">
+        <p class="info-label">✅ Buena práctica SEO</p>
+        <p>No uses los encabezados para dar tamaño al texto. Úsalos para <strong>organizar la jerarquía de información</strong>. El tamaño visual se controla con CSS. Google usa los encabezados para entender la estructura de tu contenido.</p>
+      </div>
+
+      <!-- ─────────── 08 TEXTO ─────────── -->
+      <div id="s-texto" class="sep"><div class="sep-line"></div><span class="sep-label">08 · Texto y formato</span><div class="sep-line"></div></div>
+      <h2 class="sh">Etiquetas de texto y formato</h2>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">texto.html</span></div>
+        <pre class="cc"><span class="cm">&lt;!-- Párrafo --&gt;</span>
+<span class="tg">&lt;p&gt;</span>Soy un párrafo de texto normal.<span class="tg">&lt;/p&gt;</span>
+
+<span class="cm">&lt;!-- Negrita semántica (importante) --&gt;</span>
+<span class="tg">&lt;strong&gt;</span>Texto importante<span class="tg">&lt;/strong&gt;</span>
+
+<span class="cm">&lt;!-- Negrita visual (sin peso semántico) --&gt;</span>
+<span class="tg">&lt;b&gt;</span>Texto en negrita<span class="tg">&lt;/b&gt;</span>
+
+<span class="cm">&lt;!-- Cursiva semántica (énfasis) --&gt;</span>
+<span class="tg">&lt;em&gt;</span>Texto enfatizado<span class="tg">&lt;/em&gt;</span>
+
+<span class="cm">&lt;!-- Cursiva visual (sin énfasis semántico) --&gt;</span>
+<span class="tg">&lt;i&gt;</span>Texto en cursiva<span class="tg">&lt;/i&gt;</span>
+
+<span class="tg">&lt;mark&gt;</span>Texto resaltado en amarillo<span class="tg">&lt;/mark&gt;</span>
+<span class="tg">&lt;del&gt;</span>Texto tachado<span class="tg">&lt;/del&gt;</span>
+<span class="tg">&lt;ins&gt;</span>Texto insertado (subrayado)<span class="tg">&lt;/ins&gt;</span>
+<span class="tg">&lt;sub&gt;</span>Subíndice: H<span class="tg">&lt;sub&gt;</span>2<span class="tg">&lt;/sub&gt;</span>O<span class="tg">&lt;/sub&gt;</span>
+<span class="tg">&lt;sup&gt;</span>Superíndice: x<span class="tg">&lt;sup&gt;</span>2<span class="tg">&lt;/sup&gt;&lt;/sup&gt;</span>
+<span class="tg">&lt;code&gt;</span>Código en línea<span class="tg">&lt;/code&gt;</span>
+<span class="tg">&lt;pre&gt;</span>Texto preformateado
+  con espacios y saltos<span class="tg">&lt;/pre&gt;</span>
+<span class="tg">&lt;blockquote&gt;</span>Cita larga de otra fuente<span class="tg">&lt;/blockquote&gt;</span>
+<span class="tg">&lt;q&gt;</span>Cita corta inline<span class="tg">&lt;/q&gt;</span>
+<span class="tg">&lt;abbr</span> <span class="at">title</span>=<span class="vl">"HyperText Markup Language"</span><span class="tg">&gt;</span>HTML<span class="tg">&lt;/abbr&gt;</span>
+<span class="tg">&lt;br/&gt;</span>      <span class="cm">&lt;!-- salto de línea --&gt;</span>
+<span class="tg">&lt;hr/&gt;</span>      <span class="cm">&lt;!-- línea horizontal --&gt;</span></pre>
+      </div>
+
+      <!-- ─────────── 09 LISTAS ─────────── -->
+      <div id="s-listas" class="sep"><div class="sep-line"></div><span class="sep-label">09 · Listas</span><div class="sep-line"></div></div>
+      <h2 class="sh">Listas: ordenadas, desordenadas y de definición</h2>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">listas.html</span></div>
+        <pre class="cc"><span class="cm">&lt;!-- Lista desordenada (viñetas) --&gt;</span>
+<span class="tg">&lt;ul&gt;</span>
+  <span class="tg">&lt;li&gt;</span>HTML<span class="tg">&lt;/li&gt;</span>
+  <span class="tg">&lt;li&gt;</span>CSS<span class="tg">&lt;/li&gt;</span>
+  <span class="tg">&lt;li&gt;</span>JavaScript<span class="tg">&lt;/li&gt;</span>
+<span class="tg">&lt;/ul&gt;</span>
+
+<span class="cm">&lt;!-- Lista ordenada (números) --&gt;</span>
+<span class="tg">&lt;ol</span> <span class="at">type</span>=<span class="vl">"1"</span> <span class="at">start</span>=<span class="vl">"1"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;li&gt;</span>Primero aprende HTML<span class="tg">&lt;/li&gt;</span>
+  <span class="tg">&lt;li&gt;</span>Luego aprende CSS<span class="tg">&lt;/li&gt;</span>
+  <span class="tg">&lt;li&gt;</span>Después JavaScript<span class="tg">&lt;/li&gt;</span>
+<span class="tg">&lt;/ol&gt;</span>
+
+<span class="cm">&lt;!-- Lista anidada --&gt;</span>
+<span class="tg">&lt;ul&gt;</span>
+  <span class="tg">&lt;li&gt;</span>Frontend
+    <span class="tg">&lt;ul&gt;</span>
+      <span class="tg">&lt;li&gt;</span>HTML<span class="tg">&lt;/li&gt;</span>
+      <span class="tg">&lt;li&gt;</span>CSS<span class="tg">&lt;/li&gt;</span>
+    <span class="tg">&lt;/ul&gt;</span>
+  <span class="tg">&lt;/li&gt;</span>
+<span class="tg">&lt;/ul&gt;</span>
+
+<span class="cm">&lt;!-- Lista de definición --&gt;</span>
+<span class="tg">&lt;dl&gt;</span>
+  <span class="tg">&lt;dt&gt;</span>HTML<span class="tg">&lt;/dt&gt;</span>
+  <span class="tg">&lt;dd&gt;</span>Lenguaje de marcado para la Web<span class="tg">&lt;/dd&gt;</span>
+  <span class="tg">&lt;dt&gt;</span>CSS<span class="tg">&lt;/dt&gt;</span>
+  <span class="tg">&lt;dd&gt;</span>Lenguaje de estilos para HTML<span class="tg">&lt;/dd&gt;</span>
+<span class="tg">&lt;/dl&gt;</span></pre>
+      </div>
+
+      <!-- ─────────── 10 ENLACES ─────────── -->
+      <div id="s-enlaces" class="sep"><div class="sep-line"></div><span class="sep-label">10 · Enlaces</span><div class="sep-line"></div></div>
+      <h2 class="sh">Enlaces: la esencia del hipertexto</h2>
+      <p class="bp">El elemento <em>&lt;a&gt;</em> (anchor = ancla) crea hipervínculos. Es la etiqueta que da vida al concepto de <strong>hipertexto</strong> que inventó Tim Berners-Lee. Puede enlazar a páginas, archivos, correos electrónicos o secciones de la misma página.</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">enlaces.html</span></div>
+        <pre class="cc"><span class="cm">&lt;!-- Enlace externo --&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href</span>=<span class="vl">"https://google.com"</span> <span class="at">target</span>=<span class="vl">"_blank"</span> <span class="at">rel</span>=<span class="vl">"noopener"</span><span class="tg">&gt;</span>
+  Ir a Google
+<span class="tg">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- Enlace interno (otra página del mismo sitio) --&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href</span>=<span class="vl">"contacto.html"</span><span class="tg">&gt;</span>Ir a Contacto<span class="tg">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- Ancla (salta a un id en la misma página) --&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href</span>=<span class="vl">"#seccion-contacto"</span><span class="tg">&gt;</span>Ir a Contacto<span class="tg">&lt;/a&gt;</span>
+<span class="tg">&lt;section</span> <span class="at">id</span>=<span class="vl">"seccion-contacto"</span><span class="tg">&gt;</span>...<span class="tg">&lt;/section&gt;</span>
+
+<span class="cm">&lt;!-- Enlace de correo --&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href</span>=<span class="vl">"mailto:<a href="file:///C:/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="98f5f9ecf1f9ebd8fdf5f9f1f4b6fbf7f5">[email&nbsp;protected]</a>"</span><span class="tg">&gt;</span>Enviar correo<span class="tg">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- Enlace de teléfono --&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href</span>=<span class="vl">"tel:+521234567890"</span><span class="tg">&gt;</span>Llamar<span class="tg">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- Enlace para descargar archivo --&gt;</span>
+<span class="tg">&lt;a</span> <span class="at">href</span>=<span class="vl">"doc.pdf"</span> <span class="at">download</span><span class="tg">&gt;</span>Descargar PDF<span class="tg">&lt;/a&gt;</span></pre>
+      </div>
+
+      <div class="attr-table-wrap">
+        <table class="attr-table">
+          <thead><tr><th>Atributo</th><th>Descripción</th><th>Valores comunes</th></tr></thead>
+          <tbody>
+            <tr><td>href</td><td>URL de destino del enlace. Obligatorio.</td><td>URL, #id, mailto:, tel:</td></tr>
+            <tr><td>target</td><td>Dónde se abre el enlace.</td><td>_blank (nueva pestaña), _self (misma)</td></tr>
+            <tr><td>rel</td><td>Relación con el documento destino.</td><td>noopener, noreferrer, nofollow</td></tr>
+            <tr><td>download</td><td>Descarga el archivo en lugar de navegar.</td><td>download o download="nombre.pdf"</td></tr>
+            <tr><td>title</td><td>Tooltip que aparece al pasar el cursor.</td><td>Cualquier texto</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ─────────── 11 MEDIA ─────────── -->
+      <div id="s-media" class="sep"><div class="sep-line"></div><span class="sep-label">11 · Imágenes y media</span><div class="sep-line"></div></div>
+      <h2 class="sh">Imágenes, video y audio</h2>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">media.html</span></div>
+        <pre class="cc"><span class="cm">&lt;!-- Imagen básica --&gt;</span>
+<span class="tg">&lt;img</span>
+  <span class="at">src</span>=<span class="vl">"foto.jpg"</span>
+  <span class="at">alt</span>=<span class="vl">"Descripción de la imagen"</span>
+  <span class="at">width</span>=<span class="vl">"800"</span>
+  <span class="at">height</span>=<span class="vl">"600"</span>
+  <span class="at">loading</span>=<span class="vl">"lazy"</span>
+<span class="tg">/&gt;</span>
+
+<span class="cm">&lt;!-- Imagen con pie de figura (semántico) --&gt;</span>
+<span class="tg">&lt;figure&gt;</span>
+  <span class="tg">&lt;img</span> <span class="at">src</span>=<span class="vl">"foto.jpg"</span> <span class="at">alt</span>=<span class="vl">"Paisaje de montaña"</span><span class="tg">/&gt;</span>
+  <span class="tg">&lt;figcaption&gt;</span>Vista desde el Pico de Orizaba<span class="tg">&lt;/figcaption&gt;</span>
+<span class="tg">&lt;/figure&gt;</span>
+
+<span class="cm">&lt;!-- Video HTML5 (sin Flash) --&gt;</span>
+<span class="tg">&lt;video</span> <span class="at">controls</span> <span class="at">autoplay</span> <span class="at">muted</span> <span class="at">loop</span> <span class="at">width</span>=<span class="vl">"640"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;source</span> <span class="at">src</span>=<span class="vl">"video.mp4"</span>  <span class="at">type</span>=<span class="vl">"video/mp4"</span><span class="tg">/&gt;</span>
+  <span class="tg">&lt;source</span> <span class="at">src</span>=<span class="vl">"video.webm"</span> <span class="at">type</span>=<span class="vl">"video/webm"</span><span class="tg">/&gt;</span>
+  Tu navegador no soporta video HTML5.
+<span class="tg">&lt;/video&gt;</span>
+
+<span class="cm">&lt;!-- Audio HTML5 --&gt;</span>
+<span class="tg">&lt;audio</span> <span class="at">controls</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;source</span> <span class="at">src</span>=<span class="vl">"cancion.mp3"</span> <span class="at">type</span>=<span class="vl">"audio/mpeg"</span><span class="tg">/&gt;</span>
+<span class="tg">&lt;/audio&gt;</span>
+
+<span class="cm">&lt;!-- Incrustar página o mapa --&gt;</span>
+<span class="tg">&lt;iframe</span>
+  <span class="at">src</span>=<span class="vl">"https://www.youtube.com/embed/ID"</span>
+  <span class="at">width</span>=<span class="vl">"560"</span> <span class="at">height</span>=<span class="vl">"315"</span>
+  <span class="at">allowfullscreen</span>
+<span class="tg">&gt;&lt;/iframe&gt;</span></pre>
+      </div>
+      <div class="info-box html">
+        <p class="info-label">🔑 Atributo alt — accesibilidad</p>
+        <p>El atributo <strong>alt</strong> en las imágenes es obligatorio para la accesibilidad. Lo leen los lectores de pantalla para personas con discapacidad visual, y también lo usa Google para indexar imágenes en el buscador.</p>
+      </div>
+
+      <!-- ─────────── 12 TABLAS ─────────── -->
+      <div id="s-tablas" class="sep"><div class="sep-line"></div><span class="sep-label">12 · Tablas</span><div class="sep-line"></div></div>
+      <h2 class="sh">Tablas: datos en filas y columnas</h2>
+      <p class="bp">Las tablas en HTML5 se usan para mostrar <strong>datos tabulares</strong>, no para hacer layouts de página (eso es trabajo de CSS Flexbox y Grid).</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">tabla.html</span></div>
+        <pre class="cc"><span class="tg">&lt;table&gt;</span>
+  <span class="tg">&lt;caption&gt;</span>Comparativa de lenguajes<span class="tg">&lt;/caption&gt;</span>
+
+  <span class="cm">&lt;!-- Encabezado de tabla --&gt;</span>
+  <span class="tg">&lt;thead&gt;</span>
+    <span class="tg">&lt;tr&gt;</span>
+      <span class="tg">&lt;th</span> <span class="at">scope</span>=<span class="vl">"col"</span><span class="tg">&gt;</span>Lenguaje<span class="tg">&lt;/th&gt;</span>
+      <span class="tg">&lt;th</span> <span class="at">scope</span>=<span class="vl">"col"</span><span class="tg">&gt;</span>Tipo<span class="tg">&lt;/th&gt;</span>
+      <span class="tg">&lt;th</span> <span class="at">scope</span>=<span class="vl">"col"</span><span class="tg">&gt;</span>Nivel<span class="tg">&lt;/th&gt;</span>
+    <span class="tg">&lt;/tr&gt;</span>
+  <span class="tg">&lt;/thead&gt;</span>
+
+  <span class="cm">&lt;!-- Cuerpo de tabla --&gt;</span>
+  <span class="tg">&lt;tbody&gt;</span>
+    <span class="tg">&lt;tr&gt;</span>
+      <span class="tg">&lt;td&gt;</span>HTML<span class="tg">&lt;/td&gt;</span>
+      <span class="tg">&lt;td&gt;</span>Marcado<span class="tg">&lt;/td&gt;</span>
+      <span class="tg">&lt;td&gt;</span>Fácil<span class="tg">&lt;/td&gt;</span>
+    <span class="tg">&lt;/tr&gt;</span>
+    <span class="tg">&lt;tr&gt;</span>
+      <span class="tg">&lt;td&gt;</span>Python<span class="tg">&lt;/td&gt;</span>
+      <span class="tg">&lt;td&gt;</span>Programación<span class="tg">&lt;/td&gt;</span>
+      <span class="tg">&lt;td</span> <span class="at">colspan</span>=<span class="vl">"2"</span><span class="tg">&gt;</span>Medio<span class="tg">&lt;/td&gt;</span>
+    <span class="tg">&lt;/tr&gt;</span>
+  <span class="tg">&lt;/tbody&gt;</span>
+
+  <span class="cm">&lt;!-- Pie de tabla --&gt;</span>
+  <span class="tg">&lt;tfoot&gt;</span>
+    <span class="tg">&lt;tr&gt;</span>
+      <span class="tg">&lt;td</span> <span class="at">colspan</span>=<span class="vl">"3"</span><span class="tg">&gt;</span>Fuente: MDN Web Docs<span class="tg">&lt;/td&gt;</span>
+    <span class="tg">&lt;/tr&gt;</span>
+  <span class="tg">&lt;/tfoot&gt;</span>
+<span class="tg">&lt;/table&gt;</span></pre>
+      </div>
+
+      <!-- ─────────── 13 FORMULARIOS ─────────── -->
+      <div id="s-formularios" class="sep"><div class="sep-line"></div><span class="sep-label">13 · Formularios</span><div class="sep-line"></div></div>
+      <h2 class="sh">Formularios: recolectar información del usuario</h2>
+      <p class="bp">Los formularios son el principal mecanismo de interacción del usuario con una web. HTML5 añadió docenas de nuevos tipos de <em>&lt;input&gt;</em> con validación nativa.</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">formulario.html</span></div>
+        <pre class="cc"><span class="tg">&lt;form</span> <span class="at">action</span>=<span class="vl">"/enviar"</span> <span class="at">method</span>=<span class="vl">"POST"</span><span class="tg">&gt;</span>
+
+  <span class="cm">&lt;!-- Texto simple --&gt;</span>
+  <span class="tg">&lt;label</span> <span class="at">for</span>=<span class="vl">"nombre"</span><span class="tg">&gt;</span>Nombre:<span class="tg">&lt;/label&gt;</span>
+  <span class="tg">&lt;input</span> <span class="at">type</span>=<span class="vl">"text"</span> <span class="at">id</span>=<span class="vl">"nombre"</span> <span class="at">name</span>=<span class="vl">"nombre"</span>
+         <span class="at">placeholder</span>=<span class="vl">"Tu nombre"</span> <span class="at">required</span><span class="tg">/&gt;</span>
+
+  <span class="cm">&lt;!-- Email con validación automática --&gt;</span>
+  <span class="tg">&lt;input</span> <span class="at">type</span>=<span class="vl">"email"</span> <span class="at">name</span>=<span class="vl">"email"</span> <span class="at">required</span><span class="tg">/&gt;</span>
+
+  <span class="cm">&lt;!-- Número con rango --&gt;</span>
+  <span class="tg">&lt;input</span> <span class="at">type</span>=<span class="vl">"number"</span> <span class="at">min</span>=<span class="vl">"0"</span> <span class="at">max</span>=<span class="vl">"100"</span> <span class="at">step</span>=<span class="vl">"5"</span><span class="tg">/&gt;</span>
+
+  <span class="cm">&lt;!-- Selector de fecha (HTML5) --&gt;</span>
+  <span class="tg">&lt;input</span> <span class="at">type</span>=<span class="vl">"date"</span> <span class="at">name</span>=<span class="vl">"fecha"</span><span class="tg">/&gt;</span>
+
+  <span class="cm">&lt;!-- Selector de color (HTML5) --&gt;</span>
+  <span class="tg">&lt;input</span> <span class="at">type</span>=<span class="vl">"color"</span> <span class="at">value</span>=<span class="vl">"#e8620a"</span><span class="tg">/&gt;</span>
+
+  <span class="cm">&lt;!-- Rango deslizable (HTML5) --&gt;</span>
+  <span class="tg">&lt;input</span> <span class="at">type</span>=<span class="vl">"range"</span> <span class="at">min</span>=<span class="vl">"0"</span> <span class="at">max</span>=<span class="vl">"100"</span><span class="tg">/&gt;</span>
+
+  <span class="cm">&lt;!-- Casilla de verificación --&gt;</span>
+  <span class="tg">&lt;input</span> <span class="at">type</span>=<span class="vl">"checkbox"</span> <span class="at">id</span>=<span class="vl">"acepto"</span> <span class="at">name</span>=<span class="vl">"acepto"</span><span class="tg">/&gt;</span>
+  <span class="tg">&lt;label</span> <span class="at">for</span>=<span class="vl">"acepto"</span><span class="tg">&gt;</span>Acepto los términos<span class="tg">&lt;/label&gt;</span>
+
+  <span class="cm">&lt;!-- Radio buttons --&gt;</span>
+  <span class="tg">&lt;input</span> <span class="at">type</span>=<span class="vl">"radio"</span> <span class="at">name</span>=<span class="vl">"sexo"</span> <span class="at">value</span>=<span class="vl">"m"</span><span class="tg">/&gt;</span> Masculino
+  <span class="tg">&lt;input</span> <span class="at">type</span>=<span class="vl">"radio"</span> <span class="at">name</span>=<span class="vl">"sexo"</span> <span class="at">value</span>=<span class="vl">"f"</span><span class="tg">/&gt;</span> Femenino
+
+  <span class="cm">&lt;!-- Desplegable --&gt;</span>
+  <span class="tg">&lt;select</span> <span class="at">name</span>=<span class="vl">"pais"</span><span class="tg">&gt;</span>
+    <span class="tg">&lt;option</span> <span class="at">value</span>=<span class="vl">"mx"</span><span class="tg">&gt;</span>México<span class="tg">&lt;/option&gt;</span>
+    <span class="tg">&lt;option</span> <span class="at">value</span>=<span class="vl">"us"</span><span class="tg">&gt;</span>Estados Unidos<span class="tg">&lt;/option&gt;</span>
+  <span class="tg">&lt;/select&gt;</span>
+
+  <span class="cm">&lt;!-- Área de texto multilínea --&gt;</span>
+  <span class="tg">&lt;textarea</span> <span class="at">name</span>=<span class="vl">"mensaje"</span> <span class="at">rows</span>=<span class="vl">"4"</span> <span class="at">cols</span>=<span class="vl">"50"</span><span class="tg">&gt;&lt;/textarea&gt;</span>
+
+  <span class="cm">&lt;!-- Botones --&gt;</span>
+  <span class="tg">&lt;button</span> <span class="at">type</span>=<span class="vl">"submit"</span><span class="tg">&gt;</span>Enviar<span class="tg">&lt;/button&gt;</span>
+  <span class="tg">&lt;button</span> <span class="at">type</span>=<span class="vl">"reset"</span><span class="tg">&gt;</span>Limpiar<span class="tg">&lt;/button&gt;</span>
+  <span class="tg">&lt;button</span> <span class="at">type</span>=<span class="vl">"button"</span><span class="tg">&gt;</span>Acción JS<span class="tg">&lt;/button&gt;</span>
+
+<span class="tg">&lt;/form&gt;</span></pre>
+      </div>
+
+      <h3 class="sh3">Vista previa de un formulario real</h3>
+      <div class="form-demo">
+        <div class="form-row">
+          <div>
+            <label for="d-nombre">Nombre completo</label>
+            <input type="text" id="d-nombre" placeholder="">
+          </div>
+          <div>
+            <label for="d-email">Correo electrónico</label>
+            <input type="email" id="d-email" placeholder="">
+          </div>
+        </div>
+        <label for="d-esp">Especialidad</label>
+        <select id="d-esp">
+          <option>Inteligencia Artificial</option>
+          <option>Programación</option>
+          <option>Mantenimiento de PC</option>
+        </select>
+        <label for="d-msg">Mensaje</label>
+        <textarea id="d-msg" rows="3" placeholder="Escribe aquí..."></textarea>
+        <button type="button">Enviar formulario</button>
+      </div>
+
+      <!-- ─────────── 14 NOVEDADES HTML5 ─────────── -->
+      <div id="s-html5new" class="sep"><div class="sep-line"></div><span class="sep-label">14 · Novedades HTML5</span><div class="sep-line"></div></div>
+      <h2 class="sh">Elementos exclusivos de HTML5</h2>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">html5-nuevo.html</span></div>
+        <pre class="cc"><span class="cm">&lt;!-- Canvas: dibujo 2D y WebGL con JavaScript --&gt;</span>
+<span class="tg">&lt;canvas</span> <span class="at">id</span>=<span class="vl">"miCanvas"</span> <span class="at">width</span>=<span class="vl">"500"</span> <span class="at">height</span>=<span class="vl">"300"</span><span class="tg">&gt;&lt;/canvas&gt;</span>
+
+<span class="cm">&lt;!-- SVG embebido (gráficos vectoriales) --&gt;</span>
+<span class="tg">&lt;svg</span> <span class="at">width</span>=<span class="vl">"100"</span> <span class="at">height</span>=<span class="vl">"100"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;circle</span> <span class="at">cx</span>=<span class="vl">"50"</span> <span class="at">cy</span>=<span class="vl">"50"</span> <span class="at">r</span>=<span class="vl">"40"</span>
+           <span class="at">fill</span>=<span class="vl">"#e8620a"</span><span class="tg">/&gt;</span>
+<span class="tg">&lt;/svg&gt;</span>
+
+<span class="cm">&lt;!-- Details/Summary: acordeón nativo --&gt;</span>
+<span class="tg">&lt;details&gt;</span>
+  <span class="tg">&lt;summary&gt;</span>¿Qué es HTML5? (clic para ver)<span class="tg">&lt;/summary&gt;</span>
+  <span class="tg">&lt;p&gt;</span>Es la quinta versión del lenguaje HTML.<span class="tg">&lt;/p&gt;</span>
+<span class="tg">&lt;/details&gt;</span>
+
+<span class="cm">&lt;!-- Dialog: ventana modal nativa --&gt;</span>
+<span class="tg">&lt;dialog</span> <span class="at">id</span>=<span class="vl">"modal"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;p&gt;</span>Contenido del modal<span class="tg">&lt;/p&gt;</span>
+  <span class="tg">&lt;button</span> <span class="at">onclick</span>=<span class="vl">"modal.close()"</span><span class="tg">&gt;</span>Cerrar<span class="tg">&lt;/button&gt;</span>
+<span class="tg">&lt;/dialog&gt;</span>
+
+<span class="cm">&lt;!-- Progress bar nativa --&gt;</span>
+<span class="tg">&lt;progress</span> <span class="at">value</span>=<span class="vl">"75"</span> <span class="at">max</span>=<span class="vl">"100"</span><span class="tg">&gt;</span>75%<span class="tg">&lt;/progress&gt;</span>
+
+<span class="cm">&lt;!-- Meter: indicador de valor --&gt;</span>
+<span class="tg">&lt;meter</span> <span class="at">value</span>=<span class="vl">"0.7"</span> <span class="at">min</span>=<span class="vl">"0"</span> <span class="at">max</span>=<span class="vl">"1"</span>
+       <span class="at">low</span>=<span class="vl">"0.3"</span> <span class="at">high</span>=<span class="vl">"0.7"</span> <span class="at">optimum</span>=<span class="vl">"0.9"</span><span class="tg">&gt;</span>70%<span class="tg">&lt;/meter&gt;</span>
+
+<span class="cm">&lt;!-- Time: fecha semántica --&gt;</span>
+<span class="tg">&lt;time</span> <span class="at">datetime</span>=<span class="vl">"2025-10-01"</span><span class="tg">&gt;</span>1 de octubre de 2025<span class="tg">&lt;/time&gt;</span>
+
+<span class="cm">&lt;!-- Picture: imágenes responsivas --&gt;</span>
+<span class="tg">&lt;picture&gt;</span>
+  <span class="tg">&lt;source</span> <span class="at">media</span>=<span class="vl">"(min-width:800px)"</span> <span class="at">srcset</span>=<span class="vl">"grande.jpg"</span><span class="tg">/&gt;</span>
+  <span class="tg">&lt;source</span> <span class="at">media</span>=<span class="vl">"(min-width:400px)"</span> <span class="at">srcset</span>=<span class="vl">"mediana.jpg"</span><span class="tg">/&gt;</span>
+  <span class="tg">&lt;img</span> <span class="at">src</span>=<span class="vl">"pequeña.jpg"</span> <span class="at">alt</span>=<span class="vl">"Imagen responsiva"</span><span class="tg">/&gt;</span>
+<span class="tg">&lt;/picture&gt;</span></pre>
+      </div>
+
+      <!-- ─────────── 15 ATRIBUTOS GLOBALES ─────────── -->
+      <div id="s-atributos" class="sep"><div class="sep-line"></div><span class="sep-label">15 · Atributos globales</span><div class="sep-line"></div></div>
+      <h2 class="sh">Atributos globales</h2>
+      <p class="bp">Los atributos globales pueden usarse en <strong>cualquier etiqueta HTML</strong>. Son los más importantes de memorizar.</p>
+
+      <div class="attr-table-wrap">
+        <table class="attr-table">
+          <thead><tr><th>Atributo</th><th>Descripción</th><th>Ejemplo</th></tr></thead>
+          <tbody>
+            <tr><td>id</td><td>Identificador único en la página. Solo puede haber uno por valor. Usado por CSS y JS.</td><td>id="menu-principal"</td></tr>
+            <tr><td>class</td><td>Clase CSS. Múltiples elementos pueden tener la misma clase. Pueden asignarse varias clases separadas por espacio.</td><td>class="tarjeta destacada"</td></tr>
+            <tr><td>style</td><td>Estilos CSS en línea. Se desaconseja usar; mejor usar clases CSS.</td><td>style="color: red;"</td></tr>
+            <tr><td>title</td><td>Texto de ayuda (tooltip) que aparece al pasar el cursor sobre el elemento.</td><td>title="Haz clic aquí"</td></tr>
+            <tr><td>lang</td><td>Idioma del contenido del elemento. Mejora accesibilidad y SEO.</td><td>lang="es"</td></tr>
+            <tr><td>hidden</td><td>Oculta el elemento del documento. No ocupa espacio.</td><td>hidden</td></tr>
+            <tr><td>tabindex</td><td>Controla el orden de navegación con la tecla Tab. Importante para accesibilidad.</td><td>tabindex="0"</td></tr>
+            <tr><td>contenteditable</td><td>Permite al usuario editar el contenido del elemento directamente.</td><td>contenteditable="true"</td></tr>
+            <tr><td>draggable</td><td>Indica si el elemento puede arrastrarse con el mouse (Drag and Drop API).</td><td>draggable="true"</td></tr>
+            <tr><td>spellcheck</td><td>Activa o desactiva la revisión ortográfica del navegador en el elemento.</td><td>spellcheck="true"</td></tr>
+            <tr><td>aria-*</td><td>Atributos de accesibilidad ARIA para lectores de pantalla. Esenciales en apps complejas.</td><td>aria-label="Cerrar menú"</td></tr>
+            <tr><td>role</td><td>Define el rol semántico ARIA de un elemento no semántico.</td><td>role="button"</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ─────────── 16 DATA-* ─────────── -->
+      <div id="s-data" class="sep"><div class="sep-line"></div><span class="sep-label">16 · Atributos data-*</span><div class="sep-line"></div></div>
+      <h2 class="sh">Atributos data-*: guarda datos en el HTML</h2>
+      <p class="bp">HTML5 permite crear atributos personalizados con el prefijo <em>data-</em>. Son muy útiles para almacenar información en elementos HTML que luego JavaScript puede leer sin hacer peticiones al servidor.</p>
+
+      <div class="code-block">
+        <div class="code-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div><span class="code-file">data-attrs.html</span></div>
+        <pre class="cc"><span class="cm">&lt;!-- Guardamos datos en el HTML --&gt;</span>
+<span class="tg">&lt;div</span>
+  <span class="at">class</span>=<span class="vl">"producto"</span>
+  <span class="at">data-id</span>=<span class="vl">"42"</span>
+  <span class="at">data-precio</span>=<span class="vl">"299.99"</span>
+  <span class="at">data-categoria</span>=<span class="vl">"electronica"</span>
+  <span class="at">data-en-stock</span>=<span class="vl">"true"</span>
+<span class="tg">&gt;</span>
+  Smartphone X
+<span class="tg">&lt;/div&gt;</span>
+
+<span class="cm">&lt;!-- JavaScript los lee así --&gt;</span>
+<span class="cm">&lt;script&gt;
+const prod = document.querySelector('.producto');
+console.log(prod.dataset.id);        // "42"
+console.log(prod.dataset.precio);    // "299.99"
+console.log(prod.dataset.enStock);   // "true"
+&lt;/script&gt;</span></pre>
+      </div>
+
+      <!-- ─────────── 17 CHEAT SHEET ─────────── -->
+      <div id="s-cheatsheet" class="sep"><div class="sep-line"></div><span class="sep-label">17 · Cheat Sheet</span><div class="sep-line"></div></div>
+      <h2 class="sh">Cheat Sheet: referencia rápida de etiquetas</h2>
+      <div class="cheat-grid">
+        <div class="cheat-item"><div class="cheat-tag">&lt;html&gt;</div><div class="cheat-desc">Raíz del documento</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;head&gt;</div><div class="cheat-desc">Metadatos del doc</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;body&gt;</div><div class="cheat-desc">Contenido visible</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;h1&gt;-&lt;h6&gt;</div><div class="cheat-desc">Encabezados</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;p&gt;</div><div class="cheat-desc">Párrafo</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;a&gt;</div><div class="cheat-desc">Enlace / hipervínculo</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;img/&gt;</div><div class="cheat-desc">Imagen</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;div&gt;</div><div class="cheat-desc">Contenedor bloque</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;span&gt;</div><div class="cheat-desc">Contenedor inline</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;ul&gt; &lt;ol&gt;</div><div class="cheat-desc">Listas</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;li&gt;</div><div class="cheat-desc">Elemento de lista</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;table&gt;</div><div class="cheat-desc">Tabla de datos</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;form&gt;</div><div class="cheat-desc">Formulario</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;input/&gt;</div><div class="cheat-desc">Campo de entrada</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;button&gt;</div><div class="cheat-desc">Botón</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;header&gt;</div><div class="cheat-desc">Cabecera semántica</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;nav&gt;</div><div class="cheat-desc">Navegación</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;main&gt;</div><div class="cheat-desc">Contenido principal</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;section&gt;</div><div class="cheat-desc">Sección temática</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;article&gt;</div><div class="cheat-desc">Contenido autónomo</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;aside&gt;</div><div class="cheat-desc">Barra lateral</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;footer&gt;</div><div class="cheat-desc">Pie de página</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;video&gt;</div><div class="cheat-desc">Video HTML5</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;audio&gt;</div><div class="cheat-desc">Audio HTML5</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;canvas&gt;</div><div class="cheat-desc">Lienzo de dibujo</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;svg&gt;</div><div class="cheat-desc">Gráfico vectorial</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;details&gt;</div><div class="cheat-desc">Acordeón nativo</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;dialog&gt;</div><div class="cheat-desc">Modal nativo</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;strong&gt;</div><div class="cheat-desc">Importancia semántica</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;em&gt;</div><div class="cheat-desc">Énfasis semántico</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;br/&gt;</div><div class="cheat-desc">Salto de línea</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;hr/&gt;</div><div class="cheat-desc">Línea separadora</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;meta/&gt;</div><div class="cheat-desc">Metadato</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;link/&gt;</div><div class="cheat-desc">Recurso externo</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;script&gt;</div><div class="cheat-desc">JavaScript</div></div>
+        <div class="cheat-item"><div class="cheat-tag">&lt;style&gt;</div><div class="cheat-desc">CSS interno</div></div>
+      </div>
+
+      <!-- ─────────── 18 BUENAS PRÁCTICAS ─────────── -->
+      <div id="s-buenas" class="sep"><div class="sep-line"></div><span class="sep-label">18 · Buenas prácticas</span><div class="sep-line"></div></div>
+      <h2 class="sh">Buenas prácticas al escribir HTML5</h2>
+
+      <div class="tag-grid">
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill" style="background:rgba(74,222,128,0.18);color:var(--green-acc);">✅ Siempre</span><span class="tag-type">Estructura</span></div>
+          <p class="tag-desc">Declara siempre <strong>&lt;!DOCTYPE html&gt;</strong> al inicio, define <strong>lang</strong> en &lt;html&gt; y usa <strong>charset UTF-8</strong> en &lt;meta&gt;.</p>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill" style="background:rgba(74,222,128,0.18);color:var(--green-acc);">✅ Semántica</span><span class="tag-type">Código limpio</span></div>
+          <p class="tag-desc">Usa etiquetas semánticas (<strong>&lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, &lt;article&gt;</strong>) en lugar de divs para todo. Tu código será más legible y accesible.</p>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill" style="background:rgba(74,222,128,0.18);color:var(--green-acc);">✅ Alt siempre</span><span class="tag-type">Accesibilidad</span></div>
+          <p class="tag-desc">Toda imagen <strong>&lt;img&gt;</strong> debe tener un atributo <strong>alt</strong> descriptivo. Si la imagen es decorativa, usa alt="" para que los lectores de pantalla la ignoren.</p>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill" style="background:rgba(74,222,128,0.18);color:var(--green-acc);">✅ Label-Input</span><span class="tag-type">Formularios</span></div>
+          <p class="tag-desc">Vincula cada <strong>&lt;label&gt;</strong> con su <strong>&lt;input&gt;</strong> usando el atributo <strong>for</strong> e <strong>id</strong> correspondiente. Mejora la usabilidad y accesibilidad.</p>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill" style="background:rgba(251,191,36,0.18);color:var(--yellow-acc);">⚠️ Evita</span><span class="tag-type">Layout</span></div>
+          <p class="tag-desc">No uses tablas para estructurar el layout de la página. Las tablas son para <strong>datos tabulares</strong>. El layout es trabajo de <strong>CSS Flexbox y Grid</strong>.</p>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill" style="background:rgba(251,191,36,0.18);color:var(--yellow-acc);">⚠️ Evita</span><span class="tag-type">Estilos</span></div>
+          <p class="tag-desc">No uses el atributo <strong>style=""</strong> en línea para estilar elementos. Escribe los estilos en un archivo CSS externo para mantener la separación de responsabilidades.</p>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill" style="background:rgba(74,222,128,0.18);color:var(--green-acc);">✅ Indentación</span><span class="tag-type">Legibilidad</span></div>
+          <p class="tag-desc">Usa 2 o 4 espacios de sangría para anidar etiquetas. El código bien indentado es más fácil de leer, depurar y mantener por otros desarrolladores.</p>
+        </div>
+        <div class="tag-card">
+          <div class="tag-top"><span class="tag-pill" style="background:rgba(74,222,128,0.18);color:var(--green-acc);">✅ Un H1</span><span class="tag-type">SEO</span></div>
+          <p class="tag-desc">Usa <strong>solo un &lt;h1&gt;</strong> por página con la keyword principal. Los &lt;h2&gt; a &lt;h6&gt; pueden usarse múltiples veces siguiendo la jerarquía lógica.</p>
+        </div>
+      </div>
+
+      <div class="info-box tip">
+        <p class="info-label">🚀 Siguiente paso</p>
+        <p>Ya tienes los fundamentos de HTML5. El siguiente paso es aprender <strong>CSS3</strong> para estilizar tus páginas, y después <strong>JavaScript</strong> para hacerlas interactivas. Con esas tres tecnologías puedes construir cualquier sitio web.</p>
+      </div>
+
+    </article><!-- /article -->
+  </div><!-- /main-content -->
+</div><!-- /layout -->
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <p class="footer-school">Centro de Bachillerato Tecnológico Industrial y de Servicios No. 144</p>
+  <div class="footer-divider"></div>
+  <p class="footer-details">
+    Especialidad: Inteligencia Artificial  Alumno:Mariangel Mena Gámez<br>
+    Profesor: Jordy Jesús Chirino Balcázar
+  </p>
+</footer>
+
+<!-- TOC active link highlight -->
+<script data-cfasync="false" src="file:///C:/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const sections = document.querySelectorAll('[id^="s-"]');
+  const links = document.querySelectorAll('.toc a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = </script></body></html>
